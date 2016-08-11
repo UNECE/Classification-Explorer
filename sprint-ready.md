@@ -20,9 +20,13 @@ Basic knowledge about linked data, RDF and SPARQL.
 
 Basic knowledge about classifications and [XKOS](http://www.ddialliance.org/Specification/RDF/XKOS).
 
-Advanced knowledge about JavaScript and the React ecosystem.
+Good knowledge about version management with Git: try [the Atlassian Git tutorials](https://www.atlassian.com/git/tutorials/) and the [GitHub guides](https://guides.github.com/).
+
+Advanced knowledge about [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), the[React](https://facebook.github.io/react/docs/getting-started.html) ecosystem and [Redux](http://redux.js.org/index.html).
 
 ### Tools to install
 
-* A Javascript code editor
-* A Git client and a GitHub account
+* A Javascript code editor, for example [Atom](https://atom.io/)
+* A Git client (for example [Git SCM](https://git-scm.com/) or the more visual [GitKraken](https://www.gitkraken.com/)) and a GitHub account
+* [NodeJS](https://nodejs.org/)
+* React tools [for Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)  or [for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
