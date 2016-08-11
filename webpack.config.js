@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
-var postcssGradientFixer = require('postcss-gradientfixer')
+var postcssGradientFixer = require('postcss-gradientfixer') 
 
 module.exports = {
   entry: [
@@ -28,15 +28,12 @@ module.exports = {
   },
   postcss: function () {
     return [precss, autoprefixer({ browsers: ['> 5%'] }), postcssGradientFixer]
-  },
+  },  
   resolve: {
     extensions: ['', '.js']
   },
-  node: {
-    fs: "empty"
-  },
   output: {
     path: __dirname + '/dist',
-    filename: './js/main.js'
+    filename: './js/modern.js'
   }
 }

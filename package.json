@@ -1,29 +1,27 @@
 {
-  "name": "classifications",
-  "version": "0.0.1",
-  "description": "A tool for browsing statistical classifications, developed for the Implementing ModernStats Standards project",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/UNECE/Classification-Explorer"
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "js/main.js",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "bootstrap": "~3.3.4",
+    "react": "^15.3.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
     "classnames": "~1.2.0",
     "events": "^1.0.2",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "~2.1.3",
     "lodash": "^3.9.3",
-    "object-assign": "^2.0.0",
     "react": "^15.0.2",
-    "react-dnd": "^2.1.4",
-    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1",
-    "stardog": "^0.3.1"
+    "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -83,25 +81,5 @@
     "test": "mocha --compilers js:babel-core/register --require ./src/js/test_helper.js 'src/js/**/__tests__/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch --watch-extensions jsx",
     "deploy": "node deploy.js"
-  },
-  "author": "INSEE (http://www.insee.fr)",
-  "contributors": [
-    {
-      "name": "Franck Cotton",
-      "email": "franck.cotton@insee.fr"
-    },
-    {
-      "name": "Romain Tailhurat",
-      "email": "romain.tailhurat@insee.fr"
-    },
-    {
-      "name": "Jean-Baptiste Rudant",
-      "email": "jb@noknot.fr"
-    },
-    {
-      "name": "Olivier Levitt",
-      "email": "olivier.levitt@insee.fr"
-    }
-  ],
-  "license": "MIT"
+  }
 }
