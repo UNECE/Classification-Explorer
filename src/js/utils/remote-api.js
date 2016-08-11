@@ -1,43 +1,53 @@
 import fetch from 'isomorphic-fetch'
+import credentials from '../../credentials'
+const { username, password } = credentials
+const authorization = 'Basic ' + btoa(`${username}:${password}`)
 
-const queryGetClassificationList = encodeURIComponent(`
-  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+const urlClassifications = 
+  `https://unece-stardog.ichec.ie/annex/classifications/sparql/query`
 
-  SELECT ?classification WHERE {
-  	?classification rdf:type  skos:ConceptScheme .
-  }
-`)
-
-const queryGetClassificationItems = encodeURIComponent(`
+const queryGetClassificationItems = `
 PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
 
 SELECT ?poste  WHERE {
-	<http://id.insee.fr/codes/nafr2/naf> skos:hasTopConcept ?poste
-}`)
+	<http://stamina-project.org/codes/cpfr21/cpf> skos:hasTopConcept ?poste
+}`
 
-//const urlGetSectionForClassification = `http://rdf.insee.fr/sparql?query=${queryGetSectionForClassification}`
+const queryGetClassificationList = `
+  select ?classification WHERE {   ?classification rdf:type skos:ConceptScheme . }
+`
 
-const urlGetClassificationlist = `http://rdf.insee.fr/sparql?query=${queryGetClassificationList}`
-const urlGetClassificationItems = `http://rdf.insee.fr/sparql?query=${queryGetClassificationItems}`
+const bodyFromSparql = query => 
+  encodeURIComponent('query') + '=' + 
+  encodeURIComponent(query)
 
 
 /**
  * Classification List
- * path like '/questionnaires'
  */
-
 export const remoteGetClassificationsList = () =>
-  fetch(urlGetClassificationlist, {
+  fetch(urlClassifications, {
+    method: 'POST',
     headers: {
-      'Accept': 'application/json'
-    }
+      'Authorization': authorization, 
+      'Accept': 'application/sparql-results+json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: bodyFromSparql(queryGetClassificationList)
   })
   .then(res => res.json())
 
-  export const remoteGetClassificationItems = () =>
-    fetch(urlGetClassificationItems, {
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(res => res.json())
+/**
+ * Classification items
+ */
+export const remoteGetClassificationItems = () =>
+  fetch(urlClassifications, {
+    method: 'POST',
+    headers: {
+      'Authorization': authorization,
+      'Accept': 'application/sparql-results+json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: bodyFromSparql(queryGetClassificationItems)
+  })
+  .then(res => res.json())
