@@ -37,8 +37,8 @@ class ClassificationList extends Component {
 }
 
 const mapStateToProps = state => ({
-  loaded: state.loaded,
-  regionList: state.classifications
+  loaded: state.classificationList.loaded,
+  regionList: state.classificationList.classifications
 })
 
 const mapDispatchToProps = {

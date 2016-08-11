@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import { classificationListReducer } from '../reducers/classification-list'
+import mainReducer from '../reducers'
 
 const loggerMiddleware = createLogger()
 
 export default function configureStore() {
   return createStore(
-    classificationListReducer,
+    mainReducer,
     undefined,
     compose(
 	    applyMiddleware(
@@ -17,4 +17,3 @@ export default function configureStore() {
 	    window.devToolsExtension ? window.devToolsExtension() : f => f)
     )
 }
-

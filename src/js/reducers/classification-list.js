@@ -7,7 +7,7 @@ const defaultClassif = {
   classifications: []
 }
 
-export function classificationListReducer(state=defaultClassif, action) {
+export default function classificationListReducer(state=defaultClassif, action) {
   switch (action.type) {
     case LOAD_CLASSIFICATION_LIST:
       return state

@@ -8,16 +8,18 @@ const queryGetClassificationList = encodeURIComponent(`
   }
 `)
 
-const queryGetSectionForClassification = `
+const queryGetClassificationItems = encodeURIComponent(`
 PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-
-# http://id.insee.fr/concepts/definitions/scheme
 
 SELECT ?poste  WHERE {
 	<http://id.insee.fr/codes/nafr2/naf> skos:hasTopConcept ?poste
-}`
+}`)
 
-const urlGetClassificationlist = `http://rdf.insee.fr/sparql?query=${query}`
+//const urlGetSectionForClassification = `http://rdf.insee.fr/sparql?query=${queryGetSectionForClassification}`
+
+const urlGetClassificationlist = `http://rdf.insee.fr/sparql?query=${queryGetClassificationList}`
+const urlGetClassificationItems = `http://rdf.insee.fr/sparql?query=${queryGetClassificationItems}`
+
 
 /**
  * Classification List
@@ -32,3 +34,10 @@ export const remoteGetClassificationsList = () =>
   })
   .then(res => res.json())
 
+  export const remoteGetClassificationItems = () =>
+    fetch(urlGetClassificationItems, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(res => res.json())
