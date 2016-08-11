@@ -13,7 +13,7 @@ class ClassificationItems extends Component {
   }
 
   componentWillMount() {
-    this.props.loadClassificationItemsIfNeeded()
+    this.props.loadClassificationItemsIfNeeded(this.props.uri)
   }
 
   render() {

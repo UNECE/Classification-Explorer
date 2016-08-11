@@ -17,7 +17,7 @@ export default function classificationItemsReducer(state={}, action) {
         ...state,
         [action.payload.uri]: {
             loaded: true,
-            items: action.payload
+            items: action.payload.items
           }
       }
     default:
