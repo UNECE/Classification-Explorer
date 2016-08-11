@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './components/Root'
+import Root from './components/root'
 
 //TODO replace with babel polyfill
 if (!String.prototype.includes) {
@@ -9,7 +9,7 @@ if (!String.prototype.includes) {
     if (typeof start !== 'number') {
       start = 0;
     }
-    
+
     if (start + search.length > this.length) {
       return false;
     } else {
@@ -21,5 +21,3 @@ if (!String.prototype.includes) {
 ReactDOM.render(
 	<Root/>,
 	document.getElementById('base'));
-
-
