@@ -34,6 +34,6 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    filename: './js/modern.js'
+    filename: './js/classification.js'
   }
 }

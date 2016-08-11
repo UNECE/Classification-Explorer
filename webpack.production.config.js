@@ -33,6 +33,6 @@ module.exports = {
     path: __dirname + '/dist/js',
     publicPath: 'js', // it depends on what we set as content-base option with
                       // the CLI
-    filename: 'main.js'
+    filename: 'classification.js'
   }
 }
