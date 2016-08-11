@@ -19,7 +19,7 @@ export const loadClassificationItems = (uri) =>
       type: LOAD_CLASSIFICATION_ITEMS,
       payload: { uri }
     })
-    remoteGetClassificationItems()
+    remoteGetClassificationItems(uri)
       .then(rawResults => {
         dispatch({
           type: LOAD_CLASSIFICATION_ITEMS_SUCCESS,

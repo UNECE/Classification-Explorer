@@ -4,14 +4,15 @@ const { username, password } = credentials
 const authorization = 'Basic ' + btoa(`${username}:${password}`)
 
 const urlClassifications = 
-  `https://unece-stardog.ichec.ie/annex/classifications/sparql/query`
+  'https://unece-stardog.ichec.ie/annex/classifications/sparql/query'
 
-const queryGetClassificationItems = `
-PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+const makeQueryGetClassificationItems = uri =>  `
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?poste  WHERE {
-	<http://stamina-project.org/codes/cpfr21/cpf> skos:hasTopConcept ?poste
-}`
+  SELECT ?poste  WHERE {
+  	<${uri}> skos:hasTopConcept ?poste
+  }
+`
 
 const queryGetClassificationList = `
   select ?classification WHERE {   ?classification rdf:type skos:ConceptScheme . }
@@ -40,7 +41,7 @@ export const remoteGetClassificationsList = () =>
 /**
  * Classification items
  */
-export const remoteGetClassificationItems = () =>
+export const remoteGetClassificationItems = uri =>
   fetch(urlClassifications, {
     method: 'POST',
     headers: {
@@ -48,6 +49,6 @@ export const remoteGetClassificationItems = () =>
       'Accept': 'application/sparql-results+json',
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: bodyFromSparql(queryGetClassificationItems)
+    body: bodyFromSparql(makeQueryGetClassificationItems(uri))
   })
   .then(res => res.json())
