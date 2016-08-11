@@ -18,7 +18,7 @@ class ClassificationItems extends Component {
 
   render() {
     const { loaded, items } = this.props
-    if (!loaded) return <span>loading</span>
+    if (!loaded) return <span>loading items</span>
     return (
       <ul>
         {
