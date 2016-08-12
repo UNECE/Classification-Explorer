@@ -1,19 +1,16 @@
 
 import React, { Component } from 'react'
-import { loadClassificationItemsIfNeeded } from '../actions/classification'
+import { loadItemsIfNeeded } from '../actions/items'
 import { connect } from 'react-redux'
 
-
-
-
-class ClassificationItemList extends Component {
+class Items extends Component {
 
   constructor(props) {
     super(props)
   }
 
   componentWillMount() {
-    this.props.loadClassificationItemsIfNeeded(this.props.uri)
+    this.props.loadItemsIfNeeded(this.props.uri)
   }
 
   render() {
@@ -34,11 +31,11 @@ class ClassificationItemList extends Component {
 }
 
 const mapStateToProps = (state, { uri }) => {
-  if (!state.classificationItems.hasOwnProperty(uri)) return {
+  if (!state.itemsByClassification.hasOwnProperty(uri)) return {
     loaded: false,
     items: []
   }
-  const items = state.classificationItems[uri]
+  const items = state.itemsByClassification[uri]
   return {
     loaded: items.loaded,
     items: items.items
@@ -46,7 +43,7 @@ const mapStateToProps = (state, { uri }) => {
 }
 
 const mapDispatchToProps = {
-  loadClassificationItemsIfNeeded
+  loadItemsIfNeeded
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClassificationItemList)
+export default connect(mapStateToProps, mapDispatchToProps)(Items)

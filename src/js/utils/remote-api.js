@@ -12,7 +12,7 @@ const makeQueryGetClassificationItems = uri =>  `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
 
   SELECT ?poste  WHERE {
-  	<${uri}> skos:hasTopConcept ?poste
+  	?classification skos:hasTopConcept ?poste
   }
 `
 //TODO query Franck
@@ -26,7 +26,7 @@ const makeQueryGetClassificationLevels = uri =>  `
 
 
 const queryGetClassificationList = `
-  select ?classification WHERE {   ?classification rdf:type skos:ConceptScheme . }
+  select ?classification WHERE { ?classification rdf:type skos:ConceptScheme .}
 `
 
 const bodyFromSparql = query =>
@@ -40,7 +40,7 @@ const bodyFromSparql = query =>
  * Retrieve all the classification uri
  * @return {Promise} Resolves to json if success
  */
-const remotePostClassificationsList = () =>
+export const remotePostClassificationsList = () =>
   fetch(urlClassifications, {
     method: 'POST',
     headers: {
@@ -57,7 +57,7 @@ const remotePostClassificationsList = () =>
  * Retrieve all the classifications uri
  * @return {Promise} Resolves to json if success
  */
-const remoteGetClassificationsList = () =>
+export const remoteGetClassificationsList = () =>
   fetch(urlClassifications + '?' + bodyFromSparql(queryGetClassificationList), {
     method: 'GET',
     headers: {

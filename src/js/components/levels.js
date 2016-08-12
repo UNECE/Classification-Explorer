@@ -1,25 +1,22 @@
 
 import React, { Component } from 'react'
-import { loadClassificationLevels } from '../actions/classification-levels'
-import { viewClassificationLevels } from '../actions/app-state'
+import { loadLevels } from '../actions/levels'
+import { showItemsLevel } from '../actions/app-state'
 import { connect } from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-
-
-
-class ClassificationLevels extends Component {
+class Levels extends Component {
 
   constructor(props) {
     super(props)
   }
 
   handleSelect(index, last) {
-     //viewClassificationItemsForLevel(levels[index]);
+     //showLevel(levels[index]);
    }
 
   componentWillMount() {
-    this.props.loadClassificationLevels()
+    //this.props.loadClassificationLevels()
   }
 
   render() {
@@ -50,14 +47,14 @@ class ClassificationLevels extends Component {
 }
 
 const mapStateToProps = state => ({
-  loaded: true,
-  levels: [{uri: 'uridenaf1', name: 'Group'}, {uri: 'uridenaf2', name: 'Division'}],
-  activeLevelUri: 'uridenaf2'
+  loaded: false,
+  // levels: [{uri: 'uridenaf1', name: 'Group'}, {uri: 'uridenaf2', name: 'Division'}],
+  // activeLevelUri: 'uridenaf2'
 })
 
 const mapDispatchToProps = {
-  loadClassificationLevels,
+  loadLevels,
   //viewClassificationItems
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClassificationLevels)
+export default connect(mapStateToProps, mapDispatchToProps)(Levels)

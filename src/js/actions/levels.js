@@ -1,17 +1,17 @@
 import { remoteGetClassificationLevels } from '../utils/remote-api'
 
-export const LOAD_CLASSIFICATION_LEVELS = 'LOAD_CLASSIFICATION_LEVELS'
-export const LOAD_CLASSIFICATION_LEVELS_SUCCESS = 'LOAD_CLASSIFICATION_LEVELS_SUCCESS'
+export const LOAD_LEVELS = 'LOAD_LEVELS'
+export const LOAD_LEVELS_SUCCESS = 'LOAD_LEVELS_SUCCESS'
 
-export const loadClassificationLevels = () =>
+export const loadLevels = () =>
   (dispatch, getState) => {
     dispatch({
-      type: LOAD_CLASSIFICATION_LEVELS
+      type: LOAD_LEVELS
     })
     remoteGetClassificationLevels()
       .then(rawResults => {
         dispatch({
-          type: LOAD_CLASSIFICATION_LEVELS_SUCCESS,
+          type: LOAD_LEVELS_SUCCESS,
           payload: processRaw(rawResults)
         })
       })

@@ -1,12 +1,9 @@
 
 import React, { Component } from 'react'
-import { loadClassificationItemsIfNeeded } from '../actions/classification'
+import { loadItemsIfNeeded } from '../actions/items.js'
 import { connect } from 'react-redux'
-import ClassificationItemList from './classification-item-list'
-import ClassificationLevels from './classification-levels'
-
-
-
+import Items from './items'
+import Levels from './levels'
 
 class ClassificationDetails extends Component {
 
@@ -19,7 +16,12 @@ class ClassificationDetails extends Component {
   }
 
   render() {
-    return <div><ClassificationLevels></ClassificationLevels><ClassificationItemList uri={this.props.uri}/></div>
+    return (
+      <div>
+        <Levels />
+        <Items uri={this.props.uri}/>
+      </div>
+    )
   }
 }
 

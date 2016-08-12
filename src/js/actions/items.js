@@ -1,28 +1,25 @@
 import { remoteGetClassificationItems } from '../utils/remote-api'
 
+export const LOAD_ITEMS = 'LOAD_ITEMS'
+export const LOAD_ITEMS_SUCCESS = 'LOAD_ITEMS_SUCCESS'
 
-
-export const LOAD_CLASSIFICATION_ITEMS = 'LOAD_CLASSIFICATION_ITEMS'
-export const LOAD_CLASSIFICATION_ITEMS_SUCCESS = 'LOAD_CLASSIFICATION_ITEMS_SUCCESS'
-
-export const loadClassificationItemsIfNeeded = uri =>
+export const loadItemsIfNeeded = uri =>
   (dispatch, getState) => {
     const state = getState()
     if (state.classificationItems.hasOwnProperty(uri)) return
-    dispatch(loadClassificationItems(uri))
+    dispatch(loadItems(uri))
   }
 
-export const loadClassificationItems = (uri) =>
+export const loadItems = (uri) => 
   (dispatch, getState) => {
-
     dispatch({
-      type: LOAD_CLASSIFICATION_ITEMS,
+      type: LOAD_ITEMS,
       payload: { uri }
     })
     remoteGetClassificationItems(uri)
       .then(rawResults => {
         dispatch({
-          type: LOAD_CLASSIFICATION_ITEMS_SUCCESS,
+          type: LOAD_ITEMS_SUCCESS,
           payload: {
             uri,
             items: processRaw(rawResults)

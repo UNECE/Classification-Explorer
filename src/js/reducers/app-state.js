@@ -1,21 +1,30 @@
-import { SWITCH_VIEW_CLASSIFICATION_LIST, SWITCH_VIEW_CLASSIFICATION_ITEMS }
-from '../actions/app-state'
+import {
+  SWITCH_VIEW_CLASSIFICATIONS, SWITCH_VIEW_CLASSIFICATION_DETAILS,
+  SHOW_ITEMS_LEVEL
+} from '../actions/app-state'
 
-export const VIEW_CLASSIFICATION_LIST = 'VIEW_CLASSIFICATION_LIST'
-export const VIEW_CLASSIFICATION_ITEMS = 'VIEW_CLASSIFICATION_ITEMS'
+export const VIEW_CLASSIFICATIONS = 'VIEW_CLASSIFICATION'
+export const VIEW_CLASSIFICATION_DETAILS = 'VIEW_CLASSIFICATION_DETAILS'
 
-export default function appStateReducer(state={ view: VIEW_CLASSIFICATION_LIST }, action) {
+export default function appStateReducer(state={ view: VIEW_CLASSIFICATIONS }, action) {
   switch (action.type) {
-    case SWITCH_VIEW_CLASSIFICATION_LIST:
+    case SWITCH_VIEW_CLASSIFICATIONS:
     return {
-      view: VIEW_CLASSIFICATION_LIST
+      view: VIEW_CLASSIFICATIONS
     }
-    case SWITCH_VIEW_CLASSIFICATION_ITEMS:
+    case SWITCH_VIEW_CLASSIFICATION_DETAILS:
       return {
-        view: VIEW_CLASSIFICATION_ITEMS,
-        classification: action.payload.uri
+        view: VIEW_CLASSIFICATION_DETAILS,
+        uri: action.payload.uri,
+        activeLevel: null,
+        levelsLoaded: false
       }
-      default:
-        return state
+    case SHOW_ITEMS_LEVEL:
+      return {
+        ...state,
+        activeLevel: action.payload.uri
+      }
+    default:
+      return state
   }
 }

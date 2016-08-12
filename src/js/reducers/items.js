@@ -1,10 +1,10 @@
 import {
-  LOAD_CLASSIFICATION_ITEMS, LOAD_CLASSIFICATION_ITEMS_SUCCESS
+  LOAD_ITEMS, LOAD_ITEMS_SUCCESS
 } from '../actions/classification'
 
 export default function classificationItemsReducer(state={}, action) {
   switch (action.type) {
-    case LOAD_CLASSIFICATION_ITEMS:
+    case LOAD_ITEMS:
       return {
         ...state,
         [action.payload.uri]: {
@@ -12,7 +12,7 @@ export default function classificationItemsReducer(state={}, action) {
             items: []
           }
       }
-    case LOAD_CLASSIFICATION_ITEMS_SUCCESS:
+    case LOAD_ITEMS_SUCCESS:
       return {
         ...state,
         [action.payload.uri]: {
