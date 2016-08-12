@@ -11,7 +11,7 @@ class Classifications extends Component {
   }
 
   componentWillMount() {
-    this.props.loadClassifications()
+    this.props.loadClassifications();
   }
 
   render() {

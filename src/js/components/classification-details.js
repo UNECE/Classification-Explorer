@@ -4,7 +4,7 @@ import { loadItemsIfNeeded } from '../actions/items.js'
 import { connect } from 'react-redux'
 import Items from './items'
 import Levels from './levels'
-import Correspondences from './Correspondences'
+import { loadClassificationDetails } from '../actions/classification-details'
 
 class ClassificationDetails extends Component {
 
@@ -13,13 +13,13 @@ class ClassificationDetails extends Component {
   }
 
   componentWillMount() {
-
+      this.props.loadClassificationDetails();
   }
 
   render() {
     return (
       <div>
-        <Correspondences uri={this.props.uri}/>
+        (!this.props.loaded) ? 'Pas de detail' : <span>Toto {this.props.details.length}</span>;
         <Levels uri={this.props.uri}/>
         <Items uri={this.props.uri}/>
       </div>
@@ -28,9 +28,12 @@ class ClassificationDetails extends Component {
 }
 
 const mapStateToProps = state => ({
+  loaded: state.classifications.loaded,
+  details: state.classifications.details
 })
 
 const mapDispatchToProps = {
+  loadClassificationDetails
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassificationDetails)
