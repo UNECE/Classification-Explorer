@@ -1,6 +1,6 @@
 import React from 'react'
 import ClassificationList from './classification-list'
-import ClassificationItems from './classification-items'
+import ClassificationDetails from './classification-details'
 import { connect } from 'react-redux'
 import { VIEW_CLASSIFICATION_LIST, VIEW_CLASSIFICATION_ITEMS } from '../reducers/app-state'
 function ClassificationExplorer({ view, classification }) {
@@ -10,7 +10,7 @@ function ClassificationExplorer({ view, classification }) {
   }
 
   if (view === VIEW_CLASSIFICATION_ITEMS) {
-    explorer = <ClassificationItems uri={classification} />
+    explorer = <ClassificationDetails uri={classification} />
   }
 
   return explorer

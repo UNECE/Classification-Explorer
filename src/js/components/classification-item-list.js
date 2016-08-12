@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 
 
-class ClassificationItems extends Component {
+class ClassificationItemList extends Component {
 
   constructor(props) {
     super(props)
@@ -49,4 +49,4 @@ const mapDispatchToProps = {
   loadClassificationItemsIfNeeded
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ClassificationItems)
+export default connect(mapStateToProps, mapDispatchToProps)(ClassificationItemList)
