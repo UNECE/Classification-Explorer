@@ -1,7 +1,7 @@
 /**
  * Builds the query that retrieve the list of all classifications.
  */
-const buildGetClassificationListQuery = () => `
+const classifications = () => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT ?classification ?code ?label WHERE {
@@ -12,7 +12,7 @@ const buildGetClassificationListQuery = () => `
 /**
  * Builds the query that gets the details about a classification.
  */
-const buildGetClassificationDetailsQuery = uri => `
+const classificationDetails = uri => `
   PREFIX dcterms: <http://purl.org/dc/terms/>
   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   SELECT ?code ?label ?issued WHERE {
@@ -24,7 +24,7 @@ const buildGetClassificationDetailsQuery = uri => `
  * Builds the query that gets the levels of a classification.
  * Using SPARQL 1.1 property paths, see https://www.w3.org/TR/sparql11-query/#propertypaths
  */
-const buildGetClassificationLevelsQuery = uri => `
+const classificationLevels = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -38,7 +38,7 @@ const buildGetClassificationLevelsQuery = uri => `
  * Builds the query that gets the correspondence tables for a given classification.
  * TODO Improve the database, all tables don't have a label.
  */
-const buildGetClassificationCorrespondencesQuery = uri => `
+const classificationCorrespondences = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -50,7 +50,7 @@ const buildGetClassificationCorrespondencesQuery = uri => `
 /**
  * Builds the query that gets the list of items of a givent level.
  */
-const buildGetLevelItemsQuery = uri => `
+const levelItems = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT ?item ?code ?label WHERE {
@@ -60,9 +60,9 @@ const buildGetLevelItemsQuery = uri => `
 `
 
 export default {
-  buildGetClassificationListQuery,
-  buildGetClassificationDetailsQuery,
-  buildGetClassificationLevelsQuery,
-  buildGetClassificationCorrespondencesQuery,
-  buildGetLevelItemsQuery
+  classifications,
+  classificationDetails,
+  classificationLevels,
+  classificationCorrespondences,
+  levelItems
 }

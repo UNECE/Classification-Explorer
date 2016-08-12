@@ -1,4 +1,4 @@
-import { remoteGetClassificationsList } from '../utils/remote-api'
+import remote from '../utils/remote-api'
 
 export const LOAD_CLASSIFICATIONS = 'LOAD_CLASSIFICATIONS'
 export const LOAD_CLASSIFICATIONS_SUCCESS = 'LOAD_CLASSIFICATIONS_SUCCESS'
@@ -8,7 +8,7 @@ export const loadClassifications = () =>
     dispatch({
       type: LOAD_CLASSIFICATIONS
     })
-    remoteGetClassificationsList()
+    remote.classifications()
       .then(rawResults => {
         dispatch({
           type: LOAD_CLASSIFICATIONS_SUCCESS,

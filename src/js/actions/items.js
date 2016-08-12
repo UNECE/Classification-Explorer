@@ -1,4 +1,4 @@
-import { remoteGetClassificationItems } from '../utils/remote-api'
+import remote from '../utils/remote-api'
 
 export const LOAD_ITEMS = 'LOAD_ITEMS'
 export const LOAD_ITEMS_SUCCESS = 'LOAD_ITEMS_SUCCESS'
@@ -16,7 +16,7 @@ export const loadItems = (uri) =>
       type: LOAD_ITEMS,
       payload: { uri }
     })
-    remoteGetClassificationItems(uri)
+    remote.levelItems(uri)
       .then(rawResults => {
         dispatch({
           type: LOAD_ITEMS_SUCCESS,

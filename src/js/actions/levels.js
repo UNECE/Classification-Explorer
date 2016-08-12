@@ -1,4 +1,4 @@
-import { remoteGetClassificationLevels } from '../utils/remote-api'
+import remote from '../utils/remote-api'
 
 export const LOAD_LEVELS = 'LOAD_LEVELS'
 export const LOAD_LEVELS_SUCCESS = 'LOAD_LEVELS_SUCCESS'
@@ -8,7 +8,7 @@ export const loadLevels = () =>
     dispatch({
       type: LOAD_LEVELS
     })
-    remoteGetClassificationLevels()
+    remote.classificationLevels()
       .then(rawResults => {
         dispatch({
           type: LOAD_LEVELS_SUCCESS,
