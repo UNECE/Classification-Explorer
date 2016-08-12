@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 
 
-class ClassificationItems extends Component {
+class ClassificationDetails extends Component {
 
   constructor(props) {
     super(props)
