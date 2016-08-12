@@ -4,9 +4,9 @@
 export const buildGetClassificationListQuery = `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-  SELECT ?classification WHERE {
-    ?classification rdf:type skos:ConceptScheme .
-  }
+  SELECT ?classification ?code ?label WHERE {
+    ?classification rdf:type skos:ConceptScheme ; skos:notation ?code ; skos:prefLabel ?label .
+  } ORDER BY ?code
  `
 
 /**
