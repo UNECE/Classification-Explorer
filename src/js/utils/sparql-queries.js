@@ -12,11 +12,12 @@ const classifications = () => `
 /**
  * Builds the query that gets the details about a classification.
  */
+ //TODO @Franck workaround the fact the DB is not returning any line otherwise
 const classificationDetails = uri => `
   PREFIX dcterms: <http://purl.org/dc/terms/>
   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   SELECT ?code ?label ?issued WHERE {
-    <${uri}> skos:notation ?code ; skos:prefLabel ?label ; dcterms:issued  ?issued .
+    <${uri}> skos:notation ?code ; skos:prefLabel ?label ; skos:prefLabel  ?issued .
   }
 `
 
