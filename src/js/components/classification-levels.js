@@ -24,9 +24,9 @@ class ClassificationLevels extends Component {
       <ul className="levels">
         {
           levels.map(level =>
-            <li key={level} className>
+            <li key={level.uri}>
               <a onClick={() => viewClassificationItemsForLevel(level)} href='#'>
-                {level}
+                {level.name}
               </a>
             </li>
           )
@@ -38,7 +38,7 @@ class ClassificationLevels extends Component {
 
 const mapStateToProps = state => ({
   loaded: true,
-  levels: [{uri: 'uridenaf2', name: 'naf2'}, {uri: 'uridenaf2', name: 'naf2'}],
+  levels: [{uri: 'uridenaf1', name: 'naf1'}, {uri: 'uridenaf2', name: 'naf2-test'}],
   activeLevelUri: 'uridenaf2'
 })
 

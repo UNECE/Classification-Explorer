@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { loadClassificationItemsIfNeeded } from '../actions/classification'
 import { connect } from 'react-redux'
 import ClassificationItemList from './classification-item-list'
+import ClassificationLevels from './classification-levels'
 
 
 
@@ -18,7 +19,7 @@ class ClassificationDetails extends Component {
   }
 
   render() {
-    return <ClassificationItemList uri={this.props.uri}/>
+    return <div><ClassificationLevels></ClassificationLevels><ClassificationItemList uri={this.props.uri}/></div>
   }
 }
 
