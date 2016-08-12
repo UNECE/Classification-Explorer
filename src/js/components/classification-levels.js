@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { loadClassificationLevels } from '../actions/classification-levels'
 import { viewClassificationLevels } from '../actions/app-state'
 import { connect } from 'react-redux'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 
 
@@ -13,6 +14,10 @@ class ClassificationLevels extends Component {
     super(props)
   }
 
+  handleSelect(index, last) {
+     //viewClassificationItemsForLevel(levels[index]);
+   }
+
   componentWillMount() {
     this.props.loadClassificationLevels()
   }
@@ -21,24 +26,32 @@ class ClassificationLevels extends Component {
     const { loaded, levels, activeLevelUri, viewClassificationItemsForLevel } = this.props
     if (!loaded) return <span>loading levels</span>
     return (
-      <ul className="levels">
-        {
-          levels.map(level =>
-            <li key={level.uri}>
-              <a onClick={() => viewClassificationItemsForLevel(level)} href='#'>
-                {level.name}
-              </a>
-            </li>
-          )
-        }
-      </ul>
+      <div><Tabs
+       onSelect={this.handleSelect}
+     >
+     <TabList>
+            {
+              levels.map(level =>
+                <Tab>{level.name}</Tab>
+              )
+            }
+     </TabList>
+     {
+       levels.map(level =>
+         <TabPanel>
+
+            </TabPanel>
+       )
+     }
+      </Tabs>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
   loaded: true,
-  levels: [{uri: 'uridenaf1', name: 'naf1'}, {uri: 'uridenaf2', name: 'naf2-test'}],
+  levels: [{uri: 'uridenaf1', name: 'Group'}, {uri: 'uridenaf2', name: 'Division'}],
   activeLevelUri: 'uridenaf2'
 })
 
