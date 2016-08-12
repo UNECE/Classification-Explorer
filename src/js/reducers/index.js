@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import appState from './app-state'
 import classifications from './classifications'
 import itemsByLevel from './items-by-level'
-import levelsByClassification from './levels-by-classifcation'
+import levelsByClassification from './levels-by-classification'
+import correspondencesByClassification from './correspondences-by-classification'
 import details from './details'
 
 export default combineReducers({
@@ -20,18 +21,18 @@ const stateSample = {
     [VIEW_CLASSIFICATION_DETAILS]: {
       uri: 'http://stamina-project.org/codes/nacer2/nace',
       levelsLoaded: true,
-      activeLevel: 'http://stamina-project.org/codes/nacer2/nace/division' 
-    } 
+      activeLevel: 'http://stamina-project.org/codes/nacer2/nace/division'
+    }
   },
   classificationList: {
     loaded: true,
     classifications: [
-      'http://stamina-project.org/codes/cpav21/cpa', 
-      'http://stamina-project.org/codes/cpav2008/cpa', 
-      'http://stamina-project.org/codes/cpcv2/cpc', 
-      'http://stamina-project.org/codes/cpcv11/cpc', 
-      'http://stamina-project.org/codes/cpcv21/cpc', 
-      'http://stamina-project.org/codes/isicr4/isic', 
+      'http://stamina-project.org/codes/cpav21/cpa',
+      'http://stamina-project.org/codes/cpav2008/cpa',
+      'http://stamina-project.org/codes/cpcv2/cpc',
+      'http://stamina-project.org/codes/cpcv11/cpc',
+      'http://stamina-project.org/codes/cpcv21/cpc',
+      'http://stamina-project.org/codes/isicr4/isic',
       'http://stamina-project.org/codes/nacer2/nace'
     ]
   },
@@ -66,6 +67,6 @@ const stateSample = {
         label: 'class'
       }]
     }
-  }  
+  }
 }
 */

@@ -4,6 +4,7 @@ import { loadItemsIfNeeded } from '../actions/items.js'
 import { connect } from 'react-redux'
 import Items from './items'
 import Levels from './levels'
+import Correspondences from './Correspondences'
 
 class ClassificationDetails extends Component {
 
@@ -18,6 +19,7 @@ class ClassificationDetails extends Component {
   render() {
     return (
       <div>
+        <Correspondences uri={this.props.uri}/>
         <Levels uri={this.props.uri}/>
         <Items uri={this.props.uri}/>
       </div>
