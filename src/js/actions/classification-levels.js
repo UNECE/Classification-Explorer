@@ -11,7 +11,7 @@ export const loadClassificationLevels = () =>
     remoteGetClassificationLevels()
       .then(rawResults => {
         dispatch({
-          type: LOAD_CLASSIFICATION_LEVEL_SUCCESS,
+          type: LOAD_CLASSIFICATION_LEVELS_SUCCESS,
           payload: processRaw(rawResults)
         })
       })
