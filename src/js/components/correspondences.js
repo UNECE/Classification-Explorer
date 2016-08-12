@@ -15,18 +15,18 @@ class Correspondences extends Component {
   }
 
   componentWillMount() {
-    this.props.loadCorrespondences()
+    this.props.loadCorrespondences(this.props.classification)
   }
 
   render() {
-    const { loaded, correspondences, viewCorrespondences } = this.props
+    const { loaded, correspondences } = this.props
     if (!loaded) return <span>loading correspondences</span>
     return (
       <ul>
         {
           correspondences.map(correspondence =>
-            <li key={correspondence}>
-                {correspondence}
+            <li key={correspondence.table}>
+                {correspondence.label + correspondence.table }
             </li>
           )
         }
@@ -35,14 +35,19 @@ class Correspondences extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  loaded: false,
-  correspondences: ['uri de NAF2 vers NACE']
-})
+const mapStateToProps = (state, { classification } ) => {
+  if(!state.correspondencesByClassification.hasOwnProperty(classification)) return {
+    loaded: false,
+    correspondences: []
+  }
+  return {
+    loaded: state.correspondencesByClassification[classification].loaded,
+    correspondences: state.correspondencesByClassification[classification].correspondences
+  }
+}
 
 const mapDispatchToProps = {
-  loadCorrespondences,
-  //viewClassificationItems
+  loadCorrespondences
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Correspondences)

@@ -3,25 +3,25 @@ import remote from '../utils/remote-api'
 export const LOAD_ITEMS = 'LOAD_ITEMS'
 export const LOAD_ITEMS_SUCCESS = 'LOAD_ITEMS_SUCCESS'
 
-export const loadItemsIfNeeded = uri =>
+export const loadItemsIfNeeded = level =>
   (dispatch, getState) => {
     const state = getState()
-    if (state.classificationItems.hasOwnProperty(uri)) return
-    dispatch(loadItems(uri))
+    if (state.classificationItems.hasOwnProperty(level)) return
+    dispatch(loadItems(level))
   }
 
-export const loadItems = (uri) => 
+export const loadItems = (level) =>
   (dispatch, getState) => {
     dispatch({
       type: LOAD_ITEMS,
-      payload: { uri }
+      payload: { level }
     })
-    remote.levelItems(uri)
+    remote.levelItems(level)
       .then(rawResults => {
         dispatch({
           type: LOAD_ITEMS_SUCCESS,
           payload: {
-            uri,
+            level,
             items: processRaw(rawResults)
           }
         })
@@ -29,5 +29,9 @@ export const loadItems = (uri) =>
     }
 
 function processRaw(rawResults){
-  return rawResults.results.bindings.map(raw => raw.poste.value)
+  return rawResults.results.bindings.map(({ item, code, label }) => ({
+      item: item.value,
+      code: code.value,
+      label: label.value
+  }))
 }

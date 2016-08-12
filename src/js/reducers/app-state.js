@@ -15,7 +15,7 @@ export default function appStateReducer(state={ view: VIEW_CLASSIFICATIONS }, ac
     case SWITCH_VIEW_CLASSIFICATION_DETAILS:
       return {
         view: VIEW_CLASSIFICATION_DETAILS,
-        uri: action.payload.uri,
+        activeClassification: action.payload.uri,
         activeLevel: null,
         levelsLoaded: false
       }

@@ -3,22 +3,23 @@ import remote from '../utils/remote-api'
 export const LOAD_CORRESPONDENCES = 'LOAD_CORRESPONDENCES'
 export const LOAD_CORRESPONDENCES_SUCCESS = 'LOAD_CORRESPONDENCES_SUCCESS'
 
-export const loadCorrespondences = (uri) =>
+export const loadCorrespondences = (classification) =>
   (dispatch, getState) => {
     dispatch({
-      type: LOAD_CORRESPONDENCES
+      type: LOAD_CORRESPONDENCES,
+      payload: { classification }
     })
-    remote.classificationCorrespondences(uri)
+    remote.classificationCorrespondences(classification)
       .then(rawResults => {
         dispatch({
           type: LOAD_CORRESPONDENCES_SUCCESS,
-          payload: processRaw(rawResults)
+          payload: {classification: classification, correspondences: processRaw(rawResults)}
         })
       })
     }
 
 
-//TODO retrieve labels too
+
 function processRaw(rawResults){
-  return rawResults.results.bindings.map(raw => raw.table.value)
+  return rawResults.results.bindings.map(raw => ({table: raw.table.value, label: raw.label?raw.label.value:''}))
 }

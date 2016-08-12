@@ -2,23 +2,24 @@ import remote from '../utils/remote-api'
 
 export const LOAD_CLASSIFICATION_DETAILS = 'LOAD_CLASSIFICATION_DETAIL'
 
-export const LOAD_CLASSIFICATION_DETAILS_SUCCESS = 'LOAD_CLASSIFICATION_DETAILS_SUCESS'
-export const loadClassificationDetails = () =>
+export const LOAD_CLASSIFICATION_DETAILS_SUCCESS = 'LOAD_CLASSIFICATION_DETAILS_SUCCESS'
+export const loadClassificationDetails = classification =>
   (dispatch, getState) => {
     dispatch({
-      type: LOAD_CLASSIFICATION_DETAILS
+      type: LOAD_CLASSIFICATION_DETAILS,
+      payload: { classification }
     })
 
-    remote.classificationDetails()
+    remote.classificationDetails(classification)
       .then(rawResults => {
         dispatch({
           type: LOAD_CLASSIFICATION_DETAILS_SUCCESS,
-          payload: processRaw(rawResults)
+          payload: {classification: classification, details : processRaw(rawResults)}
         })
       })
     }
 
 function processRaw(rawResults){
-  alert(rawResults.results.bindings.length);
-  return rawResults.results.bindings.map(raw => raw.classification.value)
+  const { code, label, issued } = rawResults.results.bindings[0]
+  return { code: code.value, label: label.value, issued:issued.value }
 }

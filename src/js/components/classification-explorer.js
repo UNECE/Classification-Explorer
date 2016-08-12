@@ -9,16 +9,14 @@ function ClassificationExplorer({ view, classification }) {
   if (view === VIEW_CLASSIFICATIONS) {
     explorer = <Classifications />
   }
-
   if (view === VIEW_CLASSIFICATION_DETAILS) {
     explorer = <ClassificationDetails uri={classification} />
   }
-
   return explorer
 }
 
 const mapStateToProps = state => ({
   view: state.appState.view,
-  classification: state.appState.classification
+  classification: state.appState.activeClassification
 })
 export default connect(mapStateToProps)(ClassificationExplorer)

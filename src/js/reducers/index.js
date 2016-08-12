@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import appState from './app-state'
 import classifications from './classifications'
+import classificationDetails from './classification-details'
 import itemsByLevel from './items-by-level'
 import levelsByClassification from './levels-by-classification'
 import correspondencesByClassification from './correspondences-by-classification'
@@ -9,8 +10,10 @@ import details from './details'
 export default combineReducers({
   appState,
   classifications,
+  classificationDetails,
   levelsByClassification,
   itemsByLevel,
+  correspondencesByClassification,
   details
 })
 
