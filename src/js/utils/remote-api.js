@@ -1,3 +1,5 @@
+//Stardog HTTP API documentation: http://docs.stardog.apiary.io/#
+
 import fetch from 'isomorphic-fetch'
 import credentials from '../../credentials'
 const { username, password } = credentials
@@ -23,10 +25,13 @@ const bodyFromSparql = query =>
   encodeURIComponent(query)
 
 
+// We need to pass some `x-www-form-urlencoded` data. `multipart/form-data`
+// created with `new FormData()` does not work.
 /**
- * Classification List
+ * Retrieve all the classification uri
+ * @return {Promise} Resolves to json if success
  */
-export const remoteGetClassificationsList = () =>
+const remotePostClassificationsList = () =>
   fetch(urlClassifications, {
     method: 'POST',
     headers: {
@@ -38,8 +43,25 @@ export const remoteGetClassificationsList = () =>
   })
   .then(res => res.json())
 
+// We can also use a 'GET' verb if the query is not too long
 /**
- * Classification items
+ * Retrieve all the classifications uri
+ * @return {Promise} Resolves to json if success
+ */
+const remoteGetClassificationsList = () =>
+  fetch(urlClassifications + '?' + bodyFromSparql(queryGetClassificationList), {
+    method: 'GET',
+    headers: {
+      'Authorization': authorization, 
+      'Accept': 'application/sparql-results+json',
+    }
+  })
+  .then(res => res.json())
+
+/**
+ * Retrieve all the items for a classification
+ * @param  {String} uri uri of a classification
+ * @return {Promise}    Resolves to json if success
  */
 export const remoteGetClassificationItems = uri =>
   fetch(urlClassifications, {
