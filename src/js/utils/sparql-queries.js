@@ -34,11 +34,22 @@ const buildGetClassificationLevelsQuery = uri => `
     ?level xkos:depth ?depth ; skos:prefLabel ?label .
   } ORDER BY ?depth
 `
-
+/**
+ * Builds the query that gets the correspondence tables for a given classification.
+ * TODO Improve the database, all tables don't have a label.
+ */
+const buildGetClassificationCorrespondencesQuery = uri => `
+  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
+  SELECT ?table ?label WHERE {
+    ?table xkos:compares <${uri}> .
+    OPTIONAL { ?table skos:prefLabel ?label }
+  }
+`
 /**
  * Builds the query that gets the list of items of a givent level.
  */
-
 const buildGetLevelItemsQuery = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
@@ -52,5 +63,6 @@ export default {
   buildGetClassificationListQuery,
   buildGetClassificationDetailsQuery,
   buildGetClassificationLevelsQuery,
+  buildGetClassificationCorrespondencesQuery,
   buildGetLevelItemsQuery
 }
