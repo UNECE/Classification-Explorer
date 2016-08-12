@@ -37,7 +37,7 @@ class ClassificationLevels extends Component {
 }
 
 const mapStateToProps = state => ({
-  loaded: true
+  loaded: true,
   levels: [{uri: 'uridenaf2', name: 'naf2'}, {uri: 'uridenaf2', name: 'naf2'}],
   activeLevelUri: 'uridenaf2'
 })
