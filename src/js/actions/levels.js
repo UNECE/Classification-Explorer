@@ -3,12 +3,12 @@ import remote from '../utils/remote-api'
 export const LOAD_LEVELS = 'LOAD_LEVELS'
 export const LOAD_LEVELS_SUCCESS = 'LOAD_LEVELS_SUCCESS'
 
-export const loadLevels = () =>
+export const loadLevels = (uri) =>
   (dispatch, getState) => {
     dispatch({
       type: LOAD_LEVELS
     })
-    remote.classificationLevels()
+    remote.classificationLevels(uri)
       .then(rawResults => {
         dispatch({
           type: LOAD_LEVELS_SUCCESS,

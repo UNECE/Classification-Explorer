@@ -18,7 +18,7 @@ class ClassificationDetails extends Component {
   render() {
     return (
       <div>
-        <Levels />
+        <Levels uri={this.props.uri}/>
         <Items uri={this.props.uri}/>
       </div>
     )
