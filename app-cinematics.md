@@ -13,7 +13,9 @@ The `Provider` component is passed a `store` property with a value provided by t
 In short, the `Provider` component initiates the application state in its `store` property and creates the `ClassificationExplorer` component.
 
 `ClassificationExplorer` has no rendering of its own: it just creates a child component depending on the state of the application:
-* `Classifications` if `state.appState.view` is set to `VIEW_CLASSIFICATIONS` (this is the default value, as specified in `reducers/app-state.js`).
+* `Classifications` if `state.appState.view` is set to `VIEW_CLASSIFICATIONS` (this is the default initial value, as specified in `reducers/app-state.js`).
 * `ClassificationDetails` if it is set to `VIEW_CLASSIFICATION_DETAILS`; in that case, `state.appState.activeClassification` contains the URI of the classification that is currenly viewed.
 
 The connection between the application state and the component is made through the `connect` Redux mechanism.
+
+The `Classifications` component, like other components in the application, uses the Redux `mapDispatchToProps` [mechanism](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) in order to bind actions to component properties. For example, the `loadClassifications` action is dispatched in the `componentWillMount` method (see [React component lifecycle](https://facebook.github.io/react/docs/component-specs.html)).
