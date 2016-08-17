@@ -18,3 +18,11 @@ export const showLevelItems = uri => ({
     uri
   }
 })
+
+export const TOGGLE_CORRESPONDENCE_DEFINTIONS = 'TOGGLE_CORRESPONDENCE_DEFINTIONS'
+export const toggleCorrespondenceDefinitions = correspondence => ({
+  type: TOGGLE_CORRESPONDENCE_DEFINTIONS,
+  payload: {
+    correspondence
+  }
+})
