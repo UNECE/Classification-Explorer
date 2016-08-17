@@ -10,7 +10,7 @@ function ClassificationExplorer({ view, classification }) {
     explorer = <Classifications />
   }
   if (view === VIEW_CLASSIFICATION_DETAILS) {
-    explorer = <ClassificationDetails uri={classification} />
+    explorer = <ClassificationDetails classification={classification} />
   }
   return explorer
 }

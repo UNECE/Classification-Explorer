@@ -1,53 +1,20 @@
-
 import React, { Component } from 'react'
-import { loadCorrespondences } from '../actions/correspondences'
-import { viewCorrespondences } from '../actions/app-state'
-import { connect } from 'react-redux'
+import { sparqlConnect } from '../sparql/configure-sparql'
+import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
 
-
-
-
-
-class Correspondences extends Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  componentWillMount() {
-    this.props.loadCorrespondences(this.props.classification)
-  }
-
-  render() {
-    const { loaded, correspondences } = this.props
-    if (!loaded) return <span>loading correspondences</span>
-    return (
+function Correspondences({ loaded, correspondences }) {
+  if (loaded !== LOADED) return <span>loading correspondences</span>
+  return (
+    <div>
+      <h1>Correspondences</h1>
       <ul>
-        {
-          correspondences.map(correspondence =>
+        { correspondences.map(correspondence =>
             <li key={correspondence.table}>
-                {correspondence.label + correspondence.table }
-            </li>
-          )
-        }
+              {correspondence.table}
+            </li>) }
       </ul>
-    )
-  }
+    </div>
+  )
 }
 
-const mapStateToProps = (state, { classification } ) => {
-  if(!state.correspondencesByClassification.hasOwnProperty(classification)) return {
-    loaded: false,
-    correspondences: []
-  }
-  return {
-    loaded: state.correspondencesByClassification[classification].loaded,
-    correspondences: state.correspondencesByClassification[classification].correspondences
-  }
-}
-
-const mapDispatchToProps = {
-  loadCorrespondences
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Correspondences)
+export default sparqlConnect.classificationCorrespondences()(Correspondences)

@@ -11,9 +11,9 @@ export const switchViewClassificationDetails = uri => ({
     }
 })
 
-export const SHOW_ITEMS_LEVEL = 'SHOW_ITEMS_LEVEL'
-export const showItemsLevel = uri => ({
-  type: SHOW_ITEMS_LEVEL,
+export const SHOW_LEVEL_ITEMS = 'SHOW_LEVEL_ITEMS'
+export const showLevelItems = uri => ({
+  type: SHOW_LEVEL_ITEMS,
   payload: {
     uri
   }

@@ -59,7 +59,6 @@ const levelItems = uri => `
     ?item skos:notation ?code ; skos:prefLabel ?label .
   } ORDER BY ?code
 `
-
 export default {
   classifications,
   classificationDetails,

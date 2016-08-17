@@ -1,60 +1,26 @@
-
-import React, { Component } from 'react'
-import { loadLevels } from '../actions/levels'
-import { showItemsLevel } from '../actions/app-state'
-import { connect } from 'react-redux'
+import React from 'react'
+import { sparqlConnect } from '../sparql/configure-sparql'
+import Items from './items'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
 
-class Levels extends Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  handleSelect(index, last) {
-     //showLevel(levels[index]);
-   }
-
-  componentWillMount() {
-    //this.props.loadClassificationLevels()
-  }
-
-  render() {
-    const { loaded, levels, activeLevelUri, viewClassificationItemsForLevel } = this.props
-    if (!loaded) return <span>loading levels</span>
-    return (
-      <div><Tabs
-       onSelect={this.handleSelect}
-     >
-     <TabList>
-            {
-              levels.map(level =>
-                <Tab>{level.name}</Tab>
-              )
-            }
-     </TabList>
-     {
-       levels.map(level =>
-         <TabPanel>
-
-            </TabPanel>
-       )
-     }
+function Levels({ loaded, levels }) {
+  if (loaded !== LOADED) return <span>loading levels</span>
+  return (
+    <div>
+      <h1>Levels</h1>
+      <Tabs>
+        <TabList>
+          { levels.map(({ level, depth, label }) => 
+            <Tab key={level}>{ `${label} (${depth})` }</Tab>) }
+        </TabList>
+        { levels.map(({ level, label }) => 
+          <TabPanel key={level}>
+            <Items level={level} levelLabel={label} />
+          </TabPanel>) }
       </Tabs>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
-const mapStateToProps = state => ({
-  loaded: false,
-  // levels: [{uri: 'uridenaf1', name: 'Group'}, {uri: 'uridenaf2', name: 'Division'}],
-  // activeLevelUri: 'uridenaf2'
-})
-
-const mapDispatchToProps = {
-  loadLevels,
-  //viewClassificationItems
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Levels)
+export default sparqlConnect.classificationLevels()(Levels)
