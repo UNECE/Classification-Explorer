@@ -5,7 +5,8 @@ const {
   classificationDetails,
   classificationLevels,
   classificationCorrespondences,
-  levelItems
+  levelItems,
+  correspondenceDefinitions
 } = queries
 
 export default {
@@ -74,4 +75,14 @@ export default {
     },
     queryBuilder: levelItems
   },
+  correspondenceDefinitions: {
+    params: [{
+      name: 'correspondence'
+    }],
+    results: {
+      definition: 'correspondence definition (string)'
+    },
+    whatWeGet: 'definitions',
+    queryBuilder: correspondenceDefinitions
+  }
 }

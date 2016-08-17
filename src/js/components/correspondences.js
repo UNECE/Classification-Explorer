@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import CorrespondenceDefinitions from './correspondence-definitions'
 
 function Correspondences({ loaded, correspondences }) {
   if (loaded !== LOADED) return <span>loading correspondences</span>
@@ -11,6 +12,8 @@ function Correspondences({ loaded, correspondences }) {
         { correspondences.map(correspondence =>
             <li key={correspondence.table}>
               {correspondence.table}
+              <CorrespondenceDefinitions
+                correspondence={correspondence.table} />
             </li>) }
       </ul>
     </div>
