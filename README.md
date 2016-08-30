@@ -8,10 +8,10 @@ A tool for browsing statistical classifications, developed for the Implementing 
 
 * Clone the projet
 
-* Under `src/js` create a file credentials.js containing a Javascript object with username and password, example: `export default { username: '*******', password: '*******' }`
+* Under `src/js` create a file credentials.js containing a Javascript object with username and password, example: `export default { username: '*******', password: '*******' }`. A `credentials.js.example` is provided.
 
-* run `npm install`
+* Run `npm install`
 
-* run `npm run dev` or `npm run build`
+* Run `npm run dev` (for develop or debug phases) or `npm run build` (for production).
 
-* http://localhost:8080/
+* Open a browser and navigate to http://localhost:8080/
