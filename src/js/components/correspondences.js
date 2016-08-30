@@ -12,8 +12,8 @@ function Correspondences({ loaded, correspondences }) {
         { correspondences.map(correspondence =>
             <li key={correspondence.table}>
               {correspondence.table}
-              <CorrespondenceDefinitions
-                correspondence={correspondence.table} />
+              {/* <CorrespondenceDefinitions
+                correspondence={correspondence.table} /> */}
             </li>) }
       </ul>
     </div>
