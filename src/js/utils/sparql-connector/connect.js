@@ -18,22 +18,22 @@ export function buildConnect(queryName, query, loadIfNeeded, sparqlName) {
     //only once for the component, and we should not lose this benefit).
     const propsToArgs = props => Object.keys(params).map(param =>
       props[params[param].name])
-    
+
     const loadIfNeededWithArgs = props => loadIfNeeded(...propsToArgs(props))
-    
+
     return function (WrappedComponent) {
       class Connect extends Component {
-        
+
         componentWillMount() {
           this.props.loadIfNeeded(this.props)
         }
-        
+
         render() {
           return <WrappedComponent {...this.props} />
         }
       }
       //TODO generate `propTypes`
-      
+
       //We feed `WrappedComponent` with props related to the sparql query:
       //- loaded: LOADING, LOADED or FAILED ;
       //- if LOADED: [whatWeGet]: the results, we use the `whatWeGet` property for the
@@ -43,9 +43,9 @@ export function buildConnect(queryName, query, loadIfNeeded, sparqlName) {
       //trying to load the results.
       const enhanceMSTP = (state, ownProps) => {
         const props = mapStateToProps ?
-          mapStateToProps(state, ownProps) :
+          Object.assign({}, ownProps, mapStateToProps(state, ownProps)) :
           {}
-        const entry = getEntry(state[sparqlName][queryName], query.params, ownProps)
+        const entry = getEntry(state[sparqlName][queryName], query.params, props)
         const loaded = entry ? entry.status  : LOADING
         //success
         if (loaded === LOADED) {
@@ -73,11 +73,11 @@ export function buildConnect(queryName, query, loadIfNeeded, sparqlName) {
         }
         return props
       }
-      
+
       const enhanceMDTP = Object.assign(mapDispatchToProps || {}, {
         loadIfNeeded: loadIfNeededWithArgs
       })
-      
+
       return connect(enhanceMSTP, enhanceMDTP)(Connect)
     }
   }
