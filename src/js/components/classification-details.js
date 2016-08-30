@@ -30,4 +30,4 @@ const mapStateToProps = (state, props) => ({
   classification: decodeURIComponent(props.params.classification),
 })
 
-export default sparqlConnect.classificationDetails(mapStateToProps)(ClassificationDetails)
+export default connect(mapStateToProps)(sparqlConnect.classificationDetails(ClassificationDetails))
