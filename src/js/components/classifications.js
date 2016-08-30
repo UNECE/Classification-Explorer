@@ -2,12 +2,13 @@ import React from 'react'
 import { switchViewClassificationDetails } from '../actions/app-state'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { Link } from 'react-router'
 
 function Classifications({ loaded, classifications,
     switchViewClassificationDetails }) {
   if (loaded !== LOADED) return <span>loading</span>
   //we could also write something like
-  //if (loaded === FAILED) 
+  //if (loaded === FAILED)
   //  return <span>error while retrieving clasifications/span>
   return (
     <div>
@@ -15,9 +16,9 @@ function Classifications({ loaded, classifications,
       <ul>
         { classifications.map(({ classification }) =>
             <li key={classification}>
-              <a onClick={() => switchViewClassificationDetails(classification)} href='#'>
+              <Link to={`/details/${encodeURIComponent(classification)}`}>
                 {classification}
-              </a>
+              </Link>
             </li>
           )}
       </ul>

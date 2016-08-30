@@ -6,17 +6,11 @@ import { VIEW_CLASSIFICATIONS, VIEW_CLASSIFICATION_DETAILS } from '../reducers/a
 
 function ClassificationExplorer({ view, classification }) {
   let explorer
-  if (view === VIEW_CLASSIFICATIONS) {
-    explorer = <Classifications />
-  }
-  if (view === VIEW_CLASSIFICATION_DETAILS) {
-    explorer = <ClassificationDetails classification={classification} />
-  }
+  explorer = <Classifications />
   return explorer
 }
 
-const mapStateToProps = state => ({
-  view: state.appState.view,
+const mapStateToProps = (state, props) => ({
   classification: state.appState.activeClassification
 })
 export default connect(mapStateToProps)(ClassificationExplorer)
