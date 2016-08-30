@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
-import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import CorrespondenceDefinitions from './correspondence-definitions'
 
 function Correspondences({ loaded, correspondences }) {
@@ -20,4 +20,4 @@ function Correspondences({ loaded, correspondences }) {
   )
 }
 
-export default sparqlConnect.classificationCorrespondences()(Correspondences)
+export default sparqlConnect.classificationCorrespondences(Correspondences)

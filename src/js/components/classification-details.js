@@ -4,7 +4,7 @@ import Items from './items'
 import Levels from './levels'
 import ClassificationDetailsPane from './classification-details-pane'
 import { sparqlConnect } from '../sparql/configure-sparql'
-import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
 
 function ClassificationDetails({ loaded, classification, code, label, issued }) {
   let details
@@ -26,4 +26,4 @@ function ClassificationDetails({ loaded, classification, code, label, issued }) 
   )
 }
 
-export default sparqlConnect.classificationDetails()(ClassificationDetails)
+export default sparqlConnect.classificationDetails(ClassificationDetails)

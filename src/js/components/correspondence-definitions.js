@@ -1,8 +1,8 @@
 import React from 'react'
 import { sparqlConnect } from '../sparql//configure-sparql'
-import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { toggleCorrespondenceDefinitions } from '../actions/app-state'
-
+import { connect } from 'react-redux'
 
 //a sparql component can be passed additional props (either by its parent or
 //thanks to `mapStateToProps`and `mapDispatchToProps`)
@@ -32,5 +32,5 @@ const mapDispatchToProps = {
 
 //sparqlConnect functions can be passed `mapStateToProps` and
 //`mapDispatchToProps` in almost the same way than `redux.connect`
-export default sparqlConnect.correspondenceDefinitions(
-  mapStateToProps, mapDispatchToProps)(CorrespondenceDefinitions)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  sparqlConnect.correspondenceDefinitions(CorrespondenceDefinitions))

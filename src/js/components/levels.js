@@ -2,7 +2,7 @@ import React from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import Items from './items'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
 
 function Levels({ loaded, levels }) {
   if (loaded !== LOADED) return <span>loading levels</span>
@@ -23,4 +23,4 @@ function Levels({ loaded, levels }) {
   )
 }
 
-export default sparqlConnect.classificationLevels()(Levels)
+export default sparqlConnect.classificationLevels(Levels)

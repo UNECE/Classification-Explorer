@@ -1,6 +1,6 @@
 import React from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
-import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
 
 function Items({ loaded, items, levelLabel }) {
   if (loaded !== LOADED) return <span>loading items</span>
@@ -16,4 +16,4 @@ function Items({ loaded, items, levelLabel }) {
   )
 }
 
-export default sparqlConnect.levelItems()(Items)
+export default sparqlConnect.levelItems(Items)

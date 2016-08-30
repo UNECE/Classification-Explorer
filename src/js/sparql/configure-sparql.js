@@ -1,5 +1,5 @@
 import queries from './documented-queries'
-import { buildSparqlConnector } from '../utils/sparql-connector'
+import { buildSparqlConnector } from 'sparql-connect'
 import credentials from '../credentials'
 import config from '../config'
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import { switchViewClassificationDetails } from '../actions/app-state'
 import { sparqlConnect } from '../sparql/configure-sparql'
-import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
+import { connect } from 'react-redux'
 
 function Classifications({ loaded, classifications,
     switchViewClassificationDetails }) {
@@ -56,5 +57,5 @@ It means that:
 - the results will be an array of objects with one propery: `classification`
 */
 
-export default sparqlConnect.classifications(undefined, mapDispatchToProps)
-  (Classifications)
+export default connect(undefined, mapDispatchToProps)(
+  sparqlConnect.classifications(Classifications))
