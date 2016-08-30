@@ -20,10 +20,14 @@ function ClassificationDetails({ loaded, classification, code, label, issued }) 
   return (
     <div>
       { details }
-      <Correspondences classification={classification}/>
+      {/*<Correspondences classification={classification}/>*/}
       <Levels classification={classification}/>
     </div>
   )
 }
 
-export default sparqlConnect.classificationDetails(ClassificationDetails)
+const mapStateToProps = (state, props) => ({
+  classification: decodeURIComponent(props.params.classification),
+})
+
+export default sparqlConnect.classificationDetails(mapStateToProps)(ClassificationDetails)
