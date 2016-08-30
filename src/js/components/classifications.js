@@ -1,12 +1,15 @@
 import React from 'react'
 import { switchViewClassificationDetails } from '../actions/app-state'
 import { sparqlConnect } from '../sparql/configure-sparql'
-import { LOADING, LOADED, FAILED } from 'sparql-connect'
-import { connect } from 'react-redux'
+import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
+import Loading from './loading.js'
 
 function Classifications({ loaded, classifications,
     switchViewClassificationDetails }) {
-  if (loaded !== LOADED) return <span>loading</span>
+  if (loaded !== LOADED) {
+    return( <Loading from="Classification" plural={false} />
+          )
+           } else {
   //we could also write something like
   //if (loaded === FAILED) 
   //  return <span>error while retrieving clasifications/span>
@@ -24,6 +27,7 @@ function Classifications({ loaded, classifications,
       </ul>
     </div>
   )
+}
 }
 
 const mapDispatchToProps = {
@@ -57,5 +61,5 @@ It means that:
 - the results will be an array of objects with one propery: `classification`
 */
 
-export default connect(undefined, mapDispatchToProps)(
-  sparqlConnect.classifications(Classifications))
+export default sparqlConnect.classifications(undefined, mapDispatchToProps)
+  (Classifications)

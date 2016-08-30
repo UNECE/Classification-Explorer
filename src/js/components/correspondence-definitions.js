@@ -1,14 +1,14 @@
 import React from 'react'
 import { sparqlConnect } from '../sparql//configure-sparql'
-import { LOADING, LOADED, FAILED } from 'sparql-connect'
+import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
 import { toggleCorrespondenceDefinitions } from '../actions/app-state'
-import { connect } from 'react-redux'
+import Loading from './loading.js'
 
 //a sparql component can be passed additional props (either by its parent or
 //thanks to `mapStateToProps`and `mapDispatchToProps`)
 function CorrespondenceDefinitions({ loaded, definitions, 
     correspondence, showDef, toggleDef }) {
-  if (loaded !== LOADED) return null
+  if (loaded !== LOADED){ return (<Loading from="Correspondence" plural={false}/>) } else {
   return (
     <span>
       <span style={{ cursor: 'pointer' }}
@@ -19,7 +19,7 @@ function CorrespondenceDefinitions({ loaded, definitions,
         <div>{definitions.map(({ definition }) => definition).join('/')}</div>
       }
     </span> 
-  )
+  )}
 }
 
 const mapStateToProps = (state, { correspondence }) => ({
@@ -32,5 +32,5 @@ const mapDispatchToProps = {
 
 //sparqlConnect functions can be passed `mapStateToProps` and
 //`mapDispatchToProps` in almost the same way than `redux.connect`
-export default connect(mapStateToProps, mapDispatchToProps)(
-  sparqlConnect.correspondenceDefinitions(CorrespondenceDefinitions))
+export default sparqlConnect.correspondenceDefinitions(
+  mapStateToProps, mapDispatchToProps)(CorrespondenceDefinitions)
