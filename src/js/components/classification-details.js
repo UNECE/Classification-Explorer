@@ -20,7 +20,7 @@ function ClassificationDetails({ loaded, classification, code, label, issued }) 
   return (
     <div>
       { details }
-      {/*<Correspondences classification={classification}/>*/}
+      <Correspondences classification={classification}/>
       <Levels classification={classification}/>
     </div>
   )
