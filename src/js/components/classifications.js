@@ -3,6 +3,7 @@ import { switchViewClassificationDetails } from '../actions/app-state'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 function Classifications({ loaded, classifications,
     switchViewClassificationDetails }) {

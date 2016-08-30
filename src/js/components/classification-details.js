@@ -5,6 +5,7 @@ import Levels from './levels'
 import ClassificationDetailsPane from './classification-details-pane'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
+import { connect } from 'react-redux'
 
 function ClassificationDetails({ loaded, classification, code, label, issued }) {
   let details
