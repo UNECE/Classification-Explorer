@@ -44,7 +44,7 @@ export function buildConnect(queryName, query, loadIfNeeded, sparqlName) {
       const enhanceMSTP = (state, ownProps) => {
         const props = mapStateToProps ?
           Object.assign({}, ownProps, mapStateToProps(state, ownProps)) :
-          {}
+          ownProps
         const entry = getEntry(state[sparqlName][queryName], query.params, props)
         const loaded = entry ? entry.status  : LOADING
         //success

@@ -11,10 +11,10 @@ function Levels({ loaded, levels }) {
       <h1>Levels</h1>
       <Tabs>
         <TabList>
-          { levels.map(({ level, depth, label }) => 
+          { levels.map(({ level, depth, label }) =>
             <Tab key={level}>{ `${label} (${depth})` }</Tab>) }
         </TabList>
-        { levels.map(({ level, label }) => 
+        { levels.map(({ level, label }) =>
           <TabPanel key={level}>
             <Items level={level} levelLabel={label} />
           </TabPanel>) }
