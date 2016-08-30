@@ -1,46 +1,29 @@
-
-import React, { Component } from 'react'
-import { loadItemsIfNeeded } from '../actions/items.js'
-import { connect } from 'react-redux'
+import React from 'react'
 import Correspondences from './correspondences'
 import Items from './items'
 import Levels from './levels'
-import { loadClassificationDetails } from '../actions/classification-details'
+import ClassificationDetailsPane from './classification-details-pane'
+import { sparqlConnect } from '../sparql/configure-sparql'
+import { LOADING, LOADED, FAILED } from '../utils/sparql-connector/index'
 
-class ClassificationDetails extends Component {
-
-  constructor(props) {
-    super(props)
+function ClassificationDetails({ loaded, classification, code, label, issued }) {
+  let details
+  if (loaded !== LOADED) {
+    details = <span>classification details are loading</span>
   }
-
-  componentWillMount() {
-      this.props.loadClassificationDetails(this.props.uri);
+  else {
+    details = <ClassificationDetailsPane
+                code={code}
+                label={label}
+                issued={issued} />
   }
-
-  render() {
-    return (
-      <div>
-        {!this.props.loaded ? 'Pas de detail' : <span>{this.props.details.label}</span>}
-        <Correspondences classification={this.props.uri}/>
-        <Levels uri={this.props.uri}/>
-        <Items uri={this.props.uri}/>
-      </div>
-    )
-  }
+  return (
+    <div>
+      { details }
+      <Correspondences classification={classification}/>
+      <Levels classification={classification}/>
+    </div>
+  )
 }
 
-const mapStateToProps = (state, {uri} ) => {
-  if(!state.classificationDetails.hasOwnProperty(uri)) return {
-    loaded: false, details: []
-  }
-  return {
-    loaded: state.classificationDetails[uri].loaded,
-    details: state.classificationDetails[uri].details
-  }
-}
-
-const mapDispatchToProps = {
-  loadClassificationDetails
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ClassificationDetails)
+export default sparqlConnect.classificationDetails()(ClassificationDetails)
