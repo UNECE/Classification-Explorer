@@ -3,6 +3,7 @@ import Classifications from './classifications'
 import ClassificationDetails from './classification-details'
 import { connect } from 'react-redux'
 import { VIEW_CLASSIFICATIONS, VIEW_CLASSIFICATION_DETAILS } from '../reducers/app-state'
+import Loading from './loading'
 
 function ClassificationExplorer({ view, classification }) {
   let explorer

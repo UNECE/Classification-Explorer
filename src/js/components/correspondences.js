@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import CorrespondenceDefinitions from './correspondence-definitions'
+import Loading from './loading'
 
 function Correspondences({ loaded, correspondences }) {
-  if (loaded !== LOADED) return <span>loading correspondences</span>
+  if (loaded !== LOADED) {return <Loading from="correspondences" plural={true}/>}
+  else {
   return (
     <div>
       <h1>Correspondences</h1>
@@ -18,6 +20,7 @@ function Correspondences({ loaded, correspondences }) {
       </ul>
     </div>
   )
+}
 }
 
 export default sparqlConnect.classificationCorrespondences(Correspondences)

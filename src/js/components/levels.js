@@ -3,9 +3,10 @@ import { sparqlConnect } from '../sparql/configure-sparql'
 import Items from './items'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
+import Loading from './loading'
 
 function Levels({ loaded, levels }) {
-  if (loaded !== LOADED) return <span>loading levels</span>
+  if (loaded !== LOADED) return <Loading from="Levels" plural={true}/>
   return (
     <div>
       <h1>Levels</h1>

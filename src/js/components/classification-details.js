@@ -6,21 +6,21 @@ import ClassificationDetailsPane from './classification-details-pane'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { connect } from 'react-redux'
+import Loading from './loading.js'
 
 function ClassificationDetails({ loaded, classification, code, label, issued }) {
-  let details
-  if (loaded !== LOADED) {
-    details = <span>classification details are loading</span>
-  }
-  else {
-    details = <ClassificationDetailsPane
+   //let details
+ if (loaded !== LOADED) return <Loading from="Classification" plural={false}/>
+
+  return (
+     <div>
+           <h1>{label}</h1>
+   
+      <ClassificationDetailsPane
+                loaded={loaded}
                 code={code}
                 label={label}
                 issued={issued} />
-  }
-  return (
-    <div>
-      { details }
       <Correspondences classification={classification}/>
       <Levels classification={classification}/>
     </div>
@@ -32,3 +32,4 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default connect(mapStateToProps)(sparqlConnect.classificationDetails(ClassificationDetails))
+
