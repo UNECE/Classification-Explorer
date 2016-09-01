@@ -6,7 +6,9 @@ const {
   classificationLevels,
   classificationCorrespondences,
   levelItems,
-  correspondenceDefinitions
+  correspondenceDefinitions,
+  itemDetails,
+  itemChildren
 } = queries
 
 export default {
@@ -84,5 +86,33 @@ export default {
     },
     whatWeGet: 'definitions',
     queryBuilder: correspondenceDefinitions
+  },
+  itemDetails: {
+    params: [{
+      name: 'item'
+    }],
+    results: {
+      label: 'label',
+      code: 'code',
+      label: 'label',
+      text: 'text',
+      parent: 'parent',
+      parentCode: 'parentCode',
+      parentLabel: 'parentLabel'
+    },
+    singleResult: true,
+    queryBuilder: itemDetails
+  },
+  itemChildren: {
+    params: [{
+      name: 'item'
+    }],
+    results: {
+      item: 'child item',
+      code: 'child item code',
+      label: 'child item label'
+    },
+    whatWeGet: 'items',
+    queryBuilder: itemChildren
   }
 }

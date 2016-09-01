@@ -67,11 +67,44 @@ const correspondenceDefinitions = correspondence => `
     <${correspondence}> skos:notation ?code ; skos:definition ?definition ;
   }
 `
+
+const itemDetails = item => `
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
+  SELECT ?label ?code ?label ?text ?parent ?parentCode ?parentLabel {
+    <${item}> skos:prefLabel ?label ;
+              skos:notation ?code .
+              
+    OPTIONAL {
+      <${item}> skos:broader ?parent .               
+      ?parent skos:notation ?parentCode .
+      ?parent skos:prefLabel ?parentLabel .
+    }
+    # if we use only one OPTIONAL keyword, we will not receive the note
+    # if there is no parent
+    OPTIONAL {
+     <${item}> xkos:coreContentNote ?content .
+     ?content xkos:plainText ?text .
+   }
+  }
+`
+
+const itemChildren = item => `
+  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>  
+  SELECT ?item ?code ?label { 
+    <${item}> skos:narrower ?item .
+    ?item skos:notation ?code .
+    ?item skos:prefLabel ?label
+  } 
+`
 export default {
   classifications,
   classificationDetails,
   classificationLevels,
   classificationCorrespondences,
   levelItems,
-  correspondenceDefinitions
+  correspondenceDefinitions,
+  itemDetails,
+  itemChildren
 }
