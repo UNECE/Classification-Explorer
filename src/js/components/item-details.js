@@ -9,11 +9,6 @@ import { URIToRoute } from '../router-mapping'
 import ItemChildren from './item-children'
 function ItemDetails({ loaded, item, label, code, text, parent, parentCode, parentLabel }) {
   if (loaded !== LOADED) return  <Loading from="Item details" plural={false} />
-  const noteStyle = {
-    margin: '10px',
-    padding: '15px',
-    border: 'solid #ccc 1px'
-  }
   return (
     <div>
       <h1>{code} - {label}</h1>
@@ -22,7 +17,7 @@ function ItemDetails({ loaded, item, label, code, text, parent, parentCode, pare
           { parentCode } - { parentLabel }
         </Link>
       }
-      { text && <div style={noteStyle}>{text}</div> }
+      { text && <div className="note">{text}</div> }
       <hr/>
       <ItemChildren item={item} />
     </div>
