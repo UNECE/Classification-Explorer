@@ -4,7 +4,7 @@ import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import Loading from './loading'
 import { Link } from 'react-router'
-import { URIToRoute } from '../router-mapping'
+import { uriToLink } from '../router-mapping'
 
 import ItemChildren from './item-children'
 function ItemDetails({ loaded, item, label, code, text, parent, parentCode, parentLabel }) {
@@ -13,7 +13,7 @@ function ItemDetails({ loaded, item, label, code, text, parent, parentCode, pare
     <div>
       <h1>{code} - {label}</h1>
       { parent && 
-        <Link to={`/classification/${URIToRoute.item(parent)}`}>
+        <Link to={uriToLink.itemDetails(parent)}>
           { parentCode } - { parentLabel }
         </Link>
       }

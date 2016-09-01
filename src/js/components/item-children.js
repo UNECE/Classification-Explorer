@@ -3,7 +3,7 @@ import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import Loading from './loading'
 import { Link } from 'react-router'
-import { URIToRoute } from '../router-mapping'
+import { uriToLink } from '../router-mapping'
 
 function ItemChildren({ item, loaded, items }) {
   if (loaded !== LOADED) return  <Loading from="Item children" plural={false} />
@@ -11,7 +11,7 @@ function ItemChildren({ item, loaded, items }) {
     <ul>
       { items.map(({ item, code, label }) =>
         <li key={item}>
-          <Link to={`/classification/${URIToRoute.item(item)}`}>
+          <Link to={uriToLink.itemDetails(item)}>
             { code } - { label }
           </Link>
         </li>) }

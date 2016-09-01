@@ -6,6 +6,7 @@ import configureStore from '../store/configure-store'
 import ClassificationExplorer from './classification-explorer'
 import ClassificationDetails from './classification-details'
 import ItemDetails from './item-details'
+import { path } from '../router-mapping'
 
 const store = configureStore()
 
@@ -15,9 +16,9 @@ export default class Root extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path="/" component={ClassificationExplorer} />
-          <Route path="/classification/:classificationId/details/:conceptSchemeId"
+          <Route path={path.classificationDetails}
                  component={ClassificationDetails} />
-          <Route path="/classification/:classificationId/:levelId/:itemId"
+          <Route path={path.itemDetails.pattern}
                  component={ItemDetails} />
         </Router>
       </Provider>
