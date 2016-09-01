@@ -11,7 +11,7 @@ function ItemChildren({ item, loaded, items }) {
     <ul>
       { items.map(({ item, code, label }) =>
         <li key={item}>
-          <Link to={`/item/${URIToRoute.item(item)}`}>
+          <Link to={`/classification/${URIToRoute.item(item)}`}>
             { code } - { label }
           </Link>
         </li>) }

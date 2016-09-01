@@ -13,7 +13,7 @@ function Items({ loaded, items, levelLabel }) {
       <ul>
         {items.map(({ item, code, label}) => 
           <li key={item}>
-            <Link to={`/item/${URIToRoute.item(item)}`}>
+            <Link to={`/classification/${URIToRoute.item(item)}`}>
               {item}
             </Link>
           </li>

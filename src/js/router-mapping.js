@@ -63,7 +63,10 @@ export const URIToRoute = {
   //classification looks like 'prefix/nacer2/nace'; in the route, we will deal
   //with two parameters: classificationId ('nacer2') and conceptSchemeId
   //('nace')
-  classification: uri => uri.match(rPrefix)[1],
+  classification: uri => {
+    const [classifcationId, conceptSchemeId] = uri.match(rPrefix)[1].split('/')
+    return `${classifcationId}/details/${conceptSchemeId}`
+  },
   //item looks like 'prefix/nacer2/division/02'; in the route, we will dealing
   //with three parameters: classificationId ('nacer2'), levelId ('division') and
   //itemId ('02')
@@ -78,13 +81,13 @@ export const routeToURI = {
 }
 
 const routeToURIs = {
-  '/classification/:classification/:conceptScheme': (state, { routeParams }) => {
-    const { classification, conceptScheme } = routeParams
+  '/classification/:classificationId/details/:conceptSchemeId': (state, { routeParams }) => {
+    const { classificationId, conceptSchemeId } = routeParams
     return { 
-      classification: routeToURI.classification(classification, conceptScheme)
+      classification: routeToURI.classification(classificationId, conceptSchemeId)
     }
   },
-  '/item/:classificationId/:levelId/:itemId': (state, { routeParams }) => {
+  '/classification/:classificationId/:levelId/:itemId': (state, { routeParams }) => {
     const { classificationId, levelId, itemId } = routeParams
     return {
       item: routeToURI.item(classificationId, levelId, itemId)
@@ -95,6 +98,8 @@ const routeToURIs = {
 export const connectFromRoute = (...args) => connect(
   (state, ownProps) => {
     const mapRoute = routeToURIs[ownProps.route.path]
+    //TODO waring if no mapping is found for the route (because it fails
+    //silently but it can hide an error)
     return mapRoute ? mapRoute(state, ownProps) : {}
   })(...args)
 

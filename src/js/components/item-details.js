@@ -13,7 +13,7 @@ function ItemDetails({ loaded, item, label, code, text, parent, parentCode, pare
     <div>
       <h1>{code} - {label}</h1>
       { parent && 
-        <Link to={`/item/${URIToRoute.item(parent)}`}>
+        <Link to={`/classification/${URIToRoute.item(parent)}`}>
           { parentCode } - { parentLabel }
         </Link>
       }
