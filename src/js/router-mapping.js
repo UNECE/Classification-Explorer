@@ -56,19 +56,25 @@ import { connect } from 'react-redux'
 //Simplistic example, we just add/remove a prefix, and replace '/' with '|' to
 //make URLs look nice. The idea is to later add logic with mapping functions
 //that will read from the state to know how to goes from aliases to URIs.
-const prefix = 'http://stamina-project.org/codes/'
-const rPrefix = new RegExp(prefix + '(.*)')
+const prefix = 'http://stamina-project.org/codes'
+const rPrefix = new RegExp(prefix + '\/(.*)')
 
 export const URIToRoute = {
   //classification looks like 'prefix/nacer2/nace'; in the route, we will deal
   //with two parameters: classificationId ('nacer2') and conceptSchemeId
   //('nace')
-  classification: uri => uri.match(rPrefix)[1]
+  classification: uri => uri.match(rPrefix)[1],
+  //item looks like 'prefix/nacer2/division/02'; in the route, we will dealing
+  //with three parameters: classificationId ('nacer2'), levelId ('division') and
+  //itemId ('02')
+  item: uri => uri.match(rPrefix)[1]
 }
 
 export const routeToURI = {
   classification: (classification, conceptScheme)  =>
-    `${prefix}${classification}/${conceptScheme}`,
+    `${prefix}/${classification}/${conceptScheme}`,
+  item: (classificationId, levelId, itemId) =>
+    `${prefix}/${classificationId}/${levelId}/${itemId}`
 }
 
 const routeToURIs = {
@@ -76,6 +82,12 @@ const routeToURIs = {
     const { classification, conceptScheme } = routeParams
     return { 
       classification: routeToURI.classification(classification, conceptScheme)
+    }
+  },
+  '/item/:classificationId/:levelId/:itemId': (state, { routeParams }) => {
+    const { classificationId, levelId, itemId } = routeParams
+    return {
+      item: routeToURI.item(classificationId, levelId, itemId)
     }
   }
 }
