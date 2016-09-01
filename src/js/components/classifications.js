@@ -5,6 +5,7 @@ import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Loading from './loading.js'
+import { URIToRoute } from '../router-mapping'
 
 function Classifications({ loaded, classifications,
     switchViewClassificationDetails }) {
@@ -21,7 +22,7 @@ function Classifications({ loaded, classifications,
       <ul>
         { classifications.map(({ classification }) =>
             <li key={classification}>
-              <Link to={`/details/${encodeURIComponent(classification)}`}>
+              <Link to={`/details/${URIToRoute.classification(classification)}`}>
                 {classification}
               </Link>
             </li>

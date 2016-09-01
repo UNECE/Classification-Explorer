@@ -51,18 +51,31 @@ http://stamina-project.org/codes/nacer2/division/03
 */
 
 import { connect } from 'react-redux'
-//Empty shell. For now we work with URIs, the idea is to later add logic
-//to mapping functions to build URIs based on short names and information
-//contained in the state (for example: add a prefix)
-const mapping = {
+
+//Simplistic example, we just add/remove a prefix, and replace '/' with '|' to
+//make URLs look nice. The idea is to later add logic with mapping functions
+//that will read from the state to know how to goes from aliases to URIs.
+const prefix = 'http://stamina-project.org/codes/'
+const rPrefix = new RegExp(prefix + '(.*)')
+
+export const URIToRoute = {
+  classification: uri => uri.match(rPrefix)[1].replace('/', '*')
+}
+
+export const routeToURI = {
+  classification: alias => prefix + alias.replace('*', '/')
+}
+
+const routeToURIs = {
   '/details/:classification': (state, { routeParams: { classification } }) => {
-    return { classification }
+    return { classification: routeToURI.classification(classification) }
   }
 }
 
+
 export const connectFromRoute = (...args) => connect(
   (state, ownProps) => {
-    const mapRoute = mapping[ownProps.route.path]
+    const mapRoute = routeToURIs[ownProps.route.path]
     return mapRoute ? mapRoute(state, ownProps) : {}
   })(...args)
 
