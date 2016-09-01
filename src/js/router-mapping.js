@@ -26,6 +26,7 @@ http://stamina-project.org/codes/cpcv11/cpc
 http://stamina-project.org/codes/cpcv2/cpc
 http://stamina-project.org/codes/cpcv21/cpc
 http://stamina-project.org/codes/isicr31/isic
+http://stamina-project.org/codes/nacer2/nace
 
 correspondences:
 
@@ -59,19 +60,25 @@ const prefix = 'http://stamina-project.org/codes/'
 const rPrefix = new RegExp(prefix + '(.*)')
 
 export const URIToRoute = {
-  classification: uri => uri.match(rPrefix)[1].replace('/', '*')
+  //classification looks like 'prefix/nacer2/nace'; in the route, we will deal
+  //with two parameters: classificationId ('nacer2') and conceptSchemeId
+  //('nace')
+  classification: uri => uri.match(rPrefix)[1]
 }
 
 export const routeToURI = {
-  classification: alias => prefix + alias.replace('*', '/')
+  classification: (classification, conceptScheme)  =>
+    `${prefix}${classification}/${conceptScheme}`,
 }
 
 const routeToURIs = {
-  '/details/:classification': (state, { routeParams: { classification } }) => {
-    return { classification: routeToURI.classification(classification) }
+  '/classification/:classification/:conceptScheme': (state, { routeParams }) => {
+    const { classification, conceptScheme } = routeParams
+    return { 
+      classification: routeToURI.classification(classification, conceptScheme)
+    }
   }
 }
-
 
 export const connectFromRoute = (...args) => connect(
   (state, ownProps) => {

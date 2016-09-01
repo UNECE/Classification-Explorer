@@ -14,7 +14,8 @@ export default class Root extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path="/" component={ClassificationExplorer} />
-          <Route path="/details/:classification" component={ClassificationDetails} />
+          <Route path="/classification/:classification/:conceptScheme"
+                 component={ClassificationDetails} />
         </Router>
       </Provider>
     )
