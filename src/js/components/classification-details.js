@@ -5,7 +5,7 @@ import Levels from './levels'
 import ClassificationDetailsPane from './classification-details-pane'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
-import { connect } from 'react-redux'
+import { connectFromRoute } from '../router-mapping'
 import Loading from './loading.js'
 
 function ClassificationDetails({ loaded, classification, code, label, issued }) {
@@ -31,5 +31,6 @@ const mapStateToProps = (state, props) => ({
   classification: decodeURIComponent(props.params.classification),
 })
 
-export default connect(mapStateToProps)(sparqlConnect.classificationDetails(ClassificationDetails))
+export default connectFromRoute(
+  sparqlConnect.classificationDetails(ClassificationDetails))
 
