@@ -10,6 +10,9 @@ module.exports = {
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     './src/js/main.js'
   ],
+  devServer: { 
+    historyApiFallback: true 
+  }, 
   module: {
     loaders: [
       //{ test: /\.css$/, loader: 'style-loader!css-loader?sourceMap' },
