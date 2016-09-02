@@ -18,7 +18,7 @@ export default class Root extends Component {
           <Route path="/" component={ClassificationExplorer} />
           <Route path={path.classificationDetails}
                  component={ClassificationDetails} />
-          <Route path={path.itemDetails.pattern}
+          <Route path={path.itemDetails}
                  component={ItemDetails} />
         </Router>
       </Provider>
