@@ -5,16 +5,21 @@ import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import Loading from './loading'
 import { Link } from 'react-router'
 import { uriToLink } from '../router-mapping'
-
 import ItemChildren from './item-children'
-function ItemDetails({ loaded, item, label, code, text, parent, parentCode, parentLabel }) {
+
+function ItemDetails({ loaded, item, label, code, text, parent, parentCode,
+    parentLabel, cl, clCode, clLabel }) {
   if (loaded !== LOADED) return  <Loading from="Item details" plural={false} />
   return (
     <div>
+      <Link to={uriToLink.classificationDetails(cl)}>
+        { clCode } - { clLabel }
+      </Link>
       <h1>{code} - {label}</h1>
+      
       { parent && 
         <Link to={uriToLink.itemDetails(parent)}>
-          { parentCode } - { parentLabel }
+          <span>&#x2191;&nbsp;</span>{ parentCode } - { parentLabel }
         </Link>
       }
       { text && <div className="note">{text}</div> }
