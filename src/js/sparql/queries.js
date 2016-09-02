@@ -88,9 +88,13 @@ const correspondenceDefinitions = correspondence => `
 const itemDetails = item => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
-  SELECT ?label ?code ?label ?text ?parent ?parentCode ?parentLabel {
+  SELECT ?label ?code ?label ?text ?cl ?clCode ?clLabel ?parent ?parentCode
+      ?parentLabel {
     <${item}> skos:prefLabel ?label ;
-              skos:notation ?code .
+              skos:notation ?code ;
+              skos:inScheme ?cl .
+    ?cl skos:prefLabel ?clLabel ;
+        skos:notation ?clCode .
 
     OPTIONAL {
       <${item}> skos:broader ?parent .
