@@ -8,7 +8,8 @@ const {
   levelItems,
   correspondenceDefinitions,
   itemDetails,
-  itemChildren
+  itemChildren,
+  correspondenceDetails
 } = queries
 
 export default {
@@ -59,7 +60,8 @@ export default {
     }],
     whatWeGet: 'correspondences',
     results: {
-      table: 'correspondence table (uri)'
+      table: 'correspondence table (uri)',
+      code: 'correspondence code'
     },
     queryBuilder: classificationCorrespondences
   },
@@ -96,6 +98,9 @@ export default {
       code: 'code',
       label: 'label',
       text: 'text',
+      cl: 'classification',
+      clCode: 'classificationCode',
+      clLabel: 'classificationLabel',
       parent: 'parent',
       parentCode: 'parentCode',
       parentLabel: 'parentLabel'
@@ -114,5 +119,17 @@ export default {
     },
     whatWeGet: 'items',
     queryBuilder: itemChildren
+  },
+  correspondenceDetails: {
+    params: [{
+      name: 'correspondence'
+    }],
+    results: {
+      classification: 'classification involved in the comparison',
+      code: 'classificaiton code',
+      label: 'classification label'
+    },
+    whatWeGet: 'classifications',
+    queryBuilder: correspondenceDetails
   }
 }

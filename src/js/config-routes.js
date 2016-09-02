@@ -56,6 +56,7 @@ http://stamina-project.org/codes/nacer2/division/03
 //that will read from the state to know how to goes from aliases to URIs.
 const prefix = 'http://stamina-project.org/codes'
 const rPrefix = new RegExp(prefix + '\/(.*)')
+const rCorrespondence = new RegExp(prefix + '\/(.*)\/correspondence')
 
 export const routes = {
   classificationDetails: {
@@ -80,5 +81,12 @@ export const routes = {
     //with three parameters: classificationId ('nacer2'), levelId ('division') and
     //itemId ('02')
     uriToLink: uri => `/classification/${uri.match(rPrefix)[1]}`
+  },
+  correspondenceDetails: {
+    pattern: '/correspondence/:correspondenceId',
+    paramsToProps: (state, { correspondenceId }) => ({
+      correspondence: `${prefix}/${correspondenceId}/correspondence`
+    }),
+    uriToLink: uri => `/correspondence/${uri.match(rCorrespondence)[1]}`
   }
 }

@@ -43,9 +43,11 @@ const classificationCorrespondences = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
-  SELECT ?table ?label WHERE {
+  SELECT ?table ?code WHERE {
     ?table xkos:compares <${uri}> .
-    OPTIONAL { ?table skos:prefLabel ?label }
+    OPTIONAL { 
+      ?table skos:notation ?code
+    }
   }
 `
 /**
@@ -85,7 +87,7 @@ const itemDetails = item => `
     OPTIONAL {
      <${item}> xkos:coreContentNote ?content .
      ?content xkos:plainText ?text .
-   }
+    }
   }
 `
 
@@ -98,6 +100,16 @@ const itemChildren = item => `
     ?item skos:prefLabel ?label
   } 
 `
+
+const correspondenceDetails = correspondence => `
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
+  SELECT ?classification ?code ?label {
+    <${correspondence}> xkos:compares ?classification .
+    ?classification skos:prefLabel ?label ;
+                    skos:notation ?code
+  }
+`
 export default {
   classifications,
   classificationDetails,
@@ -106,5 +118,6 @@ export default {
   levelItems,
   correspondenceDefinitions,
   itemDetails,
-  itemChildren
+  itemChildren,
+  correspondenceDetails
 }

@@ -3,6 +3,8 @@ import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import CorrespondenceDefinitions from './correspondence-definitions'
 import Loading from './loading'
+import { Link } from 'react-router'
+import { uriToLink } from '../router-mapping'
 
 function Correspondences({ loaded, correspondences }) {
   if (loaded !== LOADED) {return <Loading from="correspondences" plural={true}/>}
@@ -11,9 +13,11 @@ function Correspondences({ loaded, correspondences }) {
     <div>
       <h1>Correspondences</h1>
       <ul>
-        { correspondences.map(correspondence =>
-            <li key={correspondence.table}>
-              {correspondence.table}
+        { correspondences.map(({ table, code }) =>
+            <li key={table}>
+              <Link to={uriToLink.correspondenceDetails(table)}>
+                {code || table }
+              </Link>
               {/* <CorrespondenceDefinitions
                 correspondence={correspondence.table} /> */}
             </li>) }
