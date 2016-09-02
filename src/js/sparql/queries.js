@@ -48,8 +48,23 @@ const classificationCorrespondences = uri => `
     OPTIONAL { ?table skos:prefLabel ?label }
   }
 `
+
 /**
- * Builds the query that gets the list of items of a givent level.
+ * Builds the query that gets all the correspondence tables.
+ * TODO Improve the database, all tables don't have a label.
+ */
+const correspondences = uri => `
+  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
+  SELECT ?table ?label WHERE {
+    ?table rdf:type xkos:Corresponce .
+    OPTIONAL { ?table skos:prefLabel ?label }
+  }
+`
+
+/**
+ * Builds the query that gets the list of items of a given level.
  */
 const levelItems = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -74,9 +89,9 @@ const itemDetails = item => `
   SELECT ?label ?code ?label ?text ?parent ?parentCode ?parentLabel {
     <${item}> skos:prefLabel ?label ;
               skos:notation ?code .
-              
+
     OPTIONAL {
-      <${item}> skos:broader ?parent .               
+      <${item}> skos:broader ?parent .
       ?parent skos:notation ?parentCode .
       ?parent skos:prefLabel ?parentLabel .
     }
@@ -91,18 +106,19 @@ const itemDetails = item => `
 
 const itemChildren = item => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>  
-  SELECT ?item ?code ?label { 
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  SELECT ?item ?code ?label {
     <${item}> skos:narrower ?item .
     ?item skos:notation ?code .
     ?item skos:prefLabel ?label
-  } 
+  }
 `
 export default {
   classifications,
   classificationDetails,
   classificationLevels,
   classificationCorrespondences,
+  correspondences,
   levelItems,
   correspondenceDefinitions,
   itemDetails,
