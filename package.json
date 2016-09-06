@@ -17,7 +17,7 @@
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
-    "sparql-connect": "noknot/sparql-connect"
+    "sparql-connect": "0.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
