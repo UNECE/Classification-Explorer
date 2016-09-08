@@ -9,7 +9,8 @@ const {
   correspondenceDefinitions,
   itemDetails,
   itemChildren,
-  correspondenceDetails
+  correspondenceDetails,
+  searchInstances
 } = queries
 
 export default {
@@ -131,5 +132,15 @@ export default {
     },
     whatWeGet: 'classifications',
     queryBuilder: correspondenceDetails
+  },
+  searchInstances: {
+    params: [{
+      name: 'keyword'
+    }],
+    results: {
+      s: 'matching instances (array?)'
+    },
+    whatWeGet: 'results',
+    queryBuilder: searchInstances
   }
 }

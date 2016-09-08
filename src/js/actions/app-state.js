@@ -11,6 +11,14 @@ export const switchViewClassificationDetails = uri => ({
     }
 })
 
+export const CHANGE_KEYWORD = 'CHANGE_KEYWORD'
+export const changeKeyword = keyword => ({
+    type: CHANGE_KEYWORD,
+    payload: {
+      keyword
+    }
+})
+
 export const SHOW_LEVEL_ITEMS = 'SHOW_LEVEL_ITEMS'
 export const showLevelItems = uri => ({
   type: SHOW_LEVEL_ITEMS,
