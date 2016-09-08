@@ -22,8 +22,6 @@ function Classifications({ loaded, classifications }) {
             </li>
           )}
       </ul>
-      <br/>
-      <Search />
     </div>
   )
 }
