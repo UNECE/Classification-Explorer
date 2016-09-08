@@ -3,3 +3,7 @@
   padding: 15px;
   border: solid #ccc 1px;
 }
+
+input {
+  margin-left: 10px;
+}

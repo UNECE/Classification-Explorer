@@ -4,6 +4,12 @@ import { LOADING, LOADED, FAILED } from 'sparql-connect'
 
 export default function SearchInput({ keyword, changeKeyword }) {
   return (
-    <input type="search" placeholder="Enter a keyword" name="search_input" onChange={e => changeKeyword(e.target.value)}></input>
+    <div>
+      Search everything :
+      <input type="search" placeholder="Enter a keyword"
+             name="search_input"
+             value={keyword}
+             onChange={e => changeKeyword(e.target.value)}></input>
+    </div>
   )
 }

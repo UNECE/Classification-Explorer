@@ -8,7 +8,10 @@ function SearchResults({ loaded, results, keyword }) {
   if (loaded === FAILED) return <span>Failed loading results for {keyword}</span>
   return (
       <ul>
-        { results.map(({ s }) => <li key={s}>{s}</li>) }
+        { results.map(({ subject, predicate, match }) =>
+            <li key={subject+match}>
+              {subject} - {predicate} - {match}
+            </li>) }
       </ul>
   )
 }
