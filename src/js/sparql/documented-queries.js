@@ -10,7 +10,7 @@ const {
   itemDetails,
   itemChildren,
   correspondenceDetails,
-  searchInstances
+  searchEverything
 } = queries
 
 export default {
@@ -133,7 +133,7 @@ export default {
     whatWeGet: 'classifications',
     queryBuilder: correspondenceDetails
   },
-  searchInstances: {
+  searchEverything: {
     params: [{
       name: 'keyword'
     }],
@@ -144,6 +144,6 @@ export default {
       score: 'score'
     },
     whatWeGet: 'results',
-    queryBuilder: searchInstances
+    queryBuilder: searchEverything
   }
 }

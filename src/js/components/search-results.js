@@ -17,4 +17,4 @@ function SearchResults({ loaded, results, keyword }) {
 }
 
 
-export default sparqlConnect.searchInstances(SearchResults)
+export default sparqlConnect.searchEverything(SearchResults)

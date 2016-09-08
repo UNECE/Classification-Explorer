@@ -129,7 +129,7 @@ const correspondenceDetails = correspondence => `
                     skos:notation ?code
   }
 `
-const searchInstances = keyword => `
+const searchEverything = keyword => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT ?subject ?predicate ?match ?score WHERE {
@@ -149,5 +149,5 @@ export default {
   itemDetails,
   itemChildren,
   correspondenceDetails,
-  searchInstances
+  searchEverything
 }
