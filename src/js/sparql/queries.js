@@ -132,9 +132,9 @@ const correspondenceDetails = correspondence => `
 const searchInstances = keyword => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-  SELECT DISTINCT ?subject ?predicate ?match WHERE {
+  SELECT DISTINCT ?subject ?predicate ?match ?score WHERE {
     ?subject ?predicate ?match .
-    ?match <tag:stardog:api:property:textMatch> '${keyword}'.
+    (?match ?score) <tag:stardog:api:property:textMatch> '${keyword}*'.
   }
 `
 

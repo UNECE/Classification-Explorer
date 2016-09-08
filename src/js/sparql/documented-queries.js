@@ -140,7 +140,8 @@ export default {
     results: {
       subject: 'matching instances (array?)',
       predicate: 'predicate',
-      match: 'keyword match'
+      match: 'keyword match',
+      score: 'score'
     },
     whatWeGet: 'results',
     queryBuilder: searchInstances
