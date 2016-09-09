@@ -15,7 +15,7 @@ function ItemDetails({ loaded, item, label, code, text, parent, parentCode,
     <div>
       <Menu />
       <Link to={uriToLink.classificationDetails(cl)}>
-        { clCode } - { clLabel }
+        { clCode && `${clCode} - `}{ clLabel }
       </Link>
       <h1>{code} - {label}</h1>
       

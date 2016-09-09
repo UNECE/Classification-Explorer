@@ -93,8 +93,10 @@ const itemDetails = item => `
     <${item}> skos:prefLabel ?label ;
               skos:notation ?code ;
               skos:inScheme ?cl .
-    ?cl skos:prefLabel ?clLabel ;
-        skos:notation ?clCode .
+    ?cl skos:prefLabel ?clLabel .
+    OPTIONAL { 
+      ?cl skos:notation ?clCode .
+    }
 
     OPTIONAL {
       <${item}> skos:broader ?parent .
@@ -107,6 +109,10 @@ const itemDetails = item => `
      <${item}> xkos:coreContentNote ?content .
      ?content xkos:plainText ?text .
     }
+    FILTER (
+      langMatches(lang(?label), "FR") &&
+      langMatches(lang(?parentLabel), "FR") &&
+      langMatches(lang(?clLabel), "FR"))
   }
 `
 
@@ -141,10 +147,15 @@ const searchEverything = keyword => `
 const searchItems = keywordItem => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-  SELECT DISTINCT ?item ?classification ?predicate ?match ?score 
+  SELECT DISTINCT 
+    ?item ?itemLabel
+    ?classification ?classificationLabel
+    ?predicate ?match ?score 
   WHERE {
     ?item skos:inScheme ?classification ;
-          ?predicate ?match .
+          ?predicate ?match ;
+          skos:prefLabel ?itemLabel .
+    ?classification skos:prefLabel ?classificationLabel .
     (?match ?score) <tag:stardog:api:property:textMatch> '${keywordItem}*'.
   }
 `
