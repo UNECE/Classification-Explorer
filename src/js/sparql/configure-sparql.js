@@ -1,15 +1,9 @@
 import queries from './documented-queries'
 import { buildSparqlConnector } from 'sparql-connect'
-import credentials from '../credentials'
-import config from '../config'
-import buildFetch from './stardog-remote-call.js'
-
-const { username, password } = credentials
-const authorization = 'Basic ' + btoa(`${username}:${password}`)
-
-const queryURL = config.queryURL
 
 export const {
   mainReducer,
   sparqlConnect,
-} = buildSparqlConnector(queries, buildFetch(queryURL, authorization))
+  enhanceReducer,
+  setFetchQuery
+} = buildSparqlConnector(queries)
