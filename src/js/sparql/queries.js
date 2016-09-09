@@ -94,15 +94,19 @@ const itemDetails = item => `
               skos:notation ?code ;
               skos:inScheme ?cl .
     ?cl skos:prefLabel ?clLabel .
+    
     OPTIONAL { 
       ?cl skos:notation ?clCode .
     }
 
+    
     OPTIONAL {
-      <${item}> skos:broader ?parent .
-      ?parent skos:notation ?parentCode .
-      ?parent skos:prefLabel ?parentLabel .
-    }
+      <${item}> skos:broader ?parent ;
+                skos:prefLabel ?parentLabel .
+      OPTIONAL { ?parent skos:notation ?parentCode . } 
+      FILTER ( langMatches(lang(?parentLabel), "FR"))
+    }      
+
     # if we use only one OPTIONAL keyword, we will not receive the note
     # if there is no parent
     OPTIONAL {
@@ -111,7 +115,6 @@ const itemDetails = item => `
     }
     FILTER (
       langMatches(lang(?label), "FR") &&
-      langMatches(lang(?parentLabel), "FR") &&
       langMatches(lang(?clLabel), "FR"))
   }
 `
