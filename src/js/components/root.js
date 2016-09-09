@@ -9,6 +9,7 @@ import ItemDetails from './item-details'
 import CorrespondenceDetails from './correspondence-details'
 import { path } from '../router-mapping'
 import SearchResults from './search-results'
+import Classifications from './classifications'
 
 const store = configureStore()
 
@@ -19,15 +20,17 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path="/" component={ClassificationExplorer} />
-          <Route path={path.classificationDetails}
-                 component={ClassificationDetails} />
-          <Route path={path.itemDetails}
-                 component={ItemDetails} />
-          <Route path={path.correspondenceDetails}
-                 component={CorrespondenceDetails} />
-          <Route path={path.searchItems}
-                 component={SearchResults} />
+          <Route path="/" component={ClassificationExplorer}>
+            <IndexRoute component={Classifications} />
+            <Route path={path.classificationDetails}
+                   component={ClassificationDetails} />
+            <Route path={path.itemDetails}
+                   component={ItemDetails} />
+            <Route path={path.correspondenceDetails}
+                   component={CorrespondenceDetails} />
+            <Route path={path.searchItems}
+                   component={SearchResults} />
+          </Route>
         </Router>
       </Provider>
     )

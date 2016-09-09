@@ -60,7 +60,7 @@ const rCorrespondence = new RegExp(prefix + '\/(.*)\/correspondence')
 
 export const routes = {
   classificationDetails: {
-    pattern: '/classification/:classificationId/details/:conceptSchemeId',
+    pattern: 'classification/:classificationId/details/:conceptSchemeId',
     paramsToProps: (state, { classificationId, conceptSchemeId })  => ({
       classification: `${prefix}/${classificationId}/${conceptSchemeId}`
     }),
@@ -73,7 +73,7 @@ export const routes = {
     }
   },
   itemDetails: {
-    pattern: '/classification/:classificationId/:levelId/:itemId',
+    pattern: 'classification/:classificationId/:levelId/:itemId',
     paramsToProps: (state, { classificationId, levelId, itemId }) => ({
       item: `${prefix}/${classificationId}/${levelId}/${itemId}`
     }),
@@ -83,14 +83,14 @@ export const routes = {
     uriToLink: uri => `/classification/${uri.match(rPrefix)[1]}`
   },
   correspondenceDetails: {
-    pattern: '/correspondence/:correspondenceId',
+    pattern: 'correspondence/:correspondenceId',
     paramsToProps: (state, { correspondenceId }) => ({
       correspondence: `${prefix}/${correspondenceId}/correspondence`
     }),
     uriToLink: uri => `/correspondence/${uri.match(rCorrespondence)[1]}`
   },
   searchItems: {
-    pattern: '/search/:keyword',
+    pattern: 'search/:keyword',
     paramsToProps: (state, { keyword }) => ({ keyword }),
     uriToLink: keyword => `/search/${keyword}`
   }

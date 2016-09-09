@@ -6,11 +6,11 @@ import { VIEW_CLASSIFICATIONS, VIEW_CLASSIFICATION_DETAILS } from '../reducers/a
 import Loading from './loading'
 import Menu from './menu'
 
-function ClassificationExplorer({ view, classification }) {
+function ClassificationExplorer({ view, classification, children }) {
   return (
     <div>
       <Menu />
-      <Classifications />
+      { children }
     </div>
   )
 }

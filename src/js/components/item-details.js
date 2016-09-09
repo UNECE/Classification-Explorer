@@ -6,14 +6,12 @@ import Loading from './loading'
 import { Link } from 'react-router'
 import { uriToLink } from '../router-mapping'
 import ItemChildren from './item-children'
-import Menu from './menu'
 
 function ItemDetails({ loaded, item, label, code, text, parent, parentCode,
     parentLabel, cl, clCode, clLabel }) {
   if (loaded !== LOADED) return  <Loading from="Item details" plural={false} />
   return (
     <div>
-      <Menu />
       <Link to={uriToLink.classificationDetails(cl)}>
         { clCode && `${clCode} - `}{ clLabel }
       </Link>

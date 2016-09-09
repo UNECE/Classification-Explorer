@@ -7,7 +7,6 @@ import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { connectFromRoute } from '../router-mapping'
 import Loading from './loading.js'
-import Menu from './menu'
 
 function ClassificationDetails({ loaded, classification, code, label, issued }) {
    //let details
@@ -15,7 +14,6 @@ function ClassificationDetails({ loaded, classification, code, label, issued }) 
 
   return (
      <div>
-        <Menu />
         <h1>{label}</h1>
         <ClassificationDetailsPane
                   loaded={loaded}
