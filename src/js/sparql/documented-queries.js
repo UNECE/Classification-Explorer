@@ -153,7 +153,9 @@ export default {
     }],
     results: {
       item: 'item',
+      itemLabel: 'itemLabel',
       classification: 'classification',
+      classificationLabel: 'classificationLabel',
       predicate: 'predicate', //mainly xkos:plaintText and skos:prefLabel
       match: 'matching value'
     },

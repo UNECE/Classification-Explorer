@@ -1,7 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router'
+import { uriToLink } from '../router-mapping'
 
-export default function ItemResult({ item, predicate, match }) {
+export default function ItemResult({ item, itemLabel, predicate, match }) {
   return (
-    <span>`${item} - ${predicate} - ${match}`</span>
+    <Link to={uriToLink.itemDetails(item)}>
+      { itemLabel }
+    </Link>
   )
 }
