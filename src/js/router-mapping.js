@@ -20,8 +20,9 @@ export const uriToLink = Object.keys(routes).reduce((mapping, route) => {
 export const connectFromRoute = (...args) => connect(
   (state, ownProps) => {
     const mapRoute = paramsToProps[ownProps.route.path]
-    //TODO warning if no mapping is found for the route (because it fails
-    //silently but it can hide an error)
+    if (mapRoute === undefined) throw new ReferenceError(
+      `Mapping for route \`${ownProps.route.path}\`is missing`
+    )
     return mapRoute ? mapRoute(state, ownProps) : {}
   })(...args)
 
