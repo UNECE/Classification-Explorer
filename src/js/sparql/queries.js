@@ -138,6 +138,17 @@ const searchEverything = keyword => `
   }
 `
 
+const searchItems = keywordItem => `
+  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  SELECT DISTINCT ?item ?classification ?predicate ?match ?score 
+  WHERE {
+    ?item skos:inScheme ?classification ;
+          ?predicate ?match .
+    (?match ?score) <tag:stardog:api:property:textMatch> '${keywordItem}*'.
+  }
+`
+
 export default {
   classifications,
   classificationDetails,
@@ -149,5 +160,6 @@ export default {
   itemDetails,
   itemChildren,
   correspondenceDetails,
-  searchEverything
+  searchEverything,
+  searchItems
 }

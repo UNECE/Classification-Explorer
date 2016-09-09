@@ -1,6 +1,6 @@
 import React from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
-import Items from './items'
+import LevelItems from './level-items'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import Loading from './loading'
@@ -17,7 +17,7 @@ function Levels({ loaded, levels }) {
         </TabList>
         { levels.map(({ level, label }) =>
           <TabPanel key={level}>
-            <Items level={level} levelLabel={label} />
+            <LevelItems level={level} levelLabel={label} />
           </TabPanel>) }
       </Tabs>
     </div>

@@ -88,5 +88,10 @@ export const routes = {
       correspondence: `${prefix}/${correspondenceId}/correspondence`
     }),
     uriToLink: uri => `/correspondence/${uri.match(rCorrespondence)[1]}`
+  },
+  searchItems: {
+    pattern: '/search/:keyword',
+    paramsToProps: (state, { keyword }) => ({ keyword }),
+    uriToLink: keyword => `/search/${keyword}`
   }
 }

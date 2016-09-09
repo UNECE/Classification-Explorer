@@ -10,7 +10,8 @@ const {
   itemDetails,
   itemChildren,
   correspondenceDetails,
-  searchEverything
+  searchEverything,
+  searchItems
 } = queries
 
 export default {
@@ -145,5 +146,18 @@ export default {
     },
     whatWeGet: 'results',
     queryBuilder: searchEverything
+  },
+  searchItems: {
+    params: [{
+      name: 'keyword'
+    }],
+    results: {
+      item: 'item',
+      classification: 'classification',
+      predicate: 'predicate', //mainly xkos:plaintText and skos:prefLabel
+      match: 'matching value'
+    },
+    whatWeGet: 'items',
+    queryBuilder: searchItems
   }
 }
