@@ -123,6 +123,7 @@ const itemChildren = item => `
     <${item}> skos:narrower ?item .
     ?item skos:notation ?code .
     ?item skos:prefLabel ?label
+    FILTER (langMatches(lang(?label), "FR"))
   }
 `
 
