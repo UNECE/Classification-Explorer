@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
-import CorrespondenceDefinitions from './correspondence-definitions'
 import Loading from './loading'
 import { Link } from 'react-router'
 import { uriToLink } from '../router-mapping'
@@ -18,8 +17,6 @@ function Correspondences({ loaded, correspondences }) {
               <Link to={uriToLink.correspondenceDetails(table)}>
                 {definition}
               </Link>
-              {/* <CorrespondenceDefinitions
-                correspondence={correspondence.table} /> */}
             </li>) }
       </ul>
     </div>

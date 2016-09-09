@@ -80,14 +80,6 @@ const levelItems = uri => `
   } ORDER BY ?code
 `
 
-const correspondenceDefinitions = correspondence => `
-  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-  SELECT  ?code ?definition WHERE {
-    <${correspondence}> skos:notation ?code ; skos:definition ?definition ;
-  }
-`
-
 const itemDetails = item => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -174,7 +166,6 @@ export default {
   classificationCorrespondences,
   correspondences,
   levelItems,
-  correspondenceDefinitions,
   itemDetails,
   itemChildren,
   correspondenceDetails,

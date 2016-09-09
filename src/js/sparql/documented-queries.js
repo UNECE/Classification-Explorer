@@ -6,7 +6,6 @@ const {
   classificationLevels,
   classificationCorrespondences,
   levelItems,
-  correspondenceDefinitions,
   itemDetails,
   itemChildren,
   correspondenceDetails,
@@ -81,16 +80,6 @@ export default {
       label: 'label of the item (string)'
     },
     queryBuilder: levelItems
-  },
-  correspondenceDefinitions: {
-    params: [{
-      name: 'correspondence'
-    }],
-    results: {
-      definition: 'correspondence definition (string)'
-    },
-    whatWeGet: 'definitions',
-    queryBuilder: correspondenceDefinitions
   },
   itemDetails: {
     params: [{
