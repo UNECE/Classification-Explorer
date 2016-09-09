@@ -43,11 +43,14 @@ const classificationCorrespondences = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
-  SELECT ?table ?code WHERE {
-    ?table xkos:compares <${uri}> .
+  SELECT ?table ?definition ?code WHERE {
+    ?table xkos:compares <${uri}> ;
+           skos:definition ?definition
     OPTIONAL { 
       ?table skos:notation ?code
     }
+    # We miss somme correspondences where there is no definition in english
+    FILTER ( langMatches(lang(?definition), "EN"))
   }
 `
 

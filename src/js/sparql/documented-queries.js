@@ -63,6 +63,7 @@ export default {
     whatWeGet: 'correspondences',
     results: {
       table: 'correspondence table (uri)',
+      definition: 'correspondence definition',
       code: 'correspondence code'
     },
     queryBuilder: classificationCorrespondences

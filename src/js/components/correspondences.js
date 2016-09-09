@@ -13,10 +13,10 @@ function Correspondences({ loaded, correspondences }) {
     <div>
       <h1>Correspondences</h1>
       <ul>
-        { correspondences.map(({ table, code }) =>
+        { correspondences.map(({ table, code, definition }) =>
             <li key={table}>
               <Link to={uriToLink.correspondenceDetails(table)}>
-                {code || table }
+                {definition}
               </Link>
               {/* <CorrespondenceDefinitions
                 correspondence={correspondence.table} /> */}

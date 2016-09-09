@@ -8,7 +8,7 @@ export default function Items({ items }) {
       {items.map(({ item, code, label}) => 
         <li key={item}>
           <Link to={uriToLink.itemDetails(item)}>
-            {item}
+            {label}
           </Link>
         </li>
       )}
