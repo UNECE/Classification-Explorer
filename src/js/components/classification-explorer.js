@@ -5,7 +5,9 @@ export default function ClassificationExplorer({ children }) {
   return (
     <div>
       <Menu />
-      { children }
+      <div className="container">
+        { children }
+      </div>
     </div>
   )
 }

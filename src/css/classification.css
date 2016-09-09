@@ -7,3 +7,19 @@
 input {
   margin-left: 10px;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #ccc;
+  padding: 10px;
+}
+
+.container {
+  padding: 10px;
+  max-width: 900px;
+  margin: auto;
+}
