@@ -104,7 +104,7 @@ const itemDetails = item => `
       <${item}> skos:broader ?parent ;
                 skos:prefLabel ?parentLabel .
       OPTIONAL { ?parent skos:notation ?parentCode . } 
-      FILTER ( langMatches(lang(?parentLabel), "FR"))
+      FILTER ( langMatches(lang(?parentLabel), "EN"))
     }      
 
     # if we use only one OPTIONAL keyword, we will not receive the note
@@ -114,8 +114,8 @@ const itemDetails = item => `
      ?content xkos:plainText ?text .
     }
     FILTER (
-      langMatches(lang(?label), "FR") &&
-      langMatches(lang(?clLabel), "FR"))
+      langMatches(lang(?label), "EN") &&
+      langMatches(lang(?clLabel), "EN"))
   }
 `
 
@@ -126,7 +126,7 @@ const itemChildren = item => `
     <${item}> skos:narrower ?item .
     ?item skos:notation ?code .
     ?item skos:prefLabel ?label
-    FILTER (langMatches(lang(?label), "FR"))
+    FILTER (langMatches(lang(?label), "EN"))
   }
 `
 
