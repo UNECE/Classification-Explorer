@@ -57,6 +57,7 @@
     ]
   },
   "scripts": {
+    "build": "webpack -p --config webpack.production.config",
     "dev": "webpack-dev-server -d --hot --inline --content-base ./dist/ --host 0.0.0.0",
     "start": "http-server ./dist",
     "test": "mocha --compilers js:babel-core/register --require ./src/js/test_helper.js 'src/js/**/__tests__/*.@(js|jsx)'",

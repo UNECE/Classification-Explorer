@@ -30,9 +30,7 @@ module.exports = {
     extensions: ['', '.js']
   },
   output: {
-    path: __dirname + '/dist/js',
-    publicPath: 'js', // it depends on what we set as content-base option with
-                      // the CLI
-    filename: 'classification.js'
+    path: __dirname + '/dist',
+    filename: './js/classification.js'
   }
 }
