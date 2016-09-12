@@ -5,9 +5,10 @@ import { uriToLink } from '../router-mapping'
 export default function Items({ items }) {
   return (
     <ul>
-      {items.map(({ item, code, label}) => 
+      {items.map(({ item, code, label}) =>
         <li key={item}>
           <Link to={uriToLink.itemDetails(item)}>
+            {code} - 
             {label}
           </Link>
         </li>

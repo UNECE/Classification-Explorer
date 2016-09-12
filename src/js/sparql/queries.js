@@ -46,7 +46,7 @@ const classificationCorrespondences = uri => `
   SELECT ?table ?definition ?code WHERE {
     ?table xkos:compares <${uri}> ;
            skos:definition ?definition
-    OPTIONAL { 
+    OPTIONAL {
       ?table skos:notation ?code
     }
     # We miss somme correspondences where there is no definition in english
@@ -88,19 +88,19 @@ const itemDetails = item => `
     <${item}> skos:prefLabel ?label ;
               skos:notation ?code ;
               skos:inScheme ?cl .
-    ?cl skos:prefLabel ?clLabel .
-    
-    OPTIONAL { 
+    ?cl skos:prefLabel ?clLabel
+
+    OPTIONAL {
       ?cl skos:notation ?clCode .
     }
 
-    
+
     OPTIONAL {
       <${item}> skos:broader ?parent ;
                 skos:prefLabel ?parentLabel .
-      OPTIONAL { ?parent skos:notation ?parentCode . } 
+      OPTIONAL { ?parent skos:notation ?parentCode . }
       FILTER ( langMatches(lang(?parentLabel), "EN"))
-    }      
+    }
 
     # if we use only one OPTIONAL keyword, we will not receive the note
     # if there is no parent
@@ -122,7 +122,7 @@ const itemChildren = item => `
     ?item skos:notation ?code .
     ?item skos:prefLabel ?label
     FILTER (langMatches(lang(?label), "EN"))
-  }
+  } ORDER BY ?code
 `
 
 const correspondenceDetails = correspondence => `
@@ -146,10 +146,10 @@ const searchEverything = keyword => `
 const searchItems = keywordItem => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-  SELECT DISTINCT 
+  SELECT DISTINCT
     ?item ?itemLabel
     ?classification ?classificationLabel
-    ?predicate ?match ?score 
+    ?predicate ?match ?score
   WHERE {
     ?item skos:inScheme ?classification ;
           ?predicate ?match ;
