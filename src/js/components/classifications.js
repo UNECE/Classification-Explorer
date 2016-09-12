@@ -12,10 +12,10 @@ function Classifications({ loaded, classifications }) {
     <div>
       <h1>Classifications</h1>
       <ul>
-        { classifications.map(({ classification }) =>
+        { classifications.map(({ classification, label }) =>
             <li key={classification}>
               <Link to={uriToLink.classificationDetails(classification)}>
-                {classification}
+                {label}
               </Link>
             </li>
           )}

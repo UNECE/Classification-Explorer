@@ -18,7 +18,8 @@ export default {
     descr: 'Retrieve all the classifications',
     whatWeGet: 'classifications',
     results: {
-      classification: 'classification (uri)'
+      classification: 'classification (uri)',
+      label: 'classification label (string)'
     },
     params: [],
     queryBuilder: classifications
