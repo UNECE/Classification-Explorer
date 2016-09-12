@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 export default function Menu() {
     return (
       <header>
-        <Link to="/">Classificaitons list</Link>
+        <Link to="/">Classifications list</Link>
         <SearchInput />
       </header>
     )

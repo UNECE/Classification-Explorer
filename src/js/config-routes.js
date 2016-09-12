@@ -2,12 +2,12 @@
 
 We want routes to use short names to designate entities, for the sake of
 readability. But internally (in queries and in state), we use URIs because they
-are the obvious candiate to work as unique identifiers. Hence, we need some
+are the obvious candidate to work as unique identifiers. Hence, we need some
 functions that map routes to URIs, and URIs to short names (that will be used in
 `Link`s).
 
 Let's say we have a route like this '/correspondence/nacer2-ateco2007'. We
-should interpret it as "show information about the correspondence 
+should interpret it as "show information about the correspondence
 http://stamina-project.org/codes/nacer2-ateco2007/correspondence".
 
 In this simple example, it seems that we just need to add a prefix to the short
@@ -15,7 +15,7 @@ name, but:
 - in the future there might be multiple prefixes, so how do we know which prefix
 to use;
 - some URIs are more complex; for instance, a classification URI looks like
-http://stamina-project.org/codes/cpcv11/cpc; what should we use in the route ? 
+http://stamina-project.org/codes/cpcv11/cpc; what should we use in the route ?
 'cpcv11' (suggesting that there will only be one classification), or multiple
 parameters: 'cpcv11' and 'cpc' ?
 
