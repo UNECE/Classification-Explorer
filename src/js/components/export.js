@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-router'
 
 export default function Export({dataToExport, name}){
-  return (
-    <button className="fa fa-download" onClick={() => handleClick(dataToExport,name)}></button>
-  )
+    if (dataToExport == null || !dataToExport.length) {
+      return <span></span>;
+    }
+    else {
+      return (<button className="fa fa-download" onClick={() => handleClick(dataToExport,name)}></button>);
+    }
 }
 
 function handleClick(dataToExport,name) {
