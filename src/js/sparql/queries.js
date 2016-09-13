@@ -190,14 +190,15 @@ const searchItems = keywordItem => `
   SELECT DISTINCT
     ?item ?itemLabel
     ?classification ?classificationLabel
-    ?predicate ?match ?score
+    ?predicate ?match ?score ?code
   WHERE {
     ?item skos:inScheme ?classification ;
           ?predicate ?match ;
+          skos:notation ?code ;
           skos:prefLabel ?itemLabel .
     ?classification skos:prefLabel ?classificationLabel .
     (?match ?score) <tag:stardog:api:property:textMatch> '${keywordItem}*'.
-  }
+  } order by ?code
 `
 
 export default {
