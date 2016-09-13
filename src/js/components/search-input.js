@@ -6,23 +6,27 @@ import { uriToLink } from '../router-mapping'
 import { connect } from 'react-redux'
 
 export default class SearchInput extends Component {
-  
+
   constructor(props) {
     super(props)
-    this.handleSubmit = () => 
-      browserHistory.push(uriToLink.searchItems(this.refs.search.value))
+    this.handleSubmit = () =>
+    browserHistory.push(uriToLink.searchItems(this.refs.search.value))
+    this.handleKeyPress = (e) => {
+      if (e.key == 'Enter') {
+        this.handleSubmit();
+      }
+    }
   }
-  
+
   render() {
     return (
       <span>
         Search everything :
-        <input type="search" placeholder="Enter a keyword" ref="search" />
-        <button onClick={this.handleSubmit}>
+        <input type="search" placeholder="Enter a keyword" ref="search" onKeyPress={this.handleKeyPress} />
+        <button onClick={this.handleClick}>
           OK
         </button>
       </span>
     )
   }
 }
-
