@@ -3,9 +3,11 @@ import queries from './queries'
 const {
   classifications,
   classificationDetails,
+  classificationItems,
   classificationLevels,
   classificationCorrespondences,
   levelItems,
+  itemCorrespondences,
   itemDetails,
   itemChildren,
   correspondenceDetails,
@@ -82,6 +84,20 @@ export default {
     },
     queryBuilder: levelItems
   },
+  itemCorrespondences: {
+    descr: 'Retrieve items with their details (code and label) in correspondence with the given item in the given classification',
+    params: [{
+      name: 'hash',
+      descr: 'hash of both item and classification (uris)'
+    }],
+    whatWeGet: 'items',
+    results: {
+      item: 'item (uri)',
+      code: 'code of the item (string)',
+      label: 'label of the item (string)'
+    },
+    queryBuilder: itemCorrespondences
+  },
   itemDetails: {
     params: [{
       name: 'item'
@@ -152,5 +168,17 @@ export default {
     },
     whatWeGet: 'items',
     queryBuilder: searchItems
+  },
+  classificationItems: {
+    params: [{
+      name: 'classificationId'
+    }],
+    results: {
+      item: 'item',
+      code: 'code',
+      label: 'label'
+    },
+    whatWeGet: 'items',
+    queryBuilder: classificationItems
   }
 }
