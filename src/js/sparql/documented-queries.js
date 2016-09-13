@@ -164,7 +164,6 @@ export default {
       classification: 'classification',
       classificationLabel: 'classificationLabel',
       predicate: 'predicate', //mainly xkos:plaintText and skos:prefLabel
-      match: 'matching value',
       code:'code'
     },
     whatWeGet: 'items',

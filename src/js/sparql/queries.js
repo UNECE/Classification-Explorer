@@ -188,18 +188,23 @@ const searchItems = keywordItem => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT
-    ?item ?itemLabel
-    ?classification ?classificationLabel
-    ?predicate ?match ?score ?code
+    ?item ?code ?itemLabel
+    ?classification ?classificationLabel ?note
+    ?coreContentNote ?coreContentNoteText ?additionalContentNoteText
+     ?predicate
   WHERE {
     ?item skos:inScheme ?classification ;
-          ?predicate ?match ;
           skos:notation ?code ;
-          skos:prefLabel ?itemLabel .
+          skos:prefLabel ?itemLabel ;
+          xkos:coreContentNote ?coreContentNote ;
+          xkos:additionalContentNote ?additionalContentNote .
+    ?coreContentNote xkos:plainText ?coreContentNoteText .
+    ?additionalContentNote   xkos:plainText ?additionalContentNoteText .
     ?classification skos:prefLabel ?classificationLabel .
     (?match ?score) <tag:stardog:api:property:textMatch> '${keywordItem}*'.
   } order by ?code
 `
+
 
 export default {
   classifications,
