@@ -10,7 +10,7 @@ export default class SearchInput extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = () =>
-    browserHistory.push(uriToLink.searchItems(this.refs.search.value))
+    browserHistory.push(uriToLink.searchItems(this.refs.search.value.trim()))
     this.handleKeyPress = (e) => {
       if (e.key == 'Enter') {
         this.handleSubmit();
