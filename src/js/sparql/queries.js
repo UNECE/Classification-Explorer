@@ -17,7 +17,7 @@ const classificationDetails = uri => `
   PREFIX dcterms: <http://purl.org/dc/terms/>
   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   SELECT ?code ?label ?issued WHERE {
-    <${uri}> skos:notation ?code ; skos:prefLabel ?label ; skos:prefLabel  ?issued .
+    <${uri}> skos:notation ?code ; skos:prefLabel ?label ; dcterms:issued ?issued .
   }
 `
 
@@ -80,6 +80,19 @@ const levelItems = uri => `
   } ORDER BY ?code
 `
 
+/**
+ * Builds the query that gets the list of items of a given level.
+ */
+const classificationItems = uri => `
+  PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+  SELECT DISTINCT ?item ?code ?label WHERE {
+    <${uri}> xkos:hasLevels/rdf:rest*/rdf:first ?level .
+    ?level skos:member ?item .
+    ?item skos:notation ?code ; skos:prefLabel ?label .
+  } ORDER BY ?code LIMIT 25
+`
+
 const itemDetails = item => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -125,6 +138,34 @@ const itemChildren = item => `
   } ORDER BY ?code
 `
 
+const itemCorrespondences = hash => {
+  const  [item, correspondenceTable] = hash.split('||');
+  return `
+    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+    SELECT ?association ?item ?code ?label {
+    {
+    <${correspondenceTable}> xkos:madeOf ?association .
+  ?association xkos:sourceConcept <${item}> ;
+               xkos:targetConcept ?item .
+               ?item skos:notation ?code .
+               ?item skos:prefLabel ?label
+               FILTER (langMatches(lang(?label), "EN"))
+    }
+    UNION {
+
+  <${correspondenceTable}> xkos:madeOf ?association .
+  ?association xkos:targetConcept <${item}> ;
+               xkos:sourceConcept ?item .
+               ?item skos:notation ?code .
+               ?item skos:prefLabel ?label
+               FILTER (langMatches(lang(?label), "EN"))
+
+  }
+  }
+  `
+}
+
 const correspondenceDetails = correspondence => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -162,10 +203,12 @@ const searchItems = keywordItem => `
 export default {
   classifications,
   classificationDetails,
+  classificationItems,
   classificationLevels,
   classificationCorrespondences,
   correspondences,
   levelItems,
+  itemCorrespondences,
   itemDetails,
   itemChildren,
   correspondenceDetails,
