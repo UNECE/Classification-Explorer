@@ -96,8 +96,8 @@ const itemDetails = item => `
 
 
     OPTIONAL {
-      <${item}> skos:broader ?parent ;
-                skos:prefLabel ?parentLabel .
+      <${item}> skos:broader ?parent .
+        ?parent skos:prefLabel ?parentLabel .
       OPTIONAL { ?parent skos:notation ?parentCode . }
       FILTER ( langMatches(lang(?parentLabel), "EN"))
     }
