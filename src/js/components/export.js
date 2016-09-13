@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 export default function Export({dataToExport, name}){
   return (
-    <Link to="export"><button onClick={() => handleClick(dataToExport,name)}>Export</button></Link>
+    <Link to="export"><button className="fa fa-download" onClick={() => handleClick(dataToExport,name)}></button></Link>
   )
 }
 
