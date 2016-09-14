@@ -5,7 +5,7 @@ import { uriToLink } from '../router-mapping'
 export default function ItemResult({ item, itemLabel, predicate, match, code, coreContentNoteText, additionalContentNoteText }) {
   return (
     <Link to={uriToLink.itemDetails(item)}>
-    {code}  -  { itemLabel } - (NOTES :  {coreContentNoteText} ; {additionalContentNoteText})
+    {code}  -  { itemLabel }
     </Link>
   )
 }
