@@ -9,7 +9,6 @@ function Levels({ loaded, levels }) {
   if (loaded !== LOADED) return <Loading from="Levels" plural={true}/>
   return (
     <div>
-      <h1>Levels</h1>
       <Tabs>
         <TabList>
           { levels.map(({ level, depth, label }) =>
