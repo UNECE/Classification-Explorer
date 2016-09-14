@@ -14,7 +14,7 @@ function handleClick(dataToExport,name) {
   var csvString = convertArrayOfObjectsToCSV(dataToExport);
   //var csvString = output.join("%0A");
   var a         = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8;base64,' + window.btoa(csvString);
+  a.href = 'data:text/csv;charset=utf-8;base64,' + window.btoa(unescape(encodeURIComponent(csvString)));
   a.target      = '_blank';
   a.download    = (name || 'export')+'.csv';
 
