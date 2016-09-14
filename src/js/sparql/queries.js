@@ -31,7 +31,7 @@ const classificationLevels = uri => `
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
   SELECT DISTINCT ?level ?depth ?label
   WHERE {
-    <${uri}> xkos:hasLevels/rdf:rest*/rdf:first ?level .
+    <${uri}> xkos:levels/rdf:rest*/rdf:first ?level .
     ?level xkos:depth ?depth ; skos:prefLabel ?label .
   } ORDER BY ?depth
 `
@@ -87,7 +87,7 @@ const classificationItems = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT ?item ?code ?label WHERE {
-    <${uri}> xkos:hasLevels/rdf:rest*/rdf:first ?level .
+    <${uri}> xkos:levels/rdf:rest*/rdf:first ?level .
     ?level skos:member ?item .
     ?item skos:notation ?code ; skos:prefLabel ?label .
   } ORDER BY ?code LIMIT 25
