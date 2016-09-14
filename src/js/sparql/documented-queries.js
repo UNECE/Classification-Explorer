@@ -156,7 +156,7 @@ export default {
   },
   searchItems: {
     params: [{
-      name: 'keyword'
+      name: 'hash'
     }],
     results: {
       item: 'item',

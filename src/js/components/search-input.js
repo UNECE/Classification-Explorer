@@ -9,8 +9,9 @@ export default class SearchInput extends Component {
 
   constructor(props) {
     super(props)
-    this.handleSubmit = () =>
-    browserHistory.push(uriToLink.searchItems(this.refs.search.value.trim()))
+    this.handleSubmit = () => {
+      browserHistory.push(uriToLink.searchItems(this.refs.search.value.trim(), this.refs.searchForCode.checked))
+    }
     this.handleKeyPress = (e) => {
       if (e.key == 'Enter') {
         this.handleSubmit();
@@ -25,6 +26,7 @@ export default class SearchInput extends Component {
         <input type="search" placeholder="Enter a keyword" ref="search" onKeyPress={this.handleKeyPress} />
         <button className="fa fa-search" onClick={this.handleSubmit}>
         </button>
+        <label><input type="checkbox" ref="searchForCode"/>Search for codes only</label>
       </span>
     )
   }

@@ -90,8 +90,8 @@ export const routes = {
     uriToLink: uri => `/correspondence/${uri.match(rCorrespondence)[1]}`
   },
   searchItems: {
-    pattern: 'search/:keyword',
-    paramsToProps: (state, { keyword }) => ({ keyword }),
-    uriToLink: keyword => `/search/${keyword}`
+    pattern: 'search/:keyword/:searchForCode',
+    paramsToProps: (state, { keyword, searchForCode }) => ({ keyword, searchForCode, hash : keyword+'||'+searchForCode }),
+    uriToLink: (keyword, searchForCode) => `/search/${keyword}/${searchForCode}`
   }
 }

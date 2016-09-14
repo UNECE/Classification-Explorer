@@ -8,10 +8,10 @@ import { groupBy } from '../utils'
 import ItemResult from './item-result'
 import Loading from './loading'
 
-function SearchResults({ loaded, items, keyword }) {
+function SearchResults({ loaded, items, keyword, searchForCode, hash }) {
   if (loaded === LOADING) return <Loading from="search results" plural={true}/>
   if (loaded === FAILED) return <span>Failed loading results for {keyword}</span>
-
+  
   if(items.length == 0) return <span>There are no results for {keyword}</span>
 
   const clns = groupBy(items, 'classification', 'classificationLabel')

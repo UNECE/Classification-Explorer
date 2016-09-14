@@ -184,7 +184,27 @@ const searchEverything = keyword => `
   }
 `
 
-const searchItems = keywordItem => `
+const searchItems = hash => {
+  const  [keyword, searchForCode] = hash.split('||');
+  if(searchForCode){
+    return  `
+    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+    SELECT DISTINCT
+      ?item ?code ?itemLabel
+      ?classification ?classificationLabel ?coreContentNoteText ?additionalContentNoteText
+    WHERE {
+      ?item skos:inScheme ?classification ;
+            skos:notation ?code ;
+            skos:prefLabel ?itemLabel .
+
+      ?classification skos:prefLabel ?classificationLabel .
+      FILTER regex(?code, "${keyword}", "i")
+    } order by ?code
+    `
+  }else{
+    console.log('on cherche pas des codes')
+  return  `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT
@@ -199,11 +219,11 @@ const searchItems = keywordItem => `
     ?coreContentNote xkos:plainText ?coreContentNoteText .
     ?additionalContentNote   xkos:plainText ?additionalContentNoteText .
     ?classification skos:prefLabel ?classificationLabel .
-    (?match ?score) <tag:stardog:api:property:textMatch> '${keywordItem}*'.
+    (?match ?score) <tag:stardog:api:property:textMatch> '${keyword}*'.
     FILTER ( langMatches(lang(?itemLabel), "EN"))
   } order by ?code
-`
-
+`}
+}
 
 export default {
   classifications,
