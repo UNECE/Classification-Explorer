@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
-import { browserHistory } from 'react-router'
+import { browserHistory, withRouter } from 'react-router'
 import { uriToLink } from '../router-mapping'
 import { connect } from 'react-redux'
 
-export default class SearchInput extends Component {
+class SearchInput extends Component {
 
   constructor(props) {
     super(props)
-    this.handleSubmit = () =>
-    browserHistory.push(uriToLink.searchItems(this.refs.search.value.trim()))
+    this.state={
+      keyword: this.props.keyword?this.props.keyword:''
+    }
+    this.handleSubmit = () => {
+      browserHistory.push(uriToLink.searchItems(this.state.keyword, this.scope, encodeURIComponent(this.state.keyword + '||' + this.props.location.pathname)))
+    }
+    this.handleChange = (e) => {
+      this.setState({keyword :  this.refs.search.value.trim()});
+    }
     this.handleKeyPress = (e) => {
       if (e.key == 'Enter') {
         this.handleSubmit();
@@ -19,10 +26,17 @@ export default class SearchInput extends Component {
   }
 
   render() {
+    this.scope= 'everything';
+    if(this.props.location.pathname.startsWith('/classification/')){
+      this.scope = 'classification'
+    }
+    if(this.props.location.pathname.startsWith('/correspondence/')){
+      this.scope = 'correspondence'
+    }
     return (
       <span>
-        Search everything :
-        <input type="search" placeholder="Enter a keyword" ref="search" onKeyPress={this.handleKeyPress} />
+        Search {this.scope} :
+        <input type="search" placeholder="Enter a keyword" ref="search" onKeyPress={this.handleKeyPress} value={this.state.keyword} onChange={this.handleChange} />
         <button onClick={this.handleSubmit}>
           OK
         </button>
@@ -30,3 +44,5 @@ export default class SearchInput extends Component {
     )
   }
 }
+
+export default withRouter(SearchInput)

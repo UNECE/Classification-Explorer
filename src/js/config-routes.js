@@ -57,6 +57,7 @@ http://stamina-project.org/codes/nacer2/division/03
 const prefix = 'http://stamina-project.org/codes'
 const rPrefix = new RegExp(prefix + '\/(.*)')
 const rCorrespondence = new RegExp(prefix + '\/(.*)\/correspondence')
+const rSearch = new RegExp(prefix + '\/(.*)\/search')
 
 export const routes = {
   classificationDetails: {
@@ -90,8 +91,10 @@ export const routes = {
     uriToLink: uri => `/correspondence/${uri.match(rCorrespondence)[1]}`
   },
   searchItems: {
-    pattern: 'search/:keyword',
-    paramsToProps: (state, { keyword }) => ({ keyword }),
-    uriToLink: keyword => `/search/${keyword}`
+    pattern: 'search/:keyword/:scope/:hash',
+    paramsToProps: (state, { keyword, scope, hash }) => ({ keyword, scope, hash }),
+    uriToLink: (keyword, scope, hash) => {
+      return `/search/${keyword}/${scope}/${hash}`
+    }
   }
 }

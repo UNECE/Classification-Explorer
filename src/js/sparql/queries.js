@@ -184,7 +184,11 @@ const searchEverything = keyword => `
   }
 `
 
-const searchItems = keywordItem => `
+const searchItems = (hash) => {
+
+  const  [keywordItem, encodedLocation] = hash.split('||');
+  location = decodeURIComponent(encodedLocation);
+  return `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT
@@ -203,7 +207,7 @@ const searchItems = keywordItem => `
     FILTER ( langMatches(lang(?itemLabel), "EN"))
   } order by ?code
 `
-
+}
 
 export default {
   classifications,

@@ -6,7 +6,7 @@ export default function Menu() {
     return (
       <header>
         <Link to="/">Classifications list</Link>
-        <SearchInput />
+        <SearchInput location={location}/>
       </header>
     )
 }
