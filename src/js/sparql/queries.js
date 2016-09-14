@@ -186,7 +186,7 @@ const searchEverything = keyword => `
 
 const searchItems = hash => {
   const  [keyword, searchForCode] = hash.split('||');
-  if(searchForCode){
+  if(searchForCode==='true'){
     return  `
     PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
@@ -197,13 +197,12 @@ const searchItems = hash => {
       ?item skos:inScheme ?classification ;
             skos:notation ?code ;
             skos:prefLabel ?itemLabel .
-
       ?classification skos:prefLabel ?classificationLabel .
       FILTER regex(?code, "${keyword}", "i")
     } order by ?code
     `
   }else{
-    console.log('on cherche pas des codes')
+
   return  `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
@@ -219,11 +218,20 @@ const searchItems = hash => {
     ?coreContentNote xkos:plainText ?coreContentNoteText .
     ?additionalContentNote   xkos:plainText ?additionalContentNoteText .
     ?classification skos:prefLabel ?classificationLabel .
-    (?match ?score) <tag:stardog:api:property:textMatch> '${keyword}*'.
-    FILTER ( langMatches(lang(?itemLabel), "EN"))
+
+    FILTER ( langMatches(lang(?itemLabel), "EN") &&
+    (
+      regex(?code, "${keyword}", "i") ||
+      regex(?itemLabel, "${keyword}", "i") ||
+      regex(?coreContentNoteText, "${keyword}", "i") ||
+      regex(?additionalContentNoteText, "${keyword}", "i") ||
+      regex(?classificationLabel, "${keyword}", "i")
+    ))
   } order by ?code
 `}
 }
+
+
 
 export default {
   classifications,
