@@ -23,8 +23,7 @@ export default class SearchInput extends Component {
       <span>
         Search everything :
         <input type="search" placeholder="Enter a keyword" ref="search" onKeyPress={this.handleKeyPress} />
-        <button onClick={this.handleSubmit}>
-          OK
+        <button className="fa fa-search" onClick={this.handleSubmit}>
         </button>
       </span>
     )
