@@ -11,9 +11,9 @@ function Classifications({ loaded, classifications }) {
   return (
     <div>
       <h1>Classifications</h1>
-      <ul>
+      <ul className="list-group">
         { classifications.map(({ classification, label }) =>
-            <li key={classification}>
+            <li key={classification} className="list-group-item">
               <Link to={uriToLink.classificationDetails(classification)}>
                 {label}
               </Link>

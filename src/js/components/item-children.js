@@ -11,9 +11,9 @@ function ItemChildren({ item, loaded, items }) {
   return (
       <span>
       <Export dataToExport={items} name="export" />
-    <ul>
+    <ul className="list-group">
       { items.map(({ item, code, label }) =>
-        <li key={item}>
+        <li key={item} className="list-group-item">
           <Link to={uriToLink.itemDetails(item)}>
             { code } - { label }
           </Link>

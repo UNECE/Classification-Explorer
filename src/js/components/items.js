@@ -4,9 +4,9 @@ import { uriToLink } from '../router-mapping'
 
 export default function Items({ items }) {
   return (
-      <ul>
+      <ul className="list-group">
         {items.map(({ item, code, label}) =>
-        <li key={item}>
+        <li className="list-group-item" key={item}>
           <Link to={uriToLink.itemDetails(item)}>
             {code} -
             {label}

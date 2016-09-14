@@ -15,13 +15,13 @@ function SearchResults({ loaded, items, keyword }) {
   const clns = groupBy(items, 'classification', 'classificationLabel')
 
   return (
-    <ul>
+    <ul className="list-group">
       { Object.keys(clns).reduce(
         (agregate, clnId) => {
           const cln = clns[clnId]
           const clnEntries = cln.entries
           const clnEl =
-          <li key={clnId}>
+          <li key={clnId} className="list-group-item">
             <Link to={uriToLink.classificationDetails(clnId)}>
               {cln.props.classificationLabel}
             </Link>
