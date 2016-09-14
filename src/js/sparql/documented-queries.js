@@ -163,7 +163,8 @@ export default {
       itemLabel: 'itemLabel',
       classification: 'classification',
       classificationLabel: 'classificationLabel',
-      predicate: 'predicate', //mainly xkos:plaintText and skos:prefLabel
+      coreContentNoteText: 'coreContentNoteText',
+      additionalContentNoteText: 'additionalContentNoteText',
       code:'code'
     },
     whatWeGet: 'items',

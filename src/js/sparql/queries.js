@@ -189,9 +189,7 @@ const searchItems = keywordItem => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT
     ?item ?code ?itemLabel
-    ?classification ?classificationLabel ?note
-    ?coreContentNote ?coreContentNoteText ?additionalContentNoteText
-     ?predicate
+    ?classification ?classificationLabel ?coreContentNoteText ?additionalContentNoteText
   WHERE {
     ?item skos:inScheme ?classification ;
           skos:notation ?code ;
@@ -202,6 +200,7 @@ const searchItems = keywordItem => `
     ?additionalContentNote   xkos:plainText ?additionalContentNoteText .
     ?classification skos:prefLabel ?classificationLabel .
     (?match ?score) <tag:stardog:api:property:textMatch> '${keywordItem}*'.
+    FILTER ( langMatches(lang(?itemLabel), "EN"))
   } order by ?code
 `
 
