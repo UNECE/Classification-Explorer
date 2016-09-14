@@ -10,7 +10,7 @@ function ItemChildren({ item, loaded, items }) {
   if (loaded !== LOADED) return  <Loading from="Item children" plural={false} />
   return (
       <span>
-      <Export dataToExport={items} name="export" />
+      <h1><Export dataToExport={items} name="export" /></h1>
     <ul className="list-group">
       { items.map(({ item, code, label }) =>
         <li key={item} className="list-group-item">

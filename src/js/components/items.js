@@ -8,8 +8,7 @@ export default function Items({ items }) {
         {items.map(({ item, code, label}) =>
         <li className="list-group-item" key={item}>
           <Link to={uriToLink.itemDetails(item)}>
-            {code} -
-            {label}
+            {code} - {label}
           </Link>
         </li>
       )}
