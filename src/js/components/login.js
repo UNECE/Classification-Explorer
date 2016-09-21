@@ -8,7 +8,8 @@ class Login extends Component {
   constructor(props) {
     super(props)
     const { location, router } = this.props
-    this.state = { user: '', password: '', loggedIn: false }
+    
+    this.state = { user: '', password: '', error: false }
 
     const updateRoute = () => 
       router.replace(
@@ -17,17 +18,37 @@ class Login extends Component {
     
     checkFromStorage().then(updateRoute)
     
+    //TODO handle errors
     this.handleSubmit = () =>   
       checkFromPassword(this.refs.user.value, this.refs.password.value)
         .then(updateRoute)
+    
   }
   
   render() {
     return (
-      <div>
-        <input type="text" placeholder="username" ref="user"/>
-        <input type="password" placeholder="password" ref="password"/>
-        <button onClick={this.handleSubmit}>Login</button>
+      <div className="container">
+        <form className="form-signin">
+        <h2 className="form-signin-heading">Please sign in</h2>
+        {/* { this.state.error && 
+          <div className="alert alert-danger" role="alert">
+            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span className="sr-only">Error:</span>
+            Enter a valid email address
+          </div>
+        } */}
+        <label htmlFor="username" className="sr-only">User name</label>
+        <input type="text" id="username" className="form-control"
+               placeholder="Username" required ref="user" />
+        <label htmlFor="password" className="sr-only">Password</label>
+        <input type="password" id="password" className="form-control"
+               placeholder="Password" required="" ref="password" />
+        <button className="btn btn-lg btn-primary btn-block" type="submit"
+                onClick={e => { e.preventDefault();this.handleSubmit() }}>
+          Sign in 
+        </button>
+        
+        </form>
       </div>
     )
   }

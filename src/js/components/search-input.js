@@ -17,7 +17,8 @@ export default class SearchInput extends Component {
     return (
       <span>
         Search everything :
-        <input type="search" placeholder="Enter a keyword" ref="search" />
+        <input className="search" type="search" placeholder="Enter a keyword"
+               ref="search" />
         <button onClick={this.handleSubmit}>
           OK
         </button>
