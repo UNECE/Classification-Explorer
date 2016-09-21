@@ -23,8 +23,10 @@ export default class SearchInput extends Component {
     return (
       <span>
         Search everything :
-        <input type="search" placeholder="Enter a keyword" ref="search" onKeyPress={this.handleKeyPress} />
-        <button className="fa fa-search" onClick={this.handleSubmit}>
+        <input className="search" type="search" placeholder="Enter a keyword"
+               ref="search" />
+        <button onClick={this.handleSubmit}>
+          OK
         </button>
         <label><input type="checkbox" ref="searchForCode"/>Search for codes only</label>
       </span>

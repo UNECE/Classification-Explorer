@@ -10,8 +10,9 @@ import CorrespondenceDetails from './correspondence-details'
 import { path } from '../router-mapping'
 import SearchResults from './search-results'
 import Classifications from './classifications'
-
+import Login from './login'
 const store = configureStore()
+import { requireAuth } from '../utils/authentication'
 
 //TODO use nested to avoids having to add <Menu /> to each view (problem: we
 //cannot use `import { path } from '../router-mapping'` directly anymore
@@ -20,7 +21,10 @@ export default class Root extends Component {
     return (
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path="/" component={ClassificationExplorer}>
+          <Route path="/login" component={Login} />
+          <Route path="/"
+                 component={ClassificationExplorer}
+                 onEnter={requireAuth}>
             <IndexRoute component={Classifications} />
             <Route path={path.classificationDetails}
                    component={ClassificationDetails} />
