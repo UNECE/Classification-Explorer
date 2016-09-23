@@ -7,11 +7,12 @@ import { Link } from 'react-router'
 import { groupBy } from '../utils'
 import ItemResult from './item-result'
 import Loading from './loading'
+import TreeView from 'react-treeview'
 
 function SearchResults({ loaded, items, keyword, searchForCode, hash }) {
   if (loaded === LOADING) return <Loading from="search results" plural={true}/>
   if (loaded === FAILED) return <span>Failed loading results for {keyword}</span>
-  
+
   if(items.length == 0) return <span>There are no results for {keyword}</span>
 
   const clns = groupBy(items, 'classification', 'classificationLabel')
@@ -24,16 +25,19 @@ function SearchResults({ loaded, items, keyword, searchForCode, hash }) {
           const clnEntries = cln.entries
           const clnEl =
           <li key={clnId} className="list-group-item">
-            <Link to={uriToLink.classificationDetails(clnId)}>
+             <TreeView key={cln.props.classificationLabel} nodeLabel={<Link to={uriToLink.classificationDetails(clnId)}>
               {cln.props.classificationLabel}
-            </Link>
+            </Link>}>
+
             <ul>
             { clnEntries.map((rslt, i) =>
               //no obvious meaning ful key, so we use an index
               <li key={i}><ItemResult {...rslt} /></li>) }
             </ul>
+            </TreeView>
           </li>
           agregate.push(clnEl)
+
           return agregate
         }, []) }
     </ul>
