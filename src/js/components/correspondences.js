@@ -1,29 +1,23 @@
 import React, { Component } from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
-import Loading from './loading'
-import { Link } from 'react-router'
-import { uriToLink } from '../router-mapping'
+import CorrespondenceDefinitions from './correspondence-definitions'
 
 function Correspondences({ loaded, correspondences }) {
-  if (loaded !== LOADED) {return <Loading from="correspondences" plural={true}/>}
-  else if (correspondences == null || correspondences.length == 0){
-    return (<div></div>);
-  }
-  else {
+  if (loaded !== LOADED) return <span>loading correspondences</span>
   return (
     <div>
+      <h1>Correspondences</h1>
       <ul>
-        { correspondences.map(({ table, code, definition }) =>
-            <li key={table}>
-              <Link to={uriToLink.correspondenceDetails(table)}>
-                {definition}
-              </Link>
+        { correspondences.map(correspondence =>
+            <li key={correspondence.table}>
+              {correspondence.table}
+              <CorrespondenceDefinitions
+                correspondence={correspondence.table} />
             </li>) }
       </ul>
     </div>
   )
-}
 }
 
 export default sparqlConnect.classificationCorrespondences(Correspondences)
