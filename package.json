@@ -10,13 +10,16 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^3.9.3",
     "react": "^15.0.2",
+    "react-bootstrap": "^0.30.3",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
+    "react-router": "^2.7.0",
     "react-tabs": "^0.7.0",
+    "react-treeview": "^0.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
-    "sparql-connect": "^1.0.3"
+    "sparql-connect": "0.0.7"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -56,6 +59,7 @@
     ]
   },
   "scripts": {
+    "build": "webpack -p --config webpack.production.config",
     "dev": "webpack-dev-server -d --hot --inline --content-base ./dist/ --host 0.0.0.0",
     "start": "http-server ./dist",
     "test": "mocha --compilers js:babel-core/register --require ./src/js/test_helper.js 'src/js/**/__tests__/*.@(js|jsx)'",

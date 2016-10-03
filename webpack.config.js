@@ -10,6 +10,9 @@ module.exports = {
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     './src/js/main.js'
   ],
+  devServer: { 
+    historyApiFallback: true 
+  }, 
   module: {
     loaders: [
       //{ test: /\.css$/, loader: 'style-loader!css-loader?sourceMap' },
@@ -21,7 +24,7 @@ module.exports = {
         loader: ['babel'],
         query: {
           'presets': ['react', 'es2015'],
-          'plugins': ['transform-object-rest-spread', 'import-asserts']
+          'plugins': ['transform-object-rest-spread']
         }
       }
     ]
@@ -30,7 +33,10 @@ module.exports = {
     return [precss, autoprefixer({ browsers: ['> 5%'] }), postcssGradientFixer]
   },  
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
+    alias: {
+      'sparql-connect': '/Users/jb/Documents/noknot/modernstats/sparql-connect/'
+    }
   },
   output: {
     path: __dirname + '/dist',

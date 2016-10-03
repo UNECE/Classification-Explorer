@@ -1,22 +1,14 @@
 import React from 'react'
-import Classifications from './classifications'
-import ClassificationDetails from './classification-details'
-import { connect } from 'react-redux'
-import { VIEW_CLASSIFICATIONS, VIEW_CLASSIFICATION_DETAILS } from '../reducers/app-state'
+import Menu from './menu'
 
-function ClassificationExplorer({ view, classification }) {
-  let explorer
-  if (view === VIEW_CLASSIFICATIONS) {
-    explorer = <Classifications />
-  }
-  if (view === VIEW_CLASSIFICATION_DETAILS) {
-    explorer = <ClassificationDetails classification={classification} />
-  }
-  return explorer
+export default function ClassificationExplorer({ children }) {
+  return (
+    <div>
+      <Menu />
+      <div className="container">
+        { children }
+      </div>
+    </div>
+  )
 }
-
-const mapStateToProps = state => ({
-  view: state.appState.view,
-  classification: state.appState.activeClassification
-})
-export default connect(mapStateToProps)(ClassificationExplorer)
+ 

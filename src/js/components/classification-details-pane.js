@@ -1,12 +1,15 @@
 import React from 'react'
+import { LOADING, LOADED, FAILED } from 'sparql-connect'
+import Loading from './loading'
 
-export default function ClassificationDetailsPane({ code, label, issued }) {
-  return (
-    <div>
-      <h1>Classification details</h1>
-      <div>code: {code}</div>
-      <div>label: {label}</div>
-      <div>issued: {issued}</div>
-    </div>
-  )
+export default function ClassificationDetailsPane({ loaded, code, label, issued }) {
+  if (loaded === LOADED) {
+    return (
+      <ul className="list-group">
+        <li className="list-group-item">{code} ({issued})</li>
+      </ul>
+    )
+  } else {
+    return( <Loading from="Classification Details" plural={true}/>)
+  }
 }

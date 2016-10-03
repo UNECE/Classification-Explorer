@@ -1,10 +1,18 @@
+import { mainReducer } from '../sparql/configure-sparql'
+
+//If there is nothing more than the sparql queries handling in the state,
+//we can simpley use `mainReducer`
+export default mainReducer
+
+//If there is more in the state, we should use `enhanceReducer` with
+//`react-redux` `combineReducers` function
+
+/*
 import { enhanceReducer } from '../sparql/configure-sparql'
 import { combineReducers } from 'redux'
-import appState from './app-state'
 
-//`combineReducers` is used to allow future additions of reducers. It creates a
-//state with the `appState` entry. The use of `enhanceReducer` will add a
-//`results` (by default) entry to the state. All the data related to sparql queries
-//will stay under this entry.
-export default enhanceReducer(combineReducers({ appState }))
+const initialReducer = (state={}, action) => ...
+
+export default enhanceReducer(combineReducers({ initialReducer  }))
+*/
 

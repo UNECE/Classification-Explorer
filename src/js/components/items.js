@@ -1,19 +1,17 @@
 import React from 'react'
-import { sparqlConnect } from '../sparql/configure-sparql'
-import { LOADING, LOADED, FAILED } from 'sparql-connect'
+import { Link } from 'react-router'
+import { uriToLink } from '../router-mapping'
 
-function Items({ loaded, items, levelLabel }) {
-  if (loaded !== LOADED) return <span>loading items</span>
+export default function Items({ items }) {
   return (
-    <div>
-      <h2>Items for {levelLabel}</h2>
-      <ul>
-        {items.map(({ item, code, label}) => 
-          <li key={item}>{item}</li>
-        )}
-      </ul>
-    </div>
-  )
+      <ul className="list-group">
+        {items.map(({ item, code, label}) =>
+        <li className="list-group-item" key={item}>
+          <Link to={uriToLink.itemDetails(item)}>
+            {code} - {label}
+          </Link>
+        </li>
+      )}
+    </ul>
+)
 }
-
-export default sparqlConnect.levelItems(Items)
