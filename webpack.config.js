@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
-var postcssGradientFixer = require('postcss-gradientfixer') 
+var postcssGradientFixer = require('postcss-gradientfixer')
 
 module.exports = {
   entry: [
@@ -10,9 +10,9 @@ module.exports = {
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     './src/js/main.js'
   ],
-  devServer: { 
-    historyApiFallback: true 
-  }, 
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     loaders: [
       //{ test: /\.css$/, loader: 'style-loader!css-loader?sourceMap' },
@@ -31,12 +31,9 @@ module.exports = {
   },
   postcss: function () {
     return [precss, autoprefixer({ browsers: ['> 5%'] }), postcssGradientFixer]
-  },  
+  },
   resolve: {
-    extensions: ['', '.js'],
-    alias: {
-      'sparql-connect': '/Users/jb/Documents/noknot/modernstats/sparql-connect/'
-    }
+    extensions: ['', '.js']
   },
   output: {
     path: __dirname + '/dist',
