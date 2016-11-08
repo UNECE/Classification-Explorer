@@ -1,6 +1,7 @@
 import queries from './queries'
 
 const {
+  correspondenceAssociations,
   classifications,
   classificationDetails,
   classificationItems,
@@ -16,6 +17,24 @@ const {
 } = queries
 
 export default {
+  correspondenceAssociations: {
+    descr: 'Retrieve sources and targets for all the associations in a correspondence table',
+    whatWeGet: 'associations',
+    results: {
+      association: 'association (uri)',
+      source: 'source (uri)',
+      target: 'target (uri)',
+      sourceCode: 'source item code',
+      sourceLabel: 'source item label',
+      targetCode: 'target item code',
+      targetLabel: 'target item label'
+    },
+    params: [{
+      name: 'correspondence',
+      descr: 'the correspondence table'
+    }],
+    queryBuilder: correspondenceAssociations
+  },
   classifications: {
     descr: 'Retrieve all the classifications',
     whatWeGet: 'classifications',

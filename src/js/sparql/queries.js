@@ -138,6 +138,29 @@ const itemChildren = item => `
   } ORDER BY ?code
 `
 
+const correspondenceAssociations = correspondence => `
+SELECT 
+  ?association
+  ?source ?sourceCode ?sourceLabel
+  ?target ?targetCode ?targetLabel
+WHERE {
+  <${correspondence}> xkos:madeOf ?association .
+  ?association xkos:sourceConcept ?source ;
+               xkos:targetConcept ?target .
+  OPTIONAL {
+    ?source skos:notation ?sourceCode ;
+            skos:prefLabel ?sourceLabel .
+    FILTER (langMatches(lang(?sourceLabel), "EN"))              
+  }
+  OPTIONAL {
+    ?target skos:notation ?targetCode ;
+            skos:prefLabel ?targetLabel
+    FILTER (langMatches(lang(?targetLabel), "EN"))              
+  }
+}               
+ORDER BY ?sourceCode
+`
+
 const itemCorrespondences = hash => {
   const  [item, correspondenceTable] = hash.split('||');
   return `
@@ -234,6 +257,7 @@ const searchItems = hash => {
 
 
 export default {
+  correspondenceAssociations,
   classifications,
   classificationDetails,
   classificationItems,

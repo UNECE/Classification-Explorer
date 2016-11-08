@@ -3,7 +3,7 @@ import { sparqlConnect } from '../sparql/configure-sparql'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { connectFromRoute, uriToLink } from '../router-mapping'
 import Loading from './loading.js'
-import SelectItemOptions from './select-item-options.js'
+import Associations from './associations'
 
 function CorrespondenceDetails({ loaded, classifications, correspondence }) {
   if (loaded !== LOADED) return (
@@ -20,7 +20,7 @@ function CorrespondenceDetails({ loaded, classifications, correspondence }) {
           </li> )}
       </ul>
       <br/>
-      <SelectItemOptions classification={classifications[0]} classificationId={classifications[0].classification } correspondence={correspondence} />
+      <Associations correspondence={correspondence} />
     </div>
   )
 }
