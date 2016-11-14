@@ -24,6 +24,7 @@ export default {
       association: 'association (uri)',
       source: 'source (uri)',
       target: 'target (uri)',
+      comment: 'comment related to the association',
       sourceCode: 'source item code',
       sourceLabel: 'source item label',
       targetCode: 'target item code',

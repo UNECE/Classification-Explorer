@@ -16,11 +16,13 @@ function Associations({ loaded, associations,
           <tr>
             <th>source</th>
             <th>target</th>
+            <th>comment</th>
+            <th>details</th>
           </tr>
         </thead>
         <tbody>
           { associations.map(({
-            association, source, target,
+            association, source, target, comment,
             sourceCode, sourceLabel,
             targetCode, targetLabel }) =>
             <tr key={association}>
@@ -31,6 +33,12 @@ function Associations({ loaded, associations,
             <td>
             <ClassificationItem
               item={target} code={targetCode} label={targetLabel} />
+            </td>
+            <td>
+              { comment }
+            </td>
+            <td>
+              <a href="#">show details</a>
             </td>
             </tr>
           )}

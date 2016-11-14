@@ -139,14 +139,22 @@ const itemChildren = item => `
 `
 
 const correspondenceAssociations = correspondence => `
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
 SELECT 
   ?association
+  ?comment
   ?source ?sourceCode ?sourceLabel
   ?target ?targetCode ?targetLabel
 WHERE {
   <${correspondence}> xkos:madeOf ?association .
   ?association xkos:sourceConcept ?source ;
                xkos:targetConcept ?target .
+  OPTIONAL {
+    ?association rdfs:comment ?comment
+  }
   OPTIONAL {
     ?source skos:notation ?sourceCode ;
             skos:prefLabel ?sourceLabel .
