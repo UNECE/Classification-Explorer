@@ -50,7 +50,7 @@ const classificationCorrespondences = uri => `
       ?table skos:notation ?code
     }
     # We miss somme correspondences where there is no definition in english
-    FILTER ( langMatches(lang(?definition), "EN"))
+    FILTER ( langMatches(lang(?definition), "EN") || lang(?definition)="")
   }
 `
 
