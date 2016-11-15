@@ -1,25 +1,34 @@
 import React from 'react'
 import { sparqlConnect } from '../sparql/configure-sparql'
+import { Link } from 'react-router'
 import { LOADING, LOADED, FAILED } from 'sparql-connect'
 import { connectFromRoute, uriToLink } from '../router-mapping'
 import Loading from './loading.js'
 import Associations from './associations'
 
-function CorrespondenceDetails({ loaded, classifications, correspondence }) {
+function CorrespondenceDetails({ loaded,
+    source, sourceCode, sourceLabel,
+    target, targetCode, targetLabel,
+    correspondence }) {
   if (loaded !== LOADED) return (
     <Loading from="Correspondence details" plural={true}/>
   )
 
   return (
     <div>
-      There is a correspondence table between:
+      Correspondence table between:
       <ul>
-      { classifications.map(({ classification, code, label }) =>
-          <li key={classification}>
-          {code} - {label}
-          </li> )}
+        <li>
+          (source) <Link to={uriToLink.classificationDetails(source)}>
+            { sourceCode } - { sourceLabel }
+          </Link>
+        </li>
+        <li>
+          (target) <Link to={uriToLink.classificationDetails(target)}>
+            { targetCode } - { targetLabel }
+          </Link>
+        </li>
       </ul>
-      <br/>
       <Associations correspondence={correspondence} />
     </div>
   )

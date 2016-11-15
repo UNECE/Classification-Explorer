@@ -7,7 +7,7 @@ import ClassificationItem from './classification-item'
 
 function Associations({ loaded, associations,
     sourceClassification, targetClassification }) {
-  if (loaded !== LOADED) return  <Loading from="Association" plural={false} />
+  if (loaded !== LOADED) return  <Loading from="Associations" plural={true} />
   return (
     <div>
       Correspondences:
@@ -38,7 +38,12 @@ function Associations({ loaded, associations,
               { comment }
             </td>
             <td>
-              <a href="#">show details</a>
+              <button className="btn btn-xs" disabled
+                  title="Details will be added later (explanatory notes, coverage,
+                    information about associations involving multiple sources
+                    or targets)">
+                <i className="fa fa-home fa-info"></i>
+              </button>
             </td>
             </tr>
           )}

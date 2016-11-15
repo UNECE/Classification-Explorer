@@ -154,11 +154,14 @@ export default {
       name: 'correspondence'
     }],
     results: {
-      classification: 'classification involved in the comparison',
-      code: 'classificaiton code',
-      label: 'classification label'
+      source: 'classification acting as source',
+      sourceCode: 'source classification code',
+      sourceLabel: 'source classification label',
+      target: 'classification acting as target',
+      targetCode: 'target classification code',
+      targetLabel: 'target classification label'
     },
-    whatWeGet: 'classifications',
+    singleResult: true,
     queryBuilder: correspondenceDetails
   },
   searchEverything: {

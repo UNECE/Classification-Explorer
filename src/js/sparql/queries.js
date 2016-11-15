@@ -197,15 +197,40 @@ const itemCorrespondences = hash => {
   `
 }
 
+//HACK For now, the database provides information about the classifications
+//being compared, but no information about which classification acts as the
+//source, and which acts as the target. This information is retrieved by valuing
+//one assocaition
+// const correspondenceDetails = correspondence => `
+//   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+//   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
+//   SELECT ?classification ?code ?label {
+//     <${correspondence}> xkos:compares ?classification .
+//     ?classification skos:prefLabel ?label ;
+//                     skos:notation ?code
+//   }
+// `
 const correspondenceDetails = correspondence => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
-  SELECT ?classification ?code ?label {
-    <${correspondence}> xkos:compares ?classification .
-    ?classification skos:prefLabel ?label ;
-                    skos:notation ?code
+  
+  SELECT 
+    ?source ?sourceCode ?sourceLabel
+    ?target ?targetCode ?targetLabel {
+    <${correspondence}> xkos:madeOf ?association .
+    ?association xkos:sourceConcept ?sourceItem ;
+                 xkos:targetConcept ?targetItem .
+    ?sourceItem skos:inScheme ?source .
+    ?targetItem skos:inScheme ?target .
+    ?source skos:prefLabel ?sourceLabel ;
+                    skos:notation ?sourceCode .
+    ?target skos:prefLabel ?targetLabel ;
+                    skos:notation ?targetCode .                    
   }
+  LIMIT 1
 `
+
+
 const searchEverything = keyword => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
