@@ -7,7 +7,7 @@ const classifications = () => `
   SELECT ?classification ?code ?label WHERE {
     ?classification rdf:type skos:ConceptScheme ; skos:notation ?code ; skos:prefLabel ?label .
     FILTER ( langMatches(lang(?label), "EN"))
-  } ORDER BY ?code
+  } ORDER BY ?label
   
  `
 
