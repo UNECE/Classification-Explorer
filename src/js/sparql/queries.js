@@ -29,10 +29,11 @@ const classificationLevels = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
-  SELECT DISTINCT ?level ?depth ?label
+  SELECT ?level ?depth ?label
   WHERE {
     <${uri}> xkos:levels/rdf:rest*/rdf:first ?level .
     ?level xkos:depth ?depth ; skos:prefLabel ?label .
+    FILTER ( langMatches(lang(?label), "EN"))
   } ORDER BY ?depth
 `
 /**
@@ -77,6 +78,7 @@ const levelItems = uri => `
   SELECT ?item ?code ?label WHERE {
     <${uri}> skos:member ?item .
     ?item skos:notation ?code ; skos:prefLabel ?label .
+    FILTER ( langMatches(lang(?label), "EN"))
   } ORDER BY ?code
 `
 
