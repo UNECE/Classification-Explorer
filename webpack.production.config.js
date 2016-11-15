@@ -29,6 +29,13 @@ module.exports = {
   resolve: {
     extensions: ['', '.js']
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ],
   output: {
     path: __dirname + '/dist',
     filename: './js/classification.js'
