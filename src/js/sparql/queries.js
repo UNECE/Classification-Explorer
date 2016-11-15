@@ -6,7 +6,9 @@ const classifications = () => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT ?classification ?code ?label WHERE {
     ?classification rdf:type skos:ConceptScheme ; skos:notation ?code ; skos:prefLabel ?label .
+    FILTER ( langMatches(lang(?label), "EN"))
   } ORDER BY ?code
+  
  `
 
 /**
@@ -18,6 +20,7 @@ const classificationDetails = uri => `
   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   SELECT ?code ?label ?issued WHERE {
     <${uri}> skos:notation ?code ; skos:prefLabel ?label ; dcterms:issued ?issued .
+    FILTER ( langMatches(lang(?label), "EN"))
   }
 `
 
@@ -33,7 +36,7 @@ const classificationLevels = uri => `
   WHERE {
     <${uri}> xkos:levels/rdf:rest*/rdf:first ?level .
     ?level xkos:depth ?depth ; skos:prefLabel ?label .
-    FILTER ( langMatches(lang(?label), "EN"))
+    FILTER (langMatches(lang(?label), "EN"))
   } ORDER BY ?depth
 `
 /**
@@ -51,7 +54,7 @@ const classificationCorrespondences = uri => `
       ?table skos:notation ?code
     }
     # We miss somme correspondences where there is no definition in english
-    FILTER ( langMatches(lang(?definition), "EN") || lang(?definition)="")
+    FILTER (langMatches(lang(?definition), "EN") || lang(?definition)="")
   }
 `
 
@@ -65,7 +68,10 @@ const correspondences = uri => `
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
   SELECT ?table ?label WHERE {
     ?table rdf:type xkos:Corresponce .
-    OPTIONAL { ?table skos:prefLabel ?label }
+    OPTIONAL {
+      ?table skos:prefLabel ?label
+      FILTER (langMatches(lang(?label), "EN"))
+    }
   }
 `
 
@@ -78,7 +84,7 @@ const levelItems = uri => `
   SELECT ?item ?code ?label WHERE {
     <${uri}> skos:member ?item .
     ?item skos:notation ?code ; skos:prefLabel ?label .
-    FILTER ( langMatches(lang(?label), "EN"))
+    FILTER (langMatches(lang(?label), "EN"))
   } ORDER BY ?code
 `
 
@@ -88,10 +94,11 @@ const levelItems = uri => `
 const classificationItems = uri => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
-  SELECT DISTINCT ?item ?code ?label WHERE {
+  SELECT ?item ?code ?label WHERE {
     <${uri}> xkos:levels/rdf:rest*/rdf:first ?level .
     ?level skos:member ?item .
     ?item skos:notation ?code ; skos:prefLabel ?label .
+    FILTER ( langMatches(lang(?label), "EN"))
   } ORDER BY ?code LIMIT 25
 `
 
@@ -122,6 +129,7 @@ const itemDetails = item => `
     OPTIONAL {
      <${item}> xkos:coreContentNote ?content .
      ?content xkos:plainText ?text .
+     FILTER ( langMatches(lang(?content), "EN"))
     }
     FILTER (
       langMatches(lang(?label), "EN") &&
