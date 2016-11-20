@@ -51,6 +51,14 @@ http://stamina-project.org/codes/nacer2/division/02
 http://stamina-project.org/codes/nacer2/division/03
 */
 
+/*
+React router doesn't support dot (.) in the URL.
+We have to translate dot in id to underscore,
+and back.
+*/
+const pointToUnderscore = (str) => str.replace('.', '_')
+const underscoreToPoint = (str) => str.replace('_', '.')
+
 //Simplistic example, we just add/remove a prefix, and replace '/' with '|' to
 //make URLs look nice. The idea is to later add logic with mapping functions
 //that will read from the state to know how to goes from aliases to URIs.
@@ -74,14 +82,20 @@ export const routes = {
   },
   itemDetails: {
     pattern: 'classification/:classificationId/:levelId/:itemId',
-    paramsToProps: (state, { classificationId, levelId, itemId }) => ({
-      item: `${prefix}/${classificationId}/${levelId}/${itemId}`
-    }),
+    paramsToProps: (state, { classificationId, levelId, itemId }) => {
+      const classificationId_ = underscoreToPoint(classificationId)
+      const levelId_ = underscoreToPoint(levelId)
+      const itemId_ = underscoreToPoint(itemId)
+      return {
+        item: `${prefix}/${classificationId_}/${levelId_}/${itemId_}`
+      }
+    },
     //item looks like 'prefix/nacer2/division/02'; in the route, we will dealing
     //with three parameters: classificationId ('nacer2'), levelId ('division') and
     //itemId ('02')
-    uriToLink: uri => `/classification/${uri.match(rPrefix)[1]}`
+    uriToLink: uri => `/classification/${pointToUnderscore(uri.match(rPrefix)[1])}`
   },
+  
   correspondenceDetails: {
     pattern: 'correspondence/:correspondenceId',
     paramsToProps: (state, { correspondenceId }) => ({
