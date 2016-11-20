@@ -256,6 +256,7 @@ const searchItems = hash => {
     return  `
     PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+    PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
     SELECT DISTINCT
       ?item ?code ?itemLabel
       ?classification ?classificationLabel ?coreContentNoteText ?additionalContentNoteText
