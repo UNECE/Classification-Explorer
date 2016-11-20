@@ -12,10 +12,8 @@ export default class SearchInput extends Component {
     this.handleSubmit = () => {
       browserHistory.push(uriToLink.searchItems(this.refs.search.value.trim(), this.refs.searchForCode.checked))
     }
-    this.handleKeyPress = (e) => {
-      if (e.key == 'Enter') {
-        this.handleSubmit();
-      }
+    this.handleKeyDown = e => {
+      if (e.keyCode === 13) this.handleSubmit()
     }
   }
 
@@ -24,7 +22,7 @@ export default class SearchInput extends Component {
       <span>
         Search everything :
         <input className="search" type="search" placeholder="Enter a keyword"
-               ref="search" />
+               ref="search" onKeyDown={this.handleKeyDown} />
         <button onClick={this.handleSubmit}>
           OK
         </button>
