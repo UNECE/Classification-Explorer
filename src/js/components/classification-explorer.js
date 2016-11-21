@@ -3,11 +3,9 @@ import Menu from './menu'
 
 export default function ClassificationExplorer({ children }) {
   return (
-    <div>
+    <div className="container-fluid">
       <Menu />
-      <div className="container">
-        { children }
-      </div>
+      { children }
     </div>
   )
 }
