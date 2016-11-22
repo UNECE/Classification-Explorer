@@ -129,12 +129,14 @@ const itemDetails = item => `
     OPTIONAL {
      <${item}> xkos:coreContentNote ?content .
      ?content xkos:plainText ?text .
-     FILTER ( langMatches(lang(?content), "EN"))
+     # HACK see #46
+     # FILTER ( langMatches(lang(?content), "EN"))
     }
     FILTER (
       # langMatches(lang(?label), "EN") &&
       # langMatches(lang(?clLabel), "EN"))
-      # HACK english label missing http://classification-explorer.noknot.fr/classification/nafr2/sousClasse/23_69Z
+      # HACK english label missing (see #45)
+      # http://classification-explorer.noknot.fr/classification/nafr2/sousClasse/23_69Z
       langMatches(lang(?label), "EN"))
   }
 `
