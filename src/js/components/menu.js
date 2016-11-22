@@ -6,7 +6,7 @@ import { Link } from 'react-router'
 export default function Menu() {
     return (
       <nav className="navbar navbar-default">
-        <div className="container">
+        <div className="container-fluid">
           <div className="navbar-header">
             <Link className="navbar-brand" to="/">
               <img className="logo" src="/img/unece.png" />

@@ -20,7 +20,7 @@ export default class SearchInput extends Component {
 
   render() {
     return (
-      <form className="navbar-form navbar-right" role="search">
+      <form className="navbar-form" role="search">
         <div className="form-group" style={{ marginRight: 10}}>
           <label className="radio-inline">Search for</label>
           <label className="radio-inline">
