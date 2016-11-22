@@ -132,8 +132,10 @@ const itemDetails = item => `
      FILTER ( langMatches(lang(?content), "EN"))
     }
     FILTER (
-      langMatches(lang(?label), "EN") &&
-      langMatches(lang(?clLabel), "EN"))
+      # langMatches(lang(?label), "EN") &&
+      # langMatches(lang(?clLabel), "EN"))
+      # HACK english label missing http://classification-explorer.noknot.fr/classification/nafr2/sousClasse/23_69Z
+      langMatches(lang(?label), "EN"))
   }
 `
 
