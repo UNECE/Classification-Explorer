@@ -4,14 +4,14 @@ A tool for browsing statistical classifications, developed for the Implementing 
 
 ## To build and run
 
-* Install node.js and a Git client
+- Install node.js and a Git client
 
-* Clone the projet
+- Clone the projet
 
-* Under `src/js` create a file credentials.js containing a Javascript object with username and password, example: `export default { username: '*******', password: '*******' }`. A `credentials.js.example` is provided.
+- Under `src/js` create a file credentials.js containing a Javascript object with username and password, example: `export default { username: '*******', password: '*******' }`. A `credentials.js.example` is provided.
 
-* Run `npm install`
+- Run `npm install`
 
-* Run `npm run dev` (for develop or debug phases) or `npm run build` (for production).
+- Run `npm run start` (for develop or debug phases) or `npm run build` (for production).
 
-* Open a browser and navigate to http://localhost:8080/
+- Open a browser and navigate to http://localhost:3000

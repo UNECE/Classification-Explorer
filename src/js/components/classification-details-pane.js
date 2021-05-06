@@ -1,15 +1,22 @@
-import React from 'react'
-import { LOADING, LOADED, FAILED } from 'sparql-connect'
-import Loading from './loading'
+import React from 'react';
+import { LOADED } from 'sparql-connect';
+import Loading from './loading';
 
-export default function ClassificationDetailsPane({ loaded, code, label, issued }) {
+export default function ClassificationDetailsPane({
+  loaded,
+  code,
+  label,
+  issued,
+}) {
   if (loaded === LOADED) {
     return (
       <ul className="list-group">
-        <li className="list-group-item">{code} ({issued})</li>
+        <li className="list-group-item">
+          {code} ({issued})
+        </li>
       </ul>
-    )
+    );
   } else {
-    return( <Loading from="Classification Details" plural={true}/>)
+    return <Loading from="Classification Details" plural={true} />;
   }
 }

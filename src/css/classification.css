@@ -12,7 +12,8 @@ input.search {
   margin-left: 10px;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -36,8 +37,8 @@ html, body {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
 }
@@ -46,12 +47,12 @@ html, body {
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
+.form-signin input[type='email'] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-signin input[type="password"] {
+.form-signin input[type='password'] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -61,7 +62,9 @@ table {
   table-layout: fixed;
 }
 
-th:nth-child(1), th-nth-child(2), th:nth-child(3) {
+th:nth-child(1),
+th-nth-child(2),
+th:nth-child(3) {
   width: 30%;
 }
 
@@ -74,7 +77,7 @@ td:nth-child(4) {
 }
 
 .navbar-brand {
-  padding: 0 15px;;
+  padding: 0 15px;
 }
 
 .navbar-brand .logo {

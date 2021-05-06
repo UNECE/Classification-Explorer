@@ -1,4 +1,4 @@
-import queries from './queries'
+import queries from './queries';
 
 const {
   correspondenceAssociations,
@@ -13,12 +13,13 @@ const {
   itemChildren,
   correspondenceDetails,
   searchEverything,
-  searchItems
-} = queries
+  searchItems,
+} = queries;
 
-export default {
+const queriesObject = {
   correspondenceAssociations: {
-    descr: 'Retrieve sources and targets for all the associations in a correspondence table',
+    descr:
+      'Retrieve sources and targets for all the associations in a correspondence table',
     whatWeGet: 'associations',
     results: {
       association: 'association (uri)',
@@ -28,102 +29,118 @@ export default {
       sourceCode: 'source item code',
       sourceLabel: 'source item label',
       targetCode: 'target item code',
-      targetLabel: 'target item label'
+      targetLabel: 'target item label',
     },
-    params: [{
-      name: 'correspondence',
-      descr: 'the correspondence table'
-    }],
-    queryBuilder: correspondenceAssociations
+    params: [
+      {
+        name: 'correspondence',
+        descr: 'the correspondence table',
+      },
+    ],
+    queryBuilder: correspondenceAssociations,
   },
   classifications: {
     descr: 'Retrieve all the classifications',
     whatWeGet: 'classifications',
     results: {
       classification: 'classification (uri)',
-      label: 'classification label (string)'
+      label: 'classification label (string)',
     },
     params: [],
-    queryBuilder: classifications
+    queryBuilder: classifications,
   },
   classificationDetails: {
     descr: 'Retrieve details (depth and label) for a given classification',
     singleResult: true,
     // no need for `whatWeGet` since we retrieve only one line :  results
     // will be directly exposed with the variable names described in `results`
-    params: [{
-      name: 'classification',
-      descr: 'classification (uri)'
-    }],
+    params: [
+      {
+        name: 'classification',
+        descr: 'classification (uri)',
+      },
+    ],
     results: {
       code: 'classification code (integer)',
       label: 'classification label (string)',
-      issued: 'issued'
+      issued: 'issued',
     },
-    queryBuilder: classificationDetails
+    queryBuilder: classificationDetails,
   },
   classificationLevels: {
-    descr: 'Retrieve levels with their depth and label for a given classification',
-    params: [{
-      name: 'classification',
-      descr: 'classification (uri)'
-    }],
+    descr:
+      'Retrieve levels with their depth and label for a given classification',
+    params: [
+      {
+        name: 'classification',
+        descr: 'classification (uri)',
+      },
+    ],
     whatWeGet: 'levels',
     results: {
       level: 'level (uri)',
       depth: 'depth of the level (integer)',
-      label: 'label of the level (string)'
+      label: 'label of the level (string)',
     },
-    queryBuilder: classificationLevels
+    queryBuilder: classificationLevels,
   },
   classificationCorrespondences: {
     descr: 'Retrieve correspondences tables for a given classification',
-    params: [{
-      name: 'classification',
-      descr: 'classification (uri)'
-    }],
+    params: [
+      {
+        name: 'classification',
+        descr: 'classification (uri)',
+      },
+    ],
     whatWeGet: 'correspondences',
     results: {
       table: 'correspondence table (uri)',
       definition: 'correspondence definition',
-      code: 'correspondence code'
+      code: 'correspondence code',
     },
-    queryBuilder: classificationCorrespondences
+    queryBuilder: classificationCorrespondences,
   },
   levelItems: {
-    descr: 'Retrieve items with their details (code and label) for a given level',
-    params: [{
-      name: 'level',
-      descr: 'level (uri)'
-    }],
+    descr:
+      'Retrieve items with their details (code and label) for a given level',
+    params: [
+      {
+        name: 'level',
+        descr: 'level (uri)',
+      },
+    ],
     whatWeGet: 'items',
     results: {
       item: 'item (uri)',
       code: 'code of the item (string)',
-      label: 'label of the item (string)'
+      label: 'label of the item (string)',
     },
-    queryBuilder: levelItems
+    queryBuilder: levelItems,
   },
   itemCorrespondences: {
-    descr: 'Retrieve items with their details (code and label) in correspondence with the given item in the given classification',
-    params: [{
-      name: 'hash',
-      descr: 'hash of both item and classification (uris)'
-    }],
+    descr:
+      'Retrieve items with their details (code and label) in correspondence with the given item in the given classification',
+    params: [
+      {
+        name: 'hash',
+        descr: 'hash of both item and classification (uris)',
+      },
+    ],
     whatWeGet: 'items',
     results: {
       item: 'item (uri)',
       code: 'code of the item (string)',
-      label: 'label of the item (string)'
+      label: 'label of the item (string)',
     },
-    queryBuilder: itemCorrespondences
+    queryBuilder: itemCorrespondences,
   },
   itemDetails: {
-    params: [{
-      name: 'item'
-    }],
+    params: [
+      {
+        name: 'item',
+      },
+    ],
     results: {
-      label: 'label',
       code: 'code',
       label: 'label',
       text: 'text',
@@ -132,55 +149,63 @@ export default {
       clLabel: 'classificationLabel',
       parent: 'parent',
       parentCode: 'parentCode',
-      parentLabel: 'parentLabel'
+      parentLabel: 'parentLabel',
     },
     singleResult: true,
-    queryBuilder: itemDetails
+    queryBuilder: itemDetails,
   },
   itemChildren: {
-    params: [{
-      name: 'item'
-    }],
+    params: [
+      {
+        name: 'item',
+      },
+    ],
     results: {
       item: 'child item',
       code: 'child item code',
-      label: 'child item label'
+      label: 'child item label',
     },
     whatWeGet: 'items',
-    queryBuilder: itemChildren
+    queryBuilder: itemChildren,
   },
   correspondenceDetails: {
-    params: [{
-      name: 'correspondence'
-    }],
+    params: [
+      {
+        name: 'correspondence',
+      },
+    ],
     results: {
       source: 'classification acting as source',
       sourceCode: 'source classification code',
       sourceLabel: 'source classification label',
       target: 'classification acting as target',
       targetCode: 'target classification code',
-      targetLabel: 'target classification label'
+      targetLabel: 'target classification label',
     },
     singleResult: true,
-    queryBuilder: correspondenceDetails
+    queryBuilder: correspondenceDetails,
   },
   searchEverything: {
-    params: [{
-      name: 'keyword'
-    }],
+    params: [
+      {
+        name: 'keyword',
+      },
+    ],
     results: {
       subject: 'matching instances (array?)',
       predicate: 'predicate',
       match: 'keyword match',
-      score: 'score'
+      score: 'score',
     },
     whatWeGet: 'results',
-    queryBuilder: searchEverything
+    queryBuilder: searchEverything,
   },
   searchItems: {
-    params: [{
-      name: 'hash'
-    }],
+    params: [
+      {
+        name: 'hash',
+      },
+    ],
     results: {
       item: 'item',
       itemLabel: 'itemLabel',
@@ -188,21 +213,25 @@ export default {
       classificationLabel: 'classificationLabel',
       coreContentNoteText: 'coreContentNoteText',
       additionalContentNoteText: 'additionalContentNoteText',
-      code:'code'
+      code: 'code',
     },
     whatWeGet: 'items',
-    queryBuilder: searchItems
+    queryBuilder: searchItems,
   },
   classificationItems: {
-    params: [{
-      name: 'classificationId'
-    }],
+    params: [
+      {
+        name: 'classificationId',
+      },
+    ],
     results: {
       item: 'item',
       code: 'code',
-      label: 'label'
+      label: 'label',
     },
     whatWeGet: 'items',
-    queryBuilder: classificationItems
-  }
-}
+    queryBuilder: classificationItems,
+  },
+};
+
+export default queriesObject;

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: classification-explorer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: classification-explorer
+  template:
+    metadata:
+      labels:
+        app: classification-explorer
+    spec:
+      containers:
+        - name: classification-explorer
+          image: unece/classification-explorer:latest
+          env:
+            - name: ENDPOINT
+              value: 'http://graphdb.linked-open-statistics.org/repositories/classifications'

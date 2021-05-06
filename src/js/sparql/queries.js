@@ -9,26 +9,26 @@ const classifications = () => `
     FILTER ( langMatches(lang(?label), "EN"))
   } ORDER BY ?label
   
- `
+ `;
 
 /**
  * Builds the query that gets the details about a classification.
  */
- //TODO @Franck workaround the fact the DB is not returning any line otherwise
-const classificationDetails = uri => `
+//TODO @Franck workaround the fact the DB is not returning any line otherwise
+const classificationDetails = (uri) => `
   PREFIX dcterms: <http://purl.org/dc/terms/>
   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   SELECT ?code ?label ?issued WHERE {
     <${uri}> skos:notation ?code ; skos:prefLabel ?label ; dcterms:issued ?issued .
     FILTER ( langMatches(lang(?label), "EN"))
   }
-`
+`;
 
 /**
  * Builds the query that gets the levels of a classification.
  * Using SPARQL 1.1 property paths, see https://www.w3.org/TR/sparql11-query/#propertypaths
  */
-const classificationLevels = uri => `
+const classificationLevels = (uri) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -38,12 +38,12 @@ const classificationLevels = uri => `
     ?level xkos:depth ?depth ; skos:prefLabel ?label .
     FILTER (langMatches(lang(?label), "EN"))
   } ORDER BY ?depth
-`
+`;
 /**
  * Builds the query that gets the correspondence tables for a given classification.
  * TODO Improve the database, all tables don't have a label.
  */
-const classificationCorrespondences = uri => `
+const classificationCorrespondences = (uri) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -56,13 +56,13 @@ const classificationCorrespondences = uri => `
     # We miss somme correspondences where there is no definition in english
     FILTER (langMatches(lang(?definition), "EN") || lang(?definition)="")
   }
-`
+`;
 
 /**
  * Builds the query that gets all the correspondence tables.
  * TODO Improve the database, all tables don't have a label.
  */
-const correspondences = uri => `
+const correspondences = (uri) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -73,12 +73,12 @@ const correspondences = uri => `
       FILTER (langMatches(lang(?label), "EN"))
     }
   }
-`
+`;
 
 /**
  * Builds the query that gets the list of items of a given level.
  */
-const levelItems = uri => `
+const levelItems = (uri) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT ?item ?code ?label WHERE {
@@ -86,12 +86,12 @@ const levelItems = uri => `
     ?item skos:notation ?code ; skos:prefLabel ?label .
     FILTER (langMatches(lang(?label), "EN"))
   } ORDER BY ?code
-`
+`;
 
 /**
  * Builds the query that gets the list of items of a given level.
  */
-const classificationItems = uri => `
+const classificationItems = (uri) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT ?item ?code ?label WHERE {
@@ -100,9 +100,9 @@ const classificationItems = uri => `
     ?item skos:notation ?code ; skos:prefLabel ?label .
     FILTER ( langMatches(lang(?label), "EN"))
   } ORDER BY ?code LIMIT 25
-`
+`;
 
-const itemDetails = item => `
+const itemDetails = (item) => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
   SELECT ?label ?code ?label ?text ?cl ?clCode ?clLabel ?parent ?parentCode
@@ -139,9 +139,9 @@ const itemDetails = item => `
       # http://classification-explorer.noknot.fr/classification/nafr2/sousClasse/23_69Z
       langMatches(lang(?label), "EN"))
   }
-`
+`;
 
-const itemChildren = item => `
+const itemChildren = (item) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT ?item ?code ?label {
@@ -150,9 +150,9 @@ const itemChildren = item => `
     ?item skos:prefLabel ?label
     FILTER (langMatches(lang(?label), "EN"))
   } ORDER BY ?code
-`
+`;
 
-const correspondenceAssociations = correspondence => `
+const correspondenceAssociations = (correspondence) => `
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -181,10 +181,10 @@ WHERE {
   }
 }               
 ORDER BY ?sourceCode
-`
+`;
 
-const itemCorrespondences = hash => {
-  const  [item, correspondenceTable] = hash.split('||');
+const itemCorrespondences = (hash) => {
+  const [item, correspondenceTable] = hash.split('||');
   return `
     PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
@@ -208,8 +208,8 @@ const itemCorrespondences = hash => {
 
   }
   }
-  `
-}
+  `;
+};
 
 //HACK For now, the database provides information about the classifications
 //being compared, but no information about which classification acts as the
@@ -224,7 +224,7 @@ const itemCorrespondences = hash => {
 //                     skos:notation ?code
 //   }
 // `
-const correspondenceDetails = correspondence => `
+const correspondenceDetails = (correspondence) => `
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
   
@@ -242,22 +242,21 @@ const correspondenceDetails = correspondence => `
                     skos:notation ?targetCode .                    
   }
   LIMIT 1
-`
+`;
 
-
-const searchEverything = keyword => `
+const searchEverything = (keyword) => `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT ?subject ?predicate ?match ?score WHERE {
     ?subject ?predicate ?match .
     (?match ?score) <tag:stardog:api:property:textMatch> '${keyword}*'.
   }
-`
+`;
 
-const searchItems = hash => {
-  const  [keyword, searchForCode] = hash.split('||');
-  if(searchForCode==='true'){
-    return  `
+const searchItems = (hash) => {
+  const [keyword, searchForCode] = hash.split('||');
+  if (searchForCode === 'true') {
+    return `
     PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
     PREFIX xkos:<http://rdf-vocabulary.ddialliance.org/xkos#>
@@ -271,10 +270,9 @@ const searchItems = hash => {
       ?classification skos:prefLabel ?classificationLabel .
       FILTER regex(?code, "${keyword}", "i")
     } order by ?code
-    `
-  }else{
-
-  return  `
+    `;
+  } else {
+    return `
   PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
   SELECT DISTINCT
@@ -299,12 +297,11 @@ const searchItems = hash => {
       regex(?classificationLabel, "${keyword}", "i")
     ))
   } order by ?code
-`}
-}
+`;
+  }
+};
 
-
-
-export default {
+const output = {
   correspondenceAssociations,
   classifications,
   classificationDetails,
@@ -318,5 +315,7 @@ export default {
   itemChildren,
   correspondenceDetails,
   searchEverything,
-  searchItems
-}
+  searchItems,
+};
+
+export default output;
