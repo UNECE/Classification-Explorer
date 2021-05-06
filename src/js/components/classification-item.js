@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { uriToLink } from '../router-mapping'
+import React from 'react';
+import { Link } from 'react-router';
+import { uriToLink } from '../router-mapping';
 
-export default function ClassificationItem({ item, code, label}) {
+export default function ClassificationItem({ item, code, label }) {
   return (
     <Link to={uriToLink.itemDetails(item)}>
-    {code} - {label}
+      {code} - {label}
     </Link>
-  )
+  );
 }

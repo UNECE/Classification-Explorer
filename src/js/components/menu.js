@@ -1,22 +1,22 @@
-import React from 'react'
-import SearchInput from './search-input'
-import { Link } from 'react-router'
-
+import React from 'react';
+import SearchInput from './search-input';
+import { Link } from 'react-router';
+import img from '../../img/unece.png';
 
 export default function Menu() {
-    return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <Link className="navbar-brand" to="/">
-              <img className="logo" src="/img/unece.png" />
-              Classifications
-            </Link>
-          </div>
-          <div className="collapse navbar-collapse">    
-            <SearchInput />
-          </div>
+  return (
+    <nav className="navbar navbar-default">
+      <div className="container-fluid">
+        <div className="navbar-header">
+          <Link className="navbar-brand" to="/">
+            <img className="logo" src={img} alt="unece-logo" />
+            Classifications
+          </Link>
         </div>
-      </nav>
-    )
+        <div className="collapse navbar-collapse">
+          <SearchInput />
+        </div>
+      </div>
+    </nav>
+  );
 }

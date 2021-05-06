@@ -56,56 +56,64 @@ React router doesn't support dot (.) in the URL.
 We have to translate dot in id to underscore,
 and back.
 */
-const pointToUnderscore = (str) => str.replace('.', '_')
-const underscoreToPoint = (str) => str.replace('_', '.')
+const pointToUnderscore = (str) => str.replace('.', '_');
+const underscoreToPoint = (str) => str.replace('_', '.');
 
 //Simplistic example, we just add/remove a prefix, and replace '/' with '|' to
 //make URLs look nice. The idea is to later add logic with mapping functions
 //that will read from the state to know how to goes from aliases to URIs.
-const prefix = 'http://stamina-project.org/codes'
-const rPrefix = new RegExp(prefix + '\/(.*)')
-const rCorrespondence = new RegExp(prefix + '\/(.*)\/correspondence')
+const prefix = 'http://stamina-project.org/codes';
+const rPrefix = new RegExp(prefix + '/(.*)');
+const rCorrespondence = new RegExp(prefix + '/(.*)/correspondence');
 
 export const routes = {
   classificationDetails: {
     pattern: 'classification/:classificationId/details/:conceptSchemeId',
-    paramsToProps: (state, { classificationId, conceptSchemeId })  => ({
-      classification: `${prefix}/${classificationId}/${conceptSchemeId}`
+    paramsToProps: (state, { classificationId, conceptSchemeId }) => ({
+      classification: `${prefix}/${classificationId}/${conceptSchemeId}`,
     }),
     //classification looks like 'prefix/nacer2/nace'; in the route, we will deal
     //with two parameters: classificationId ('nacer2') and conceptSchemeId
     //('nace')
-    uriToLink: uri => {
-      const [classifcationId, conceptSchemeId] = uri.match(rPrefix)[1].split('/')
-      return `/classification/${classifcationId}/details/${conceptSchemeId}`
-    }
+    uriToLink: (uri) => {
+      const [classifcationId, conceptSchemeId] = uri
+        .match(rPrefix)[1]
+        .split('/');
+      return `/classification/${classifcationId}/details/${conceptSchemeId}`;
+    },
   },
   itemDetails: {
     pattern: 'classification/:classificationId/:levelId/:itemId',
     paramsToProps: (state, { classificationId, levelId, itemId }) => {
-      const classificationId_ = underscoreToPoint(classificationId)
-      const levelId_ = underscoreToPoint(levelId)
-      const itemId_ = underscoreToPoint(itemId)
+      const classificationId_ = underscoreToPoint(classificationId);
+      const levelId_ = underscoreToPoint(levelId);
+      const itemId_ = underscoreToPoint(itemId);
       return {
-        item: `${prefix}/${classificationId_}/${levelId_}/${itemId_}`
-      }
+        item: `${prefix}/${classificationId_}/${levelId_}/${itemId_}`,
+      };
     },
     //item looks like 'prefix/nacer2/division/02'; in the route, we will dealing
     //with three parameters: classificationId ('nacer2'), levelId ('division') and
     //itemId ('02')
-    uriToLink: uri => `/classification/${pointToUnderscore(uri.match(rPrefix)[1])}`
+    uriToLink: (uri) =>
+      `/classification/${pointToUnderscore(uri.match(rPrefix)[1])}`,
   },
-  
+
   correspondenceDetails: {
     pattern: 'correspondence/:correspondenceId',
     paramsToProps: (state, { correspondenceId }) => ({
-      correspondence: `${prefix}/${correspondenceId}/correspondence`
+      correspondence: `${prefix}/${correspondenceId}/correspondence`,
     }),
-    uriToLink: uri => `/correspondence/${uri.match(rCorrespondence)[1]}`
+    uriToLink: (uri) => `/correspondence/${uri.match(rCorrespondence)[1]}`,
   },
   searchItems: {
     pattern: 'search/:keyword/:searchForCode',
-    paramsToProps: (state, { keyword, searchForCode }) => ({ keyword, searchForCode, hash : keyword+'||'+searchForCode }),
-    uriToLink: (keyword, searchForCode) => `/search/${keyword}/${searchForCode}`
-  }
-}
+    paramsToProps: (state, { keyword, searchForCode }) => ({
+      keyword,
+      searchForCode,
+      hash: keyword + '||' + searchForCode,
+    }),
+    uriToLink: (keyword, searchForCode) =>
+      `/search/${keyword}/${searchForCode}`,
+  },
+};
