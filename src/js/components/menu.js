@@ -2,8 +2,10 @@ import React from 'react';
 import SearchInput from './search-input';
 import { Link } from 'react-router';
 import img from '../../img/unece.png';
+import { getEnvVar } from '../env';
 
 export default function Menu() {
+  const deployMsg = getEnvVar('DEPLOY_MESSAGE');
   return (
     <nav className="navbar navbar-default">
       <div className="container-fluid">
@@ -13,6 +15,7 @@ export default function Menu() {
             Classifications
           </Link>
         </div>
+        {deployMsg && <i className="my-2 my-lg-0">{deployMsg}</i>}
         <div className="collapse navbar-collapse">
           <SearchInput />
         </div>
