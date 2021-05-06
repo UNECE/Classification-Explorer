@@ -112,6 +112,8 @@ const itemDetails = (item) => `
               skos:inScheme ?cl .
     ?cl skos:prefLabel ?clLabel
 
+    FILTER (lang(?clLabel) = 'en')
+
     OPTIONAL {
       ?cl skos:notation ?clCode .
     }
