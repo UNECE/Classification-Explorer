@@ -19,4 +19,4 @@ spec:
             - name: ENDPOINT
               value: 'http://graphdb.linked-open-statistics.org/repositories/classifications'
             - name: DEPLOY_MESSAGE
-              value: 'App deployed into Insee Lab cluster'
+              value: 'Powered by Insee Lab'
