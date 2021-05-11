@@ -1,17 +1,19 @@
 # Classification Explorer
 
-A tool for browsing statistical classifications, developed for the Implementing ModernStats Standards project
+A tool for browsing statistical classifications, developed for the Implementing ModernStats Standards project.
+
+The classifications are stored as RDF using the XKOS model.
 
 ## To build and run
 
-- Install node.js and a Git client
+- Install a Git client and [Node.js](https://nodejs.org/)
 
-- Clone the projet
+- Install yarn: `npm install --global yarn`
 
-- Under `src/js` create a file credentials.js containing a Javascript object with username and password, example: `export default { username: '*******', password: '*******' }`. A `credentials.js.example` is provided.
+- Clone the projet and open a command prompt window
 
-- Run `npm install`
+- Under `src/js`, create a `credentials.js` file exporting a JavaScript object with the username and password, for example: `export default { username: '*******', password: '*******' }`. A `credentials.js.example` is provided.
 
-- Run `npm run start` (for develop or debug phases) or `npm run build` (for production).
+- Run `yarn install`
 
-- Open a browser and navigate to http://localhost:3000
+- Run `yarn` and navigate to http://localhost:3000
