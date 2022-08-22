@@ -17,6 +17,6 @@ spec:
           image: unece/classification-explorer:latest
           env:
             - name: ENDPOINT
-              value: 'http://graphdb.linked-open-statistics.org/repositories/classifications'
+              value: 'https://graphdb.linked-open-statistics.org/repositories/classifications'
             - name: DEPLOY_MESSAGE
               value: 'Powered by Insee Lab'
