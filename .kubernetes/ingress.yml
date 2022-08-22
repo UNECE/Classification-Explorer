@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: classification-explorer
@@ -13,6 +13,9 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: classification-explorer
-              servicePort: http
+              service:
+                name: classification-explorer
+                port: 
+                  number: 80
